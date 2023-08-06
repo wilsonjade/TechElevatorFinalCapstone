@@ -55,4 +55,9 @@ CREATE TABLE sellers (
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
+--populate test data
+INSERT INTO plants (kingdom, species, description) VALUES ('Plantae','Poa Pratensis', 'Kentucky bluegrass');
+INSERT INTO plants (kingdom, species, description) VALUES ('Plantae','Plantus scientificus', 'This is a plant!');
+INSERT INTO sellers (seller_name, seller_type, is_user) VALUES ('Fake Nursery', 'Retailer', 0);
+
 GO
