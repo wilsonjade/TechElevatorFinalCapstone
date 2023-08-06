@@ -23,6 +23,33 @@ CREATE TABLE users (
 	user_role varchar(50) NOT NULL
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 )
+CREATE TABLE plants (
+	plant_id int IDENTITY(1,1) NOT NULL,
+	kingdom varchar(50),
+	[order] varchar(50),
+	family varchar(50),
+	subfamily varchar(50),
+	genus varchar(50),
+	species varchar(50),
+	common_name varchar(50),
+	description varchar(max),
+	CONSTRAINT PK_plant PRIMARY KEY (plant_id),
+	)
+CREATE TABLE sellers (
+	seller_id int IDENTITY(1,1) NOT NULL,
+	seller_name varchar(50) NOT NULL,
+	seller_type varchar(50) NOT NULL,
+	is_user int NOT NULL,
+	user_id int,
+	address1 varchar(100),
+	address2 varchar(100),
+	city varchar(100),
+	state nchar(2),
+	zip varchar(9),
+	website varchar(max)
+	CONSTRAINT [PK_seller] PRIMARY KEY (seller_id),
+	CONSTRAINT [FK_user] FOREIGN KEY (user_id) REFERENCES [users](user_id), 
+)
 
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
