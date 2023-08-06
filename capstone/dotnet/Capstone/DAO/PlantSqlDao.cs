@@ -6,10 +6,10 @@ using System.Data.SqlClient;
 
 namespace Capstone.DAO
 {
-    public class PlantSqlDao
+    public class PlantSqlDao: IPlantDao
     {
         private readonly string connectionString;
-        private readonly string sqlGetPlants = @"SELECT plant_id, kingdom, family, genus, species, common_name, order, subfamily, description FROM plants;";
+        private readonly string sqlGetPlants = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description FROM plants;";
 
         public PlantSqlDao(string dbConnectionString)
         {
@@ -20,14 +20,14 @@ namespace Capstone.DAO
         {
             Plant plant = new Plant();
             plant.PlantId = Convert.ToInt32(reader["plant_id"]);
-            plant.Kingdom = Convert.ToString(reader["kingdom"]);
-            plant.Family = Convert.ToString(reader["family"]);
-            plant.Genus = Convert.ToString(reader["genus"]);
-            plant.Species = Convert.ToString(reader["species"]);
-            plant.CommonName = Convert.ToString(reader["common_name"]);
-            plant.Order = Convert.ToString(reader["order"]);
-            plant.Subfamily = Convert.ToString(reader["subfamily"]);
-            plant.Description = Convert.ToString(reader["description"]);
+            plant.Kingdom = reader["kingdom"] is DBNull ? null : Convert.ToString(reader["kingdom"]);
+            plant.Family = reader["family"] is DBNull ? null : Convert.ToString(reader["family"]);
+            plant.Genus = reader["genus"] is DBNull ? null : Convert.ToString(reader["genus"]);
+            plant.Species = reader["species"] is DBNull ? null : Convert.ToString(reader["species"]);
+            plant.CommonName = reader["common_name"] is DBNull ? null : Convert.ToString(reader["common_name"]);
+            plant.Order = reader["order"] is DBNull ? null : Convert.ToString(reader["order"]);
+            plant.Subfamily = reader["subfamily"] is DBNull ? null : Convert.ToString(reader["subfamily"]);
+            plant.Description = reader["description"] is DBNull ? null : Convert.ToString(reader["description"]);
 
             return plant;
 
