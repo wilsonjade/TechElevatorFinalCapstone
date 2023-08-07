@@ -18,11 +18,18 @@ namespace Capstone.Controllers
         }
         [HttpGet]
 
-        
-        public ActionResult< List<Plant>> GetPlants()
+
+        public ActionResult<List<Plant>> GetPlants()
         {
-            
+
             return Ok(plantDao.GetPlants());
+        }
+
+        [HttpGet("{plantId}")]
+
+        public ActionResult<Plant> GetPlantById(int plantId)
+        {
+            return Ok(plantDao.GetPlantById(plantId));
         }
 
     }

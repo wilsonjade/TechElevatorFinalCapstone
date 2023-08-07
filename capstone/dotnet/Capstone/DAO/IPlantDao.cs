@@ -7,6 +7,8 @@ namespace Capstone.DAO
     {
         List<Plant> GetPlants();
 
+        Plant GetPlantById(int plantId);
+
 
     }
 }

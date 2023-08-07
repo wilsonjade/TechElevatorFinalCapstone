@@ -5,4 +5,8 @@ export default {
         return axios.get("/plant");
     },
 
+    getPlantById(plantId) {
+        return axios.get(`/plant/${plantId}`)
+    }
+
 }

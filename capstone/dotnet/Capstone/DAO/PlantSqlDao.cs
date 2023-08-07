@@ -11,9 +11,36 @@ namespace Capstone.DAO
         private readonly string connectionString;
         private readonly string sqlGetPlants = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description FROM plants;";
 
+        private readonly string sqlGetPlantById = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description FROM plants WHERE plant_id = @plantId;";
+
         public PlantSqlDao(string dbConnectionString)
         {
             connectionString = dbConnectionString;
+        }
+
+
+        public Plant GetPlantById(int plantId)
+        {
+            Plant plant = new Plant();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sqlGetPlantById, conn))
+                {
+                    cmd.Parameters.AddWithValue("@plantId", plantId);
+
+                    using(SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            plant = MapRowToPlant(reader);
+                        }
+                    }
+                }
+            }
+            return plant;
         }
 
         public Plant MapRowToPlant(SqlDataReader reader)
