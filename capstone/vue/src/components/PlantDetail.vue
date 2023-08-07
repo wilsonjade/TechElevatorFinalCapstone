@@ -1,5 +1,6 @@
 <template>
   <section class="plant">
+    <h1 class="headline">Common name: {{ plant.commonName }}</h1>
     <p>Id: {{ plant.plantId }}</p>
     <p>Kingdom: {{ plant.kingdom }}</p>
     <p>Order: {{ plant.order }}</p>
@@ -7,9 +8,15 @@
     <p>Subfamily: {{ plant.subfamily }}</p>
     <p>Genus: {{ plant.genus }}</p>
     <p>Species: {{ plant.species }}</p>
-    <p>Common name: {{ plant.commonName }}</p>
     <p>Description: {{ plant.description }}</p>
+    <section>
+      <img src="../assets/genericplant.png" alt="a generic plant image"/>
+    </section>
+    <section>
+      <h2>Description and details</h2>
+    </section>
   </section>
+
 </template>
 
 <script>
@@ -21,10 +28,12 @@ export default {
   
 
   methods: {
-    getPlantById(plantId){
-      plantService.getPlantById(plantId)
-
-    }
+    getThisPlant(){
+      plantService.getPlantById(this.$route.params.plantId)
+      .then((response)=>{
+        console.log(response)
+        this.plant = response.data})
+    },
   },
 
   data(){
@@ -34,14 +43,8 @@ export default {
   },
 
   created(){
-    console.log("Reached created")
-    console.log(this.$route.params.plantId)
-    console.log(this.getPlantById(this.$route.params.plantId))
-    this.getPlantById(this.$route.params.plantId).then(response => {
-      this.plant = response.data
-    })
-    
-    
+  //  console.log("Reached created")
+    this.getThisPlant();
 
   }
 };

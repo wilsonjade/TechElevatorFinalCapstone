@@ -56,8 +56,8 @@ INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg4
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
 --populate test data
-INSERT INTO plants (kingdom, species, description) VALUES ('Plantae','Poa Pratensis', 'Kentucky bluegrass');
-INSERT INTO plants (kingdom, species, description) VALUES ('Plantae','Plantus scientificus', 'This is a plant!');
+INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description) VALUES ('Plantae','Poales', 'Poaceae','Pooideae','Poa','Poa Pratensis', 'Kentucky bluegrass', 'Poa pratensis, commonly known as Kentucky bluegrass (or blue grass), smooth meadow-grass, or common meadow-grass, is a perennial species of grass native to practically all of Europe, North Asia and the mountains of Algeria and Morocco. Although the species is spread over all of the cool, humid parts of the United States, it is not native to North America.');
+INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description) VALUES ('Plantae','Orderia', 'Familius','SubFamilius','Geniusius', 'Plantus Supra Coolius','Very Cool Plant', 'Plants are extremely cool, we all love plants!!');
 INSERT INTO sellers (seller_name, seller_type, is_user) VALUES ('Fake Nursery', 'Retailer', 0);
 
 GO
