@@ -6,6 +6,8 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 
+import ListPlants from '../components/ListPlants.vue'
+
 Vue.use(Router)
 
 /**
@@ -51,6 +53,14 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: "/plant",
+      name: "plants",
+      component: ListPlants,
+      meta: {
+        requiresAuth: true
       }
     },
   ]
