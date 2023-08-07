@@ -40,7 +40,7 @@ CREATE TABLE sellers (
 	seller_id int IDENTITY(1,1) NOT NULL,
 	seller_name varchar(50) NOT NULL,
 	seller_type varchar(50) NOT NULL,
-	is_user int NOT NULL,
+	is_user bit NOT NULL,
 	user_id int,
 	address1 varchar(100),
 	address2 varchar(100),
@@ -50,8 +50,26 @@ CREATE TABLE sellers (
 	website varchar(max)
 	CONSTRAINT [PK_seller] PRIMARY KEY (seller_id),
 	CONSTRAINT [FK_user] FOREIGN KEY (user_id) REFERENCES [users](user_id), 
-)
+	)
 
+CREATE TABLE [events] (
+	event_id int IDENTITY(1,1) NOT NULL,
+	user_id int,
+	address1 varchar(100),
+	address2 varchar(100),
+	city varchar(100),
+	state nchar(2),
+	zip varchar(9),
+	website varchar(max),
+	name varchar(max) NOT NULL,
+	short_description varchar(max),
+	long_description varchar(max),
+	is_virtual bit NOT NULL,
+	start_time datetime NOT NULL,
+	end_time datetime NOT NULL,
+	CONSTRAINT [PK_event] PRIMARY KEY (event_id),
+	CONSTRAINT [FK_user_event] FOREIGN KEY (user_id) REFERENCES [users](user_id),
+	)
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
