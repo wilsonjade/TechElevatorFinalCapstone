@@ -12,6 +12,7 @@
         public string? CommonName { get; set; }
         public string? Order { get; set; }
         public string Description { get; set; }
+        public string? ImgUrl { get; set; }
 
         public Plant() { }
 
@@ -24,7 +25,8 @@
          string species,
          string commonName,
          string order,
-         string description)
+         string description,
+             string imgurl)
         {
             Kingdom = kingdom;
             Family = family;
@@ -34,6 +36,7 @@
             CommonName = commonName;
             Order = order;
             Description = description;
+            ImgUrl = imgurl;
         }
 
         //methods

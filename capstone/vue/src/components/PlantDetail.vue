@@ -10,7 +10,7 @@
     <p>Species: {{ plant.species }}</p>
     <p>Description: {{ plant.description }}</p>
     <section>
-      <img src="../assets/genericplant.png" alt="a generic plant image"/>
+      <img v-bind:src="plant.imgUrl" alt="a generic plant image"/>
     </section>
     <section>
       <h2>Description and details</h2>

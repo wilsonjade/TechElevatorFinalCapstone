@@ -9,9 +9,9 @@ namespace Capstone.DAO
     public class PlantSqlDao: IPlantDao
     {
         private readonly string connectionString;
-        private readonly string sqlGetPlants = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description FROM plants;";
+        private readonly string sqlGetPlants = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, img_url FROM plants;";
 
-        private readonly string sqlGetPlantById = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description FROM plants WHERE plant_id = @plantId;";
+        private readonly string sqlGetPlantById = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, img_url FROM plants WHERE plant_id = @plantId;";
 
         public PlantSqlDao(string dbConnectionString)
         {
@@ -55,6 +55,7 @@ namespace Capstone.DAO
             plant.Order = reader["order"] is DBNull ? null : Convert.ToString(reader["order"]);
             plant.Subfamily = reader["subfamily"] is DBNull ? null : Convert.ToString(reader["subfamily"]);
             plant.Description = reader["description"] is DBNull ? null : Convert.ToString(reader["description"]);
+            plant.ImgUrl = reader["img_url"] is DBNull ? null : Convert.ToString(reader["img_Url"]);
 
             return plant;
 

@@ -8,6 +8,9 @@ import store from '../store/index'
 
 import ListPlants from '../components/ListPlants.vue'
 import PlantDetail from '../components/PlantDetail.vue'
+import myStuffView from '../views/myStuffView.vue'
+import virtualGardenView from '../views/virtualGardenView.vue'
+import searchView from '../views/searchView.vue'
 
 Vue.use(Router)
 
@@ -71,7 +74,31 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: "/myStuff",
+      name: "myStuffView",
+      component: myStuffView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/virtualGarden",
+      name: "virtualGardenView",
+      component: virtualGardenView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/search",
+      name: "searchView",
+      component: searchView,
+      meta: {
+        requiresAuth: true
+      }
+    },
 
   ]
 })
