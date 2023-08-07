@@ -1,5 +1,5 @@
 <template>
-  <section class="plant">
+  <section class="plant card">
     <h1 class="headline">Common name: {{ plant.commonName }}</h1>
     <p>Id: {{ plant.plantId }}</p>
     <p>Kingdom: {{ plant.kingdom }}</p>
