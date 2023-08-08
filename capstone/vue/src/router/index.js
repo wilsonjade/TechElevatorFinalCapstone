@@ -11,6 +11,7 @@ import PlantDetail from '../components/PlantDetail.vue'
 import myStuffView from '../views/myStuffView.vue'
 import virtualGardenView from '../views/virtualGardenView.vue'
 import searchView from '../views/searchView.vue'
+import eventsView from '../views/eventsView.vue'
 
 Vue.use(Router)
 
@@ -99,6 +100,16 @@ const router = new Router({
         requiresAuth: true
       }
     },
+    {
+      path: "/events",
+      name: "eventsView",
+      component: eventsView,
+      meta:{
+        requiresAuth: true
+
+      }
+
+    }
 
   ]
 })
