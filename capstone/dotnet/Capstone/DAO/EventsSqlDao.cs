@@ -1,6 +1,7 @@
 ﻿using Capstone.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 
 namespace Capstone.DAO
@@ -23,6 +24,9 @@ namespace Capstone.DAO
             "WHERE event_id = @eventId;";
 
         private readonly string SqlDeleteEvent = @"DELETE FROM events WHERE event_id = @eventId;";
+
+        private readonly string SqlAddEvents = @"INSERT INTO events (user_id, address1, address2, city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) 
+VALUES (@userId, @address1, @address2, @city, @state, @zip, @website, @name, @short_description, @long_description, @is_virtual, @start_time, @end_time);";
 
         public EventsSqlDao(string dbConnectionString)
         {
@@ -103,8 +107,32 @@ namespace Capstone.DAO
        
         public Events AddEvent(Events eventToAdd)
         {
-            Events events = new Events();
-            return events;
+            using(SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(SqlAddEvents, conn))
+                {
+                    cmd.Parameters.AddWithValue("@userId", eventToAdd.UserId);
+                    cmd.Parameters.AddWithValue("@address1", eventToAdd.Address1);
+                    cmd.Parameters.AddWithValue("@address2", eventToAdd.Address2);
+                    cmd.Parameters.AddWithValue("@city", eventToAdd.City);
+                    cmd.Parameters.AddWithValue("@state", eventToAdd.State);
+                    cmd.Parameters.AddWithValue("@zip", eventToAdd.Zip);
+                    cmd.Parameters.AddWithValue("@website", eventToAdd.Website);
+                    cmd.Parameters.AddWithValue("@name", eventToAdd.Name);
+                    cmd.Parameters.AddWithValue("@short_description", eventToAdd.ShortDescription);
+                    cmd.Parameters.AddWithValue("@long_description", eventToAdd.LongDescription);
+                    cmd.Parameters.AddWithValue("@is_virtual", eventToAdd.IsVirtual);
+                    cmd.Parameters.AddWithValue("@start_time", eventToAdd.StartTime);
+                    cmd.Parameters.AddWithValue("@end_time", eventToAdd.EndTime);
+
+                    eventToAdd.EventId = (int)cmd.ExecuteNonQuery();
+                }
+
+            }
+
+            return eventToAdd;
         }
         
         public Events UpdateEvent(Events eventsToUpdate)

@@ -10,7 +10,7 @@ namespace Capstone.Controllers
 
     [Route("[controller]")]
     [ApiController]
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     public class EventsController : Controller
     {
         public IEventsDao eventsDao;
@@ -69,13 +69,13 @@ namespace Capstone.Controllers
             return NotFound();
         }
 
-        //[HttpPost]
-        //public ActionResult<Events> AddEvent(Events newEvent)
-        //{
-        //    Events added = eventsDao.CreateEvent(newEvent);
-        //    return Created($"/events/{added.EventId}", added);
-        //}
+        [HttpPost]
+        public ActionResult<Events> AddEvent(Events newEvent)
+        {
+            Events added = eventsDao.AddEvent(newEvent);
+            return Created($"/events/{added.EventId}", added);
+        }
     }
 
-    
+
 }
