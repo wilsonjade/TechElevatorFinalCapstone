@@ -8,6 +8,7 @@
       <router-link v-bind:to="{ name: 'searchView'}">Search Plants </router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
       <router-link v-bind:to="{ name: 'login' }" v-else>Login</router-link>
+      <router-link v-bind:to="{name: 'eventsView'}">Events</router-link>&nbsp;|&nbsp;
 
     </div>
     <router-view />
