@@ -33,12 +33,29 @@ namespace Capstone.Controllers
             return Ok(eventsDao.GetEventById(eventsId));
         }
 
+        [HttpGet("future")] //getFutureEvents()
+        public ActionResult<List<Events>> GetFutureEvents()
+        {
+            return Ok(eventsDao.GetFutureEvents());
+        }
+
         //[HttpPut("{eventsId}")]
 
         //public ActionResult<Events> UpdateEvent(Events eventToUpdate)
         //{
 
         //}
+
+        [HttpDelete("{id}")]
+        public ActionResult<Events> DeleteEvent(int id)
+        {
+            bool isDeleted = eventsDao.DeleteEvent(id);
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+            return NotFound();
+        }
 
     }
 

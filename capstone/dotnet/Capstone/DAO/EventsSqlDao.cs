@@ -14,9 +14,14 @@ namespace Capstone.DAO
         private readonly string SqlGetEventsById = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
       ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events] WHERE event_id = @eventId;";
 
+        private readonly string SqlGetFutureEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
+      ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events]  WHERE start_time > GETDATE();";
+
         private readonly string SqlUpdateEvents = @"UPDATE events SET address1=@address1, address2=@address2, city=@city," +
             "state=@state, zip=@zip, website=@website, name=@name, short_description=@short_description, long_description=@long_description, is_virtual=@is_virtual, start_time=@start_time, end_time=@end_time" +
             "WHERE events_id = @eventsId;";
+
+        private readonly string SqlDeleteEvent = @"DELETE FROM events WHERE event_id = @eventId;";
 
         public EventsSqlDao(string dbConnectionString)
         {
@@ -50,14 +55,49 @@ namespace Capstone.DAO
         public Events GetEventById(int id)
         {
             Events events = new Events();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(SqlGetEventsById, conn))
+                {
+                    cmd.Parameters.AddWithValue("@eventId", id);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            events = MapRowToEvents(reader);
+                        }
+                    }
+                }
+            }
             return events;
         }
 
        
         public List<Events> GetFutureEvents()
         {
-            List<Events> events = new List<Events>();
-            return events;
+            List<Events> eventsList = new List<Events>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(SqlGetFutureEvents, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Events events = MapRowToEvents(reader);
+                            eventsList.Add(events);
+
+                        }
+                    }
+                }
+            }
+            return eventsList;
         }
        
         public Events AddEvent(Events eventToAdd)
@@ -106,9 +146,25 @@ namespace Capstone.DAO
         
         public bool DeleteEvent(int eventId)
         {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
 
-            Events events = new Events();
-            return false;
+                using (SqlCommand cmd = new SqlCommand(SqlDeleteEvent, conn))
+                {
+                    cmd.Parameters.AddWithValue("@eventId", eventId);
+
+                    int count = cmd.ExecuteNonQuery();
+                    if (count == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
         }
 
         public Events MapRowToEvents(SqlDataReader reader)
