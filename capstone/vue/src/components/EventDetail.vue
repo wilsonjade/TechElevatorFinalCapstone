@@ -1,6 +1,8 @@
 <template>
   <section class="event card">
-    <h1 class="headline">This is the event detail: </h1>
+    <h1 class="headline"> {{item.name}} </h1>
+     <h2>{{ item.shortDescription }}</h2>
+      <p>{{item.longDescription}}</p>
     
     <section>
      
@@ -18,7 +20,7 @@ import eventService from "../services/EventService.js"
 
 export default {
   name: "event",
-  
+  props:["item"],
 
   methods: {
     getThisEvent(){
