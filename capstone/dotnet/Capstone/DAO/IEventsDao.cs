@@ -5,7 +5,7 @@
     using Capstone.Models;
 
     
-    public interface IEventDao
+    public interface IEventsDao 
     {
         /// <summary>
         /// 
