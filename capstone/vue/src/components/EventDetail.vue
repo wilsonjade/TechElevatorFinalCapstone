@@ -5,7 +5,7 @@
       <p>{{item.longDescription}}</p>
    
   <footer> 
-  <button v-if="isAdmin" >Edit Event</button> 
+  <button v-if="isAdmin" v-on:click="$router.push({name: 'eventAdmin', params:{id: item.eventId}})" >Edit Event</button> 
   <button v-if="isAdmin" v-on:click="deleteThisEvent()">Delete Event</button>  </footer>
   </section>
 </template>
@@ -24,8 +24,9 @@ export default {
       let errorMsg;
       eventService.deleteEvent(this.item.eventId)
       .then(
-        response => {wasSuccess = response.data;
+        response => {wasSuccess = response.status == 200 ;
         alert( wasSuccess ? "Event Deleted" : "Event deletion unsuccessful, please try again");
+        this.$router.go(0); //refresh view
         }
       )
       .catch((error) => {

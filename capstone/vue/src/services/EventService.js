@@ -12,5 +12,12 @@ export default {
     deleteEvent(eventId){
         return axios.delete(`/events/${eventId}`);
     },
-
+    createEvent(eventObj){
+        console.log("reached axios create")
+        return axios.post("/events/",eventObj);
+    },
+    updateEvent(eventId,eventObj){
+        return axios.put(`/events/${eventId}`,eventObj)
+    }
+    
 }
