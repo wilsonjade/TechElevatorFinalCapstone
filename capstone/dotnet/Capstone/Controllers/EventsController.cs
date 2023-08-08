@@ -9,7 +9,7 @@ namespace Capstone.Controllers
 
     [Route("[controller]")]
     [ApiController]
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class EventsController : Controller
     {
         public IEventsDao eventsDao;
@@ -32,6 +32,13 @@ namespace Capstone.Controllers
         {
             return Ok(eventsDao.GetEventById(eventsId));
         }
+
+        //[HttpPut("{eventsId}")]
+
+        //public ActionResult<Events> UpdateEvent(Events eventToUpdate)
+        //{
+
+        //}
 
     }
 
