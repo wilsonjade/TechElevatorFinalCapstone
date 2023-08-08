@@ -69,7 +69,7 @@ export default {
   created(){
   //  console.log("Reached created events")
    // this.getThisEvent();
-    this.isAdmin = this.$store.state.user.role;
+    this.isAdmin = this.$store.state.user.role == 'admin';
   },
 };
 

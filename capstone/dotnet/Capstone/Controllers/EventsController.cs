@@ -21,7 +21,7 @@ namespace Capstone.Controllers
         }
 
         [HttpGet]
-
+        [AllowAnonymous]
         public ActionResult<List<Events>> GetEvents()
         {
             return Ok(eventsDao.GetEvents());
@@ -69,7 +69,7 @@ namespace Capstone.Controllers
             return NotFound();
         }
 
-        [HttpPost]
+        [HttpPost()]
         public ActionResult<Events> AddEvent(Events newEvent)
         {
             Events added = eventsDao.AddEvent(newEvent);

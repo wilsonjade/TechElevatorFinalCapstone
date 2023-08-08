@@ -7,15 +7,19 @@
      
       <div>
       <label for="name">Name:</label>
-      <input v-model="formData.name" type="text" id="name" required />
+      <input v-model="formData.name"  type="text" id="name"  required />
     </div>
     <div>
       <label for="userId">User ID:</label>
-      <input v-model="formData.userId" type="number" id="userId" required />
+      <input v-model="formData.userid" v-bind:placeholder="userid"  type="number" id="userId" disabled />
     </div>
     <div>
       <label for="address1">Address:</label>
       <input v-model="formData.address1" type="text" id="address1"  />
+    </div>
+    <div>
+      <label for="address2">Address Line 2:</label>
+      <input v-model="formData.address2" type="text" id="address2"  />
     </div>
     <div>
       <label for="city">City:</label>
@@ -23,7 +27,7 @@
     </div>
     <div>
       <label for="state">State:</label>
-      <input v-model="formData.state" type="text" id="state"  />
+      <input v-model="formData.state" maxlength="2" type="text" id="state"  />
     </div>
     <div>
       <label for="zip">Zip:</label>
@@ -66,40 +70,60 @@ export default {
     return {
     testobj: {},
       formData: {
-        eventId: null,
+        eventId: 0,
         userid: 0,
         address1: '123',
-        city: 'cbus',
-        state: 'oh',
-        zip: '321',
-        website: 'http://www.url.com',
-        name: 'Nm',
+        address2: '',
+        city: 'test',
+        state: 'OH',
+        zip: 'test',
+        website: 'test',
+        name: 'test',
         shortDescription: 'short',
         longDescription: 'long',
         isVirtual: false,
-        startTime: null,
-        endTime: null,
+        startTime: '2023-08-08T12:00:00',
+        endTime: '2023-08-08T13:00:00',
       },
     };
+  },
+  computed: {
+    userid(){return this.$store.state.user.userId}
   },
   methods: {
     submitForm() {
       // Handle form submission here
-      console.log(this.formData);
+   
+      //if id = 0 , call POST
+      if(this.formData.eventId === 0 || this.formData.eventId == null){
+        this.formData.userid = this.userid //set userId
+
+        const sendObj = this.formData
+        delete sendObj.eventId;
+        EventService.createEvent(sendObj).then(response=>
+        alert(response.status)
+        ).catch((error)=>{
+        alert(error.message)
+        alert(error.statusText)}
+        );
+      }else{
+      //if id != 0 , call PUT
       EventService.updateEvent(this.formData.eventId,this.formData).then(
           response=> alert(response.status)
-      ).catch(error=> alert(error.message));
-      // You can send the formData to an API, process it, etc.
+      ).catch(error=> alert(error.message));}
+      
     },
   },
   created(){
-      if(this.$route.params.id){
+    //populate in existing data if id is valid
+      if(this.$route.params.id != 0){
           EventService.getEventsById(this.$route.params.id)
           .then( response =>{
           this.testobj = response.data;
               this.formData = response.data;}
           )
       }
+      
   }
 };
 </script>

@@ -14,7 +14,8 @@ export default {
     },
     createEvent(eventObj){
         console.log("reached axios create")
-        return axios.post("/events/",eventObj);
+        
+        return axios.post("/events/", eventObj);
     },
     updateEvent(eventId,eventObj){
         return axios.put(`/events/${eventId}`,eventObj)

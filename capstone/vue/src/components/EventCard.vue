@@ -1,12 +1,12 @@
 <template>
   <div class="event card">
-    <section>
+    <section >
       <h1>{{ item.name }}</h1>
       <h2>{{ item.shortDescription }}</h2>
      
     </section>
     <section>
-      <event-detail v-bind:item="item"/>
+      <event-detail v-bind:item="item" v-bind:display="display"/>
     </section>
   </div>
 </template>
