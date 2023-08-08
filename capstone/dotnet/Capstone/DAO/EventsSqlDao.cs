@@ -8,7 +8,7 @@ namespace Capstone.DAO
     public class EventsSqlDao : IEventsDao
     {
         private readonly string connectionString;
-        private readonly string SqlGetEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
+        private readonly string SqlGetEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip], [website],[name],[short_description]
       ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events];";
 
         private readonly string SqlGetEventsById = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
@@ -17,9 +17,10 @@ namespace Capstone.DAO
         private readonly string SqlGetFutureEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
       ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events]  WHERE start_time > GETDATE();";
 
-        private readonly string SqlUpdateEvents = @"UPDATE events SET address1=@address1, address2=@address2, city=@city," +
-            "state=@state, zip=@zip, website=@website, name=@name, short_description=@short_description, long_description=@long_description, is_virtual=@is_virtual, start_time=@start_time, end_time=@end_time" +
-            "WHERE events_id = @eventsId;";
+        private readonly string SqlUpdateEvents = @"UPDATE events SET address1=@address1, address2=@address2, city=@city, " +
+            "state=@state, zip=@zip, website=@website, name=@name, short_description=@short_description, long_description=@long_description, " +
+            "is_virtual=@is_virtual, start_time=@start_time, end_time=@end_time " +
+            "WHERE event_id = @eventId;";
 
         private readonly string SqlDeleteEvent = @"DELETE FROM events WHERE event_id = @eventId;";
 
@@ -114,6 +115,7 @@ namespace Capstone.DAO
 
                 using (SqlCommand cmd = new SqlCommand(SqlUpdateEvents, conn))
                 {
+                    cmd.Parameters.AddWithValue("@eventId", eventsToUpdate.EventId);
                     cmd.Parameters.AddWithValue("@address1", eventsToUpdate.Address1);
                     cmd.Parameters.AddWithValue("@address2", eventsToUpdate.Address2);
                     cmd.Parameters.AddWithValue("@city", eventsToUpdate.City);
@@ -138,10 +140,7 @@ namespace Capstone.DAO
                     }
 
                 }
-            }
-           
-
-           
+            }                     
         }
         
         public bool DeleteEvent(int eventId)
@@ -166,6 +165,13 @@ namespace Capstone.DAO
                 }
             }
         }
+
+        //public Events CreateEvent(Events newEvent)
+        //{
+
+        //}
+
+
 
         public Events MapRowToEvents(SqlDataReader reader)
         {
