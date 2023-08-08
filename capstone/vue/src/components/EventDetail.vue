@@ -24,8 +24,9 @@ export default {
       let errorMsg;
       eventService.deleteEvent(this.item.eventId)
       .then(
-        response => {wasSuccess = response.data;
+        response => {wasSuccess = response.status == 200 ;
         alert( wasSuccess ? "Event Deleted" : "Event deletion unsuccessful, please try again");
+        this.$router.go(0); //refresh view
         }
       )
       .catch((error) => {
