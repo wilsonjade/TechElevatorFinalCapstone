@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Capstone.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Capstone.Controllers
 {
 
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class EventsController : Controller
     {
         public IEventsDao eventsDao;
