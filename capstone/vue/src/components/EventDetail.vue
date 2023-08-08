@@ -18,7 +18,7 @@ import eventService from "../services/EventService.js"
 
 export default {
   name: "event",
-  
+  props:["item"],
 
   methods: {
     getThisEvent(){
