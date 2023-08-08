@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Capstone.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using Capstone.Exceptions;
 
 namespace Capstone.Controllers
 {
@@ -39,12 +40,23 @@ namespace Capstone.Controllers
             return Ok(eventsDao.GetFutureEvents());
         }
 
-        //[HttpPut("{eventsId}")]
+        [HttpPut("{id}")]
 
-        //public ActionResult<Events> UpdateEvent(Events eventToUpdate)
-        //{
+        public ActionResult<Events> UpdateEvent(int id, Events eventToUpdate)
+        {
+            eventToUpdate.EventId = id;
 
-        //}
+            try
+            {
+                Events result = eventsDao.UpdateEvent(eventToUpdate);
+                return Ok(result);
+            }
+            catch (DaoException)
+            {
+                return NotFound();
+            }
+
+        }
 
         [HttpDelete("{id}")]
         public ActionResult<Events> DeleteEvent(int id)
@@ -52,11 +64,17 @@ namespace Capstone.Controllers
             bool isDeleted = eventsDao.DeleteEvent(id);
             if (isDeleted)
             {
-                return NoContent();
+                return Ok();
             }
             return NotFound();
         }
 
+        //[HttpPost]
+        //public ActionResult<Events> AddEvent(Events newEvent)
+        //{
+        //    Events added = eventsDao.CreateEvent(newEvent);
+        //    return Created($"/events/{added.EventId}", added);
+        //}
     }
 
     
