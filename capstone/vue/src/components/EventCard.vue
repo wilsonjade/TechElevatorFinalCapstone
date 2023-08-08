@@ -1,40 +1,45 @@
 <template>
-  <section class="eventDetail">
-    <h1> {{item.name}} </h1>
-     <h2>{{ item.shortDescription }}</h2>
-      <p>{{item.longDescription}}</p>
-   
-  <footer> 
-  <button v-if="isAdmin" >Edit Event</button> 
-  <button v-if="isAdmin" v-on:click="deleteThisEvent()">Delete Event</button>  </footer>
-  </section>
+  <div class="event card">
+    <section>
+      <h1>{{ item.name }}</h1>
+      <h2>{{ item.shortDescription }}</h2>
+     
+    </section>
+    <section>
+      <event-detail v-bind:item="item"/>
+    </section>
+  </div>
 </template>
 
 <script>
-
-import eventService from "../services/EventService.js"
+import eventService from "../services/EventService.js";
+import EventDetail from './EventDetail.vue';
 
 export default {
-  name: "event",
-  props:["item"],
+  components: { EventDetail },
+  name: "eventCard",
+  props: ["item"],
 
   methods: {
-    deleteThisEvent(){
+    deleteThisEvent() {
       let wasSuccess = false;
       let errorMsg;
-      eventService.deleteEvent(this.item.eventId)
-      .then(
-        response => {wasSuccess = response.data;
-        alert( wasSuccess ? "Event Deleted" : "Event deletion unsuccessful, please try again");
-        }
-      )
-      .catch((error) => {
+      eventService
+        .deleteEvent(this.item.eventId)
+        .then((response) => {
+          wasSuccess = response.data;
+          alert(
+            wasSuccess
+              ? "Event Deleted"
+              : "Event deletion unsuccessful, please try again"
+          );
+        })
+        .catch((error) => {
           if (error.response) {
             // error.response exists
             // Request was made, but response has error status (4xx or 5xx)
             errorMsg = `Error deleting event: ${error.response.status}`;
             alert(errorMsg);
-            
           } else if (error.request) {
             // There is no error.response, but error.request exists
             // Request was made, but no response was received
@@ -46,38 +51,29 @@ export default {
             errorMsg = "Error deleting event: error making request";
             alert(errorMsg);
           }
-      }
-      );
-      
-    }
+        });
+    },
     // getThisEvent(){
     //   eventService.getEventsById(this.$route.params.eventId)
     //   .then((response)=>{
     //     console.log(response)
     //     this.event = response.data})
     // },
-  
   },
-  data(){
+  data() {
     return {
       isAdmin: false,
-      event: {}
-    }
+      event: {},
+    };
   },
 
-  created(){
-  //  console.log("Reached created events")
-   // this.getThisEvent();
+  created() {
+    //  console.log("Reached created events")
+    // this.getThisEvent();
     this.isAdmin = this.$store.state.user.role;
   },
 };
-
 </script>
 
 <style>
-.eventDetail{
-  background-color: darkolivegreen;
-  border-width: 2px;
-  border-style: solid;
-}
 </style>

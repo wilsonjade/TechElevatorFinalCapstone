@@ -7,6 +7,10 @@ export default {
 
     getEventsById(eventId) {
         return axios.get(`/events/${eventId}`)
-    }
+    },
+
+    deleteEvent(eventId){
+        return axios.delete(`/events/${eventId}`);
+    },
 
 }
