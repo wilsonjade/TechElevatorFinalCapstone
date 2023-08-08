@@ -66,7 +66,7 @@ export default {
     return {
     testobj: {},
       formData: {
-        event_id: null,
+        eventId: null,
         userid: 0,
         address1: '123',
         city: 'cbus',
@@ -86,7 +86,7 @@ export default {
     submitForm() {
       // Handle form submission here
       console.log(this.formData);
-      EventService.updateEvent(this.formData).then(
+      EventService.updateEvent(this.formData.eventId,this.formData).then(
           response=> alert(response.status)
       ).catch(error=> alert(error.message));
       // You can send the formData to an API, process it, etc.
