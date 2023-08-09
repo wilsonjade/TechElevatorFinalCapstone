@@ -37,7 +37,7 @@ namespace Capstone.Controllers
 
 
         [HttpPut("{id}")]
-
+        [AllowAnonymous]
         public ActionResult<Seller> UpdateSeller(int id, Seller sellerToUpdate)
         {
             sellerToUpdate.SellerId = id;
@@ -55,6 +55,7 @@ namespace Capstone.Controllers
         }
 
         [HttpDelete("{id}")]
+        [AllowAnonymous]
         public ActionResult<Seller> DeleteSeller(int id)
         {
             bool isDeleted = sellerDao.DeleteSeller(id);
@@ -66,6 +67,7 @@ namespace Capstone.Controllers
         }
 
         [HttpPost()]
+        [AllowAnonymous]
         public ActionResult<Seller> AddSeller(Seller newSeller)
         {
             Seller added = sellerDao.CreateSeller(newSeller);
