@@ -125,14 +125,14 @@ namespace Capstone.DAO
         }
         public Seller CreateSeller(Seller newSeller)
         {
-            Seller createdSeller = new Seller();
+            
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
                 using (SqlCommand cmd = new SqlCommand(sqlCreateSeller, conn))
                 {
-                   // cmd.Parameters.AddWithValue("@seller_id", newSeller.SellerId);
+                    cmd.Parameters.AddWithValue("@seller_id", newSeller.SellerId);
                     cmd.Parameters.AddWithValue("@address1", newSeller.Address1);
                     cmd.Parameters.AddWithValue("@address2", newSeller.Address2);
                     cmd.Parameters.AddWithValue("@city", newSeller.City);
@@ -143,14 +143,14 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@seller_type", newSeller.SellerType);
 
                     //SqlCommand testcmd = new SqlCommand();
-                    cmd.ExecuteScalar(); //why can't i assign this to an int??
+                    newSeller.SellerId = (int)cmd.ExecuteNonQuery(); //why can't i assign this to an int??
 
-                    createdSeller = GetSellerById(2); 
+                   
                 }
 
             }
 
-            return createdSeller;
+            return newSeller;
         }
         public Seller UpdateSeller(Seller sellerToUpdate)
         {
