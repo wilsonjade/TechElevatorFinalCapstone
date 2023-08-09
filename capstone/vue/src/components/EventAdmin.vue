@@ -72,18 +72,18 @@ export default {
       formData: {
         eventId: 0,
         userid: 0,
-        address1: '123',
+        address1: '',
         address2: '',
-        city: 'test',
-        state: 'OH',
-        zip: 'test',
-        website: 'test',
-        name: 'test',
-        shortDescription: 'short',
-        longDescription: 'long',
+        city: '',
+        state: '',
+        zip: '',
+        website: '',
+        name: '',
+        shortDescription: '',
+        longDescription: '',
         isVirtual: false,
-        startTime: '2023-08-08T12:00:00',
-        endTime: '2023-08-08T13:00:00',
+        startTime: '2023-08-15T12:00:00',
+        endTime: '2023-08-15T13:00:00',
       },
     };
   },
@@ -109,9 +109,9 @@ export default {
       }else{
       //if id != 0 , call PUT
       EventService.updateEvent(this.formData.eventId,this.formData).then(
-          response=> alert(response.status)
+          response=> {if(response.status == 200){alert("Update successful")}}
       ).catch(error=> alert(error.message));}
-      
+      this.$router.push({name: 'eventsView'})
     },
   },
   created(){

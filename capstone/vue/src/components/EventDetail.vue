@@ -2,6 +2,7 @@
   <section class="eventDetail">
     <h1> {{item.name}} </h1>
      <h2>{{ item.shortDescription }}</h2>
+     <p v-if="item.isVirtual">This Event is Virtual</p>
       <p>{{item.longDescription}}</p>
    
   <footer> 
