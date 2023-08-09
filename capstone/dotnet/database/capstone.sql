@@ -40,8 +40,6 @@ CREATE TABLE sellers (
 	seller_id int IDENTITY(1,1) NOT NULL,
 	seller_name varchar(50) NOT NULL,
 	seller_type varchar(50) NOT NULL,
-	is_user bit NOT NULL,
-	user_id int,
 	address1 varchar(100),
 	address2 varchar(100),
 	city varchar(100),
@@ -49,7 +47,7 @@ CREATE TABLE sellers (
 	zip varchar(9),
 	website varchar(max)
 	CONSTRAINT [PK_seller] PRIMARY KEY (seller_id),
-	CONSTRAINT [FK_user] FOREIGN KEY (user_id) REFERENCES [users](user_id), 
+	
 	)
 
 CREATE TABLE [events] (
@@ -77,7 +75,7 @@ INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','Yh
 --populate test data
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, img_url) VALUES ('Plantae','Poales', 'Poaceae','Pooideae','Poa','Poa Pratensis', 'Kentucky bluegrass', 'Poa pratensis, commonly known as Kentucky bluegrass (or blue grass), smooth meadow-grass, or common meadow-grass, is a perennial species of grass native to practically all of Europe, North Asia and the mountains of Algeria and Morocco. Although the species is spread over all of the cool, humid parts of the United States, it is not native to North America.','https://www.picturethisai.com/image-handle/website_cmsname/image/1080/154159742233608208.jpeg');
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, img_url) VALUES ('Plantae','Orderia', 'Familius','SubFamilius','Geniusius', 'Plantus Supra Coolius','Very Cool Plant', 'Plants are extremely cool, we all love plants!!','./assets/genericplant.png');
-INSERT INTO sellers (seller_name, seller_type, is_user) VALUES ('Fake Nursery', 'Retailer', 0);
+INSERT INTO sellers (seller_name, seller_type) VALUES ('Fake Nursery', 'Retailer');
 INSERT INTO events (user_id , address1 , city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, '123 Main St',  'Columbus', 'OH', '12345', 'www.website.com', 'Columbus Garden Tour', 'Visit local home gardens in Columbus', 'This is a long description. It is so long.  I love plants', 0, '2023-08-14 09:30:00', '2023-08-14 13:45:00')
 INSERT INTO events (user_id , website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, 'www.zoom.com/meeting123456', 'Green Morning America', 'Zoom chat for gardener talk', 'This is a long description. It is so long.  I love plants', 1, '2023-08-15 10:00:00', '2023-08-14 11:00:00')
 GO
