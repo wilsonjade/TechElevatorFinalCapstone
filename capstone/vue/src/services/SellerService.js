@@ -17,7 +17,6 @@ export default {
         return axios.delete(`/seller/${sellerId}`);
     },
     createSeller(seller){
-        console.log("reached axios create")        
         return axios.post("/seller/", seller);
     },
     updateSeller(sellerId, seller){

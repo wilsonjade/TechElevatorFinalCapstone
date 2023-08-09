@@ -31,17 +31,19 @@ export default {
       return this.$store.state.sellers;
     },
     filteredSellers() {
-      return this.$store.state.sellers.filter((seller) => {
-        return this.filteredSellersByPlant.includes(seller.sellerId)
-      });
-    },
+      if(this.filteredSellersByPlant.length>0){
+      return this.$store.state.sellers.filter((seller) => {return this.filteredSellersByPlant.includes(seller.sellerId)})
+      }
+      else{return this.$store.state.sellers}
+    }
   },
   created() {
     this.isAdmin = this.$store.state.user.role == "admin";
     //call database for valid list of seller IDs
+    if(this.$route.params.plantId){
     SellerService.getSellersByPlantId(this.$route.params.plantId).then(response=>{
       this.filteredSellersByPlant = response.data
-    })
+    })}
   },
 };
 </script>
