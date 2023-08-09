@@ -132,7 +132,7 @@ namespace Capstone.DAO
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand(sqlGetSellers, conn))
+                using (SqlCommand cmd = new SqlCommand(sqlGetSellerByPlantId, conn))
                 {
                     cmd.Parameters.AddWithValue("@plant_id", plantId);
                     using (SqlDataReader reader = cmd.ExecuteReader())
