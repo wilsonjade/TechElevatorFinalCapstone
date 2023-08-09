@@ -14,6 +14,7 @@ import searchView from '../views/searchView.vue'
 import eventsView from '../views/eventsView.vue'
 import EventAdmin from '../components/EventAdmin.vue'
 import SellerList from '../components/SellerList.vue'
+import SellersView from '../views/SellersView.vue'
 
 Vue.use(Router)
 
@@ -123,8 +124,8 @@ const router = new Router({
     },
     {
       path: "/sellers",
-      name: "sellerlist",
-      component: SellerList,
+      name: "sellerView",
+      component: SellersView,
       meta:{
         requiresAuth: false
       }
