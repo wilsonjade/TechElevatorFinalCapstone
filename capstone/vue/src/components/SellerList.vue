@@ -17,16 +17,20 @@
 import SellerDetail from "./SellerDetail.vue";
 
 export default {
-  name: "sellerList",
+  name: "listSellers",
   props: ["item"],
   components: { SellerDetail },
   data() {
     return {
       isAdmin: false,
-      sellers: [],
     };
   },
   methods: {},
+  computed: {
+    sellers() {
+      return this.$store.state.sellers;
+    }
+  },
   created() {
     this.isAdmin = this.$store.state.user.role == "admin";
   },

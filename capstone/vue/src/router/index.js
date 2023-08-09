@@ -124,7 +124,7 @@ const router = new Router({
       }
     },
     {
-      path: "/sellers",
+      path: "/seller",
       name: "sellersView",
       component: SellersView,
       meta:{
@@ -132,7 +132,7 @@ const router = new Router({
       }
     },
     {
-      path: "/sellers/:plantId",
+      path: "/seller/:plantId",
       name: "sellersByPlant",
       component: SellerList,
       meta:{
