@@ -13,6 +13,7 @@ import virtualGardenView from '../views/virtualGardenView.vue'
 import searchView from '../views/searchView.vue'
 import eventsView from '../views/eventsView.vue'
 import EventAdmin from '../components/EventAdmin.vue'
+import SellerList from '../components/SellerList.vue'
 
 Vue.use(Router)
 
@@ -119,9 +120,23 @@ const router = new Router({
         requiresAuth: true
 
       }
-
-    }
-
+    },
+    {
+      path: "/sellers",
+      name: "sellerlist",
+      component: SellerList,
+      meta:{
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/sellers/:plantId",
+      name: "sellersByPlant",
+      component: SellerList,
+      meta:{
+        requiresAuth: false
+      }
+    },
   ]
 })
 

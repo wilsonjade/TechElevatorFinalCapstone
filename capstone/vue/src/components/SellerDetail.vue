@@ -1,5 +1,5 @@
 <template>
-  <section class="sellerDetail">
+  <section class="seller-detail">
 
 
 
@@ -9,9 +9,23 @@
 </template>
 
 <script>
+
+
 export default {
     name: "sellerDetail",
     props: ["item"],
+    data() {
+      return {
+        isAdmin: false,
+        sellers: [],
+      };
+    },
+    methods: {},
+    created() {
+      this.isAdmin = this.$store.state.user.role == 'admin';
+
+
+    },
 
 }
 </script>
