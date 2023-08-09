@@ -4,7 +4,7 @@
       >Add New Seller</router-link>
 
     <seller-detail
-      v-for="seller in sellers"
+      v-for="seller in filteredSellers"
       v-bind:key="seller.id"
       v-bind:item="seller"
     />
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import SellerService from '../services/SellerService';
 import SellerDetail from "./SellerDetail.vue";
 
 export default {
@@ -21,7 +22,7 @@ export default {
   data() {
     return {
       isAdmin: false,
-      filteredSellers: [],
+      filteredSellersByPlant: [],
     };
   },
   methods: {},
@@ -29,15 +30,18 @@ export default {
     sellers() {
       return this.$store.state.sellers;
     },
-    filiteredSellersByPlantId() {
+    filteredSellers() {
       return this.$store.state.sellers.filter((seller) => {
-        return this.filteredSellers.includes(seller.sellerId)
+        return this.filteredSellersByPlant.includes(seller.sellerId)
       });
     },
   },
   created() {
     this.isAdmin = this.$store.state.user.role == "admin";
-    this.filteredSellers = this.$store.state.sellers;
+    //call database for valid list of seller IDs
+    SellerService.getSellersByPlantId(this.$route.params.plantId).then(response=>{
+      this.filteredSellersByPlant = response.data
+    })
   },
 };
 </script>
