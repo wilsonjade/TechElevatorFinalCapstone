@@ -101,7 +101,10 @@ export default {
         const sendObj = this.formData
         delete sendObj.eventId;
         EventService.createEvent(sendObj).then(response=>
-        alert(response.status)
+        alert(
+          response.status == 201 ? "Event created successfully" : response.status
+        
+        )
         ).catch((error)=>{
         alert(error.message)
         alert(error.statusText)}
