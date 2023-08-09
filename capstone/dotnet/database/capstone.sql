@@ -1,4 +1,4 @@
-USE master
+﻿USE master
 GO
 
 --drop database if it exists
@@ -68,6 +68,13 @@ CREATE TABLE [events] (
 	CONSTRAINT [PK_event] PRIMARY KEY (event_id),
 	CONSTRAINT [FK_user_event] FOREIGN KEY (user_id) REFERENCES [users](user_id),
 	)
+
+CREATE TABLE sellers_products (
+	seller_id int NOT NULL,
+	plant_id int NOT NULL
+	CONSTRAINT [FK_inventory_seller] FOREIGN KEY (seller_id) REFERENCES [sellers](seller_id),
+	CONSTRAINT [FK_inventory_plant] FOREIGN KEY (plant_id) REFERENCES [plants](plant_id)
+)
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
@@ -75,7 +82,23 @@ INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','Yh
 --populate test data
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, img_url) VALUES ('Plantae','Poales', 'Poaceae','Pooideae','Poa','Poa Pratensis', 'Kentucky bluegrass', 'Poa pratensis, commonly known as Kentucky bluegrass (or blue grass), smooth meadow-grass, or common meadow-grass, is a perennial species of grass native to practically all of Europe, North Asia and the mountains of Algeria and Morocco. Although the species is spread over all of the cool, humid parts of the United States, it is not native to North America.','https://www.picturethisai.com/image-handle/website_cmsname/image/1080/154159742233608208.jpeg');
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, img_url) VALUES ('Plantae','Orderia', 'Familius','SubFamilius','Geniusius', 'Plantus Supra Coolius','Very Cool Plant', 'Plants are extremely cool, we all love plants!!','./assets/genericplant.png');
-INSERT INTO sellers (seller_name, seller_type) VALUES ('Fake Nursery', 'Retailer');
+INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, img_url) VALUES('Plantae', 'Pinales', 'Pinaceae','', 'Pinus', 'P. sylvestris', 'Scoth Pine', 'Pinus sylvestris is an evergreen coniferous tree growing up to 35 metres (115 feet) in height[3] and 1 m (3 ft 3 in) in trunk diameter when mature,[4] exceptionally over 45 m (148 ft) tall and 1.7 m (5+1⁄2 ft) in trunk diameter on very productive sites.','https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Skuleskogen_pine.jpg/330px-Skuleskogen_pine.jpg');
+INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, img_url) VALUES('Plantae', 'Zingiberales', 'Strelitziaceae', '', 'Strelitzia', 'S. reginia', 'Bird of Paradise', ' The leaves are evergreen and arranged in two ranks, making a fan-shaped crown. The flowers stand above the foliage at the tips of long stalks. The hard, beak-like sheath from which the flower emerges is termed the spathe.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Bird_of_Paradise_flower.JPG/330px-Bird_of_Paradise_flower.JPG');
+INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, img_url) VALUES('Plantae', 'Caryophyllales', 'Cactaceae', 'Cactoideae', 'Rhipsalidopsis', 'R. gaertneri', 'Spring Cactus', 'R. gaertneri grows on trees (epiphytic) or less often rocks (lithophytic) in sub-tropical rain forest. Together with the hybrid with R. rosea, Rhipsalidopsis × graeseri, it is known, in English speaking countries in the Northern Hemisphere, as Easter cactus or Whitsun cactus and is a widely cultivated ornamental plant.', 'https://upload.wikimedia.org/wikipedia/commons/c/c0/Hatiora_gaertneri.jpg');
+
 INSERT INTO events (user_id , address1 , city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, '123 Main St',  'Columbus', 'OH', '12345', 'www.website.com', 'Columbus Garden Tour', 'Visit local home gardens in Columbus', 'This is a long description. It is so long.  I love plants', 0, '2023-08-14 09:30:00', '2023-08-14 13:45:00')
 INSERT INTO events (user_id , website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, 'www.zoom.com/meeting123456', 'Green Morning America', 'Zoom chat for gardener talk', 'This is a long description. It is so long.  I love plants', 1, '2023-08-15 10:00:00', '2023-08-14 11:00:00')
+INSERT INTO sellers (seller_name, seller_type) VALUES ('Fake Nursery', 'Retailer');
+INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website,) VALUES ('Oakland Nursery Dublin','Retailer','4261 West Dublin-Granville Road','','Dublin','OH','43017','https://www.oaklandnursery.com/page/garden-centers/dublin');
+INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website,) VALUES ('Oakland Nursery Columbus','Retailer','1156 Oakland Park Avenue','','Columbus','OH','43224-3317','https://www.oaklandnursery.com/page/garden-centers/columbus');
+INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website,) VALUES ('Nature Hills','Online Seller','2336 S 156th Circle','','Omaha','NE','68130','https://www.naturehills.com/');
+--populate test inventory records
+INSERT INTO sellers_products (seller_id, plant_id) VALUES (1,1);
+INSERT INTO sellers_products (seller_id, plant_id) VALUES (1,2);
+INSERT INTO sellers_products (seller_id, plant_id) VALUES (1,3);
+INSERT INTO sellers_products (seller_id, plant_id) VALUES (1,4);
+INSERT INTO sellers_products (seller_id, plant_id) VALUES (2,2);
+INSERT INTO sellers_products (seller_id, plant_id) VALUES (2,3);
+INSERT INTO sellers_products (seller_id, plant_id) VALUES (3,1);
+INSERT INTO sellers_products (seller_id, plant_id) VALUES (3,4);
 GO
