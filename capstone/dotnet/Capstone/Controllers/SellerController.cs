@@ -35,6 +35,18 @@ namespace Capstone.Controllers
             return Ok(sellerDao.GetSellerById(sellerId));
         }
 
+        [HttpGet("plant/{plantId}")]
+        [AllowAnonymous]
+        public ActionResult<List<int>> GetSellersByPlantId(int plantId)
+        {
+            return Ok(sellerDao.GetSellerByPlantId(plantId));
+            
+        }
+
+        //public ActionResult<Seller> GetSellerById(int sellerId)
+        //{
+        //    return Ok(sellerDao.GetSellerById(sellerId));
+        //}
 
         [HttpPut("{id}")]
         
