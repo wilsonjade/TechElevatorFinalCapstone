@@ -44,7 +44,7 @@ CREATE TABLE sellers (
 	address2 varchar(100),
 	city varchar(100),
 	state nchar(2),
-	zip varchar(9),
+	zip varchar(10),
 	website varchar(max)
 	CONSTRAINT [PK_seller] PRIMARY KEY (seller_id),
 	
@@ -57,7 +57,7 @@ CREATE TABLE [events] (
 	address2 varchar(100),
 	city varchar(100),
 	state nchar(2),
-	zip varchar(9),
+	zip varchar(10),
 	website varchar(max),
 	name varchar(max) NOT NULL,
 	short_description varchar(max),
@@ -89,9 +89,9 @@ INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_
 INSERT INTO events (user_id , address1 , city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, '123 Main St',  'Columbus', 'OH', '12345', 'www.website.com', 'Columbus Garden Tour', 'Visit local home gardens in Columbus', 'This is a long description. It is so long.  I love plants', 0, '2023-08-14 09:30:00', '2023-08-14 13:45:00')
 INSERT INTO events (user_id , website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, 'www.zoom.com/meeting123456', 'Green Morning America', 'Zoom chat for gardener talk', 'This is a long description. It is so long.  I love plants', 1, '2023-08-15 10:00:00', '2023-08-14 11:00:00')
 INSERT INTO sellers (seller_name, seller_type) VALUES ('Fake Nursery', 'Retailer');
-INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website,) VALUES ('Oakland Nursery Dublin','Retailer','4261 West Dublin-Granville Road','','Dublin','OH','43017','https://www.oaklandnursery.com/page/garden-centers/dublin');
-INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website,) VALUES ('Oakland Nursery Columbus','Retailer','1156 Oakland Park Avenue','','Columbus','OH','43224-3317','https://www.oaklandnursery.com/page/garden-centers/columbus');
-INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website,) VALUES ('Nature Hills','Online Seller','2336 S 156th Circle','','Omaha','NE','68130','https://www.naturehills.com/');
+INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website) VALUES ('Oakland Nursery Dublin','Retailer','4261 West Dublin-Granville Road','','Dublin','OH','43017','https://www.oaklandnursery.com/page/garden-centers/dublin');
+INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website) VALUES ('Oakland Nursery Columbus','Retailer','1156 Oakland Park Avenue','','Columbus','OH','43224-3317','https://www.oaklandnursery.com/page/garden-centers/columbus');
+INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website) VALUES ('Nature Hills','Online Seller','2336 S 156th Circle','','Omaha','NE','68130','https://www.naturehills.com/');
 --populate test inventory records
 INSERT INTO sellers_products (seller_id, plant_id) VALUES (1,1);
 INSERT INTO sellers_products (seller_id, plant_id) VALUES (1,2);
