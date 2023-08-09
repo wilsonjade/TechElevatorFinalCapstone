@@ -16,6 +16,7 @@ namespace Capstone.DAO
         private readonly string sqlGetSellerById = @"SELECT seller_id,seller_name,seller_type ,address1,address2 ,city ,state ,zip,website FROM sellers
                                                      WHERE @seller_id = sellers.seller_id;";
         private readonly string sqlGetSellerInventoryById = @"SELECT plant_id FROM sellers_products WHERE @seller_id = sellers_products.seller_id;";
+        private readonly string sqlGetSellerByPlantId = @"SELECT seller_id FROM sellers_products WHERE @plant_id = sellers_products.plant_id;";
         private readonly string sqlCreateSeller = @"INSERT INTO sellers 
                                                          (seller_name,seller_type ,address1,address2 ,city ,state ,zip,website)
                                                   VALUES (@seller_name,@seller_type ,@address1,@address2 ,@city ,@state ,@zip,@website);";
@@ -122,6 +123,33 @@ namespace Capstone.DAO
                 }
             }
             return inventoryList;
+        }
+
+        public List<int> GetSellerByPlantId(int plantId)
+        {
+            List<int> result = new List<int>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sqlGetSellers, conn))
+                {
+                    cmd.Parameters.AddWithValue("@plant_id", plantId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            int thisInt = Convert.ToInt32(reader["seller_id"]);
+                            result.Add(thisInt);
+
+                        }
+                    }
+                }
+            }
+
+
+            return result;
         }
         public Seller CreateSeller(Seller newSeller)
         {
