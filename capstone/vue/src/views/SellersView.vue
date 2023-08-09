@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>This is the SellersView</h1>
+    <h1>SellersView.vue</h1>
     <seller-list />
 
   </section>
