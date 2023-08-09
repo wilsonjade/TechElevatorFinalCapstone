@@ -1,9 +1,5 @@
 <template>
   <section class="seller-detail card">
-    <h1>SellerDetail.vue</h1>
-
-
-
     <h1>{{item.sellerName}}</h1>
     <p>{{item.sellerType}}</p>
     <p>{{item.address1}}</p>

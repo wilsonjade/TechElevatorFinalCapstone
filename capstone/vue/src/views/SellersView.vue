@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h1>SellersView.vue</h1>
     <seller-list />
 
   </section>

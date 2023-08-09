@@ -9,8 +9,8 @@ export default {
         return axios.get(`/seller/${sellerId}`)
     },
 
-    getSellersByPlant(plantId) {
-        return axios.get(`/seller/${plantId}`)
+    getSellersByPlantId(plantId) {
+        return axios.get(`/seller/plant/${plantId}`)
     },
 
     deleteSeller(sellerId){

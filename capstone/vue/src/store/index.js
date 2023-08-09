@@ -26,6 +26,7 @@ export default new Vuex.Store({
 
     plants: [],
     sellers: [],
+    
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {

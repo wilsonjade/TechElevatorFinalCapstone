@@ -132,7 +132,7 @@ const router = new Router({
       }
     },
     {
-      path: "/seller/:plantId",
+      path: "/seller/plant/:plantId",
       name: "sellersByPlant",
       component: SellerList,
       meta:{
