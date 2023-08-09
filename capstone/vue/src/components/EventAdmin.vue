@@ -54,7 +54,7 @@
       <label for="start_time">Start Time:</label>
       <input v-model="formData.startTime" type="datetime-local" id="start_time" required />
     </div>
-    <div>
+    <div> 
       <label for="end_time">End Time:</label>
       <input v-model="formData.endTime" type="datetime-local" id="end_time" required />
     </div>
@@ -101,7 +101,10 @@ export default {
         const sendObj = this.formData
         delete sendObj.eventId;
         EventService.createEvent(sendObj).then(response=>
-        alert(response.status)
+        alert(
+          response.status == 201 ? "Event created successfully" : response.status
+        
+        )
         ).catch((error)=>{
         alert(error.message)
         alert(error.statusText)}

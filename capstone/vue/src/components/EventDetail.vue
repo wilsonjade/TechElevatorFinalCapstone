@@ -1,8 +1,8 @@
 <template>
   <section class="eventDetail">
-    <h1> {{item.name}} </h1>
-     <h2>{{ item.shortDescription }}</h2>
+    
      <p v-if="item.isVirtual">This Event is Virtual</p>
+     <span>{{item.startTime}}</span><span>{{item.endTime}}</span>
       <p>{{item.longDescription}}</p>
    
   <footer> 
@@ -11,7 +11,7 @@
   </section>
 </template>
 
-<script>
+<script> 
 
 import eventService from "../services/EventService.js"
 
