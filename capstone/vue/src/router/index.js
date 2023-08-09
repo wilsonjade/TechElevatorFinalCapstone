@@ -124,7 +124,11 @@ const router = new Router({
     },
     {
       path: "/sellers",
+<<<<<<< HEAD
       name: "sellersView",
+=======
+      name: "sellerView",
+>>>>>>> a11ab27fed5a31ee2bcde1a0831e2032dccf2517
       component: SellersView,
       meta:{
         requiresAuth: false
