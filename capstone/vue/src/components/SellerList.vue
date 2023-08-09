@@ -1,40 +1,40 @@
 <template>
-<<<<<<< HEAD
   <section>
-    <p>Below, you will see a list of seller cards</p>
-    <seller-detail v-for="seller in sellers" v-bind:key="seller.id" v-bind:item="seller" />
-=======
-  <section class="sellerList">
-    <seller-detail v-for="seller in sellers" v-bind:key="seller.seller_id" v-bind:item="seller" /> 
-    
-      
->>>>>>> a11ab27fed5a31ee2bcde1a0831e2032dccf2517
+    <h1>SellerList.vue:</h1>
+    <seller-detail
+      v-for="seller in sellers"
+      v-bind:key="seller.id"
+      v-bind:item="seller"
+    />
+
+
+    <router-link v-bind:to="{name: 'SellerAdmin'}">Add New Seller</router-link>
+
   </section>
 </template>
 
 <script>
-<<<<<<< HEAD
-import SellerDetail from './SellerDetail.vue';
+import SellerDetail from "./SellerDetail.vue";
 
 export default {
+  name: "listSellers",
+  props: ["item"],
   components: { SellerDetail },
   data() {
     return {
-      sellers: [],
-    }
+      isAdmin: false,
+    };
   },
   methods: {},
-  };
-=======
-import SellerDetail from './SellerDetail.vue'
-
-
-export default {
-
-components: SellerDetail
-
-}
->>>>>>> a11ab27fed5a31ee2bcde1a0831e2032dccf2517
+  computed: {
+    sellers() {
+      return this.$store.state.sellers;
+    }
+  },
+  created() {
+    this.isAdmin = this.$store.state.user.role == "admin";
+  },
+};
 </script>
 
 <style>
