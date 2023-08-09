@@ -11,7 +11,7 @@
   </section>
 </template>
 
-<script>
+<script> 
 
 import eventService from "../services/EventService.js"
 

@@ -14,7 +14,7 @@
 <script>
 import eventService from "../services/EventService.js";
 import EventDetail from './EventDetail.vue';
-
+ 
 export default {
   components: { EventDetail },
   name: "eventCard",

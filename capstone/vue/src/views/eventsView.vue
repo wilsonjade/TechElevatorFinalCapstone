@@ -3,7 +3,7 @@
       <h1>this is the eventsView</h1>
       <p> list of eventsView here</p>
       <button v-if="isAdmin" v-on:click="newEvent()"> Add New Event</button>
-      <event-card v-for="event in events" v-bind:key="event.id" v-bind:item="event"/>
+      <event-card v-for="event in events" v-bind:key="event.id" v-bind:item="event"/> 
         
   </section>
  

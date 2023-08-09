@@ -42,7 +42,7 @@ body {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
 }
 
-a {
+a, button {
   background-color: #4c9173;
   color: #f6f7e8;
   border-radius: 8px;
@@ -59,7 +59,7 @@ a {
   border: 2px solid #266147;
 }
 
-a:hover {
+a:hover, button:hover {
   font-weight: bold;
   color: #da98cc; 
   font-size: 1.1rem; 

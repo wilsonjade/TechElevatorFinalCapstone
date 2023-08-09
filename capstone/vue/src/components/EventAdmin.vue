@@ -54,7 +54,7 @@
       <label for="start_time">Start Time:</label>
       <input v-model="formData.startTime" type="datetime-local" id="start_time" required />
     </div>
-    <div>
+    <div> 
       <label for="end_time">End Time:</label>
       <input v-model="formData.endTime" type="datetime-local" id="end_time" required />
     </div>
