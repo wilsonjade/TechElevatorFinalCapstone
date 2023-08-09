@@ -87,7 +87,7 @@ namespace Capstone.DAO
 
                 using (SqlCommand cmd = new SqlCommand(sqlGetSellerById, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", sellerId);
+                    cmd.Parameters.AddWithValue("@seller_id", sellerId);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
@@ -108,7 +108,7 @@ namespace Capstone.DAO
 
                 using (SqlCommand cmd = new SqlCommand(sqlGetSellers, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", sellerId);
+                    cmd.Parameters.AddWithValue("@seller_id", sellerId);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())

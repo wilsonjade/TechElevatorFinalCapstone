@@ -11,44 +11,40 @@ namespace Capstone.Controllers
     [Route("[controller]")]
     [ApiController]
     [Authorize(Roles = "admin")]
-    public class EventsController : Controller
+    public class SellerController : Controller
     {
-        public IEventsDao eventsDao;
+        public ISellerDao sellerDao;
 
-        public EventsController(IEventsDao eventsDao)
+        public SellerController(ISellerDao sellerDao)
         {
-            this.eventsDao = eventsDao;
+            this.sellerDao = sellerDao;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult<List<Events>> GetEvents()
+        public ActionResult<List<Seller>> GetSellers()
         {
-            return Ok(eventsDao.GetEvents());
+            return Ok(sellerDao.GetSellers());
         }
 
-        [HttpGet("{eventsId}")]
+        [HttpGet("{sellerId}")]
+        [AllowAnonymous]
 
-        public ActionResult<Events> GetEventsById(int eventsId)
+        public ActionResult<Seller> GetSellerById(int sellerId)
         {
-            return Ok(eventsDao.GetEventById(eventsId));
+            return Ok(sellerDao.GetSellerById(sellerId));
         }
 
-        [HttpGet("future")] //getFutureEvents()
-        public ActionResult<List<Events>> GetFutureEvents()
-        {
-            return Ok(eventsDao.GetFutureEvents());
-        }
 
         [HttpPut("{id}")]
 
-        public ActionResult<Events> UpdateEvent(int id, Events eventToUpdate)
+        public ActionResult<Seller> UpdateSeller(int id, Seller sellerToUpdate)
         {
-            eventToUpdate.EventId = id;
+            sellerToUpdate.SellerId = id;
 
             try
             {
-                Events result = eventsDao.UpdateEvent(eventToUpdate);
+                Seller result = sellerDao.UpdateSeller(sellerToUpdate);
                 return Ok(result);
             }
             catch (DaoException)
@@ -59,9 +55,9 @@ namespace Capstone.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Events> DeleteEvent(int id)
+        public ActionResult<Seller> DeleteSeller(int id)
         {
-            bool isDeleted = eventsDao.DeleteEvent(id);
+            bool isDeleted = sellerDao.DeleteSeller(id);
             if (isDeleted)
             {
                 return Ok();
@@ -70,10 +66,10 @@ namespace Capstone.Controllers
         }
 
         [HttpPost()]
-        public ActionResult<Events> AddEvent(Events newEvent)
+        public ActionResult<Seller> AddSeller(Seller newSeller)
         {
-            Events added = eventsDao.AddEvent(newEvent);
-            return Created($"/events/{added.EventId}", added);
+            Seller added = sellerDao.CreateSeller(newSeller);
+            return Created($"/seller/{added.SellerId}", added);
         }
     }
 
