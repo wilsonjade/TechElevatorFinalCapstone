@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Capstone.DAO
 {
-    public class IRatingsDao 
+    public interface IRatingsDao 
     {
         public List<Ratings> GetRatings();
         public Ratings AddRatings(Ratings ratingToAdd);
