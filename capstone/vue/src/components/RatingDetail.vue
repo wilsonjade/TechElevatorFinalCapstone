@@ -1,60 +1,50 @@
 <template>
-  <section class="seller-detail card">
-    <h1>{{ item.sellerName }}</h1>
-    <p>{{ item.sellerType }}</p>
-    <p>{{ item.address1 }}</p>
-    <p>{{ item.address2 }}</p>
-    <p>{{ item.city }}</p>
-    <p>{{ item.state }}</p>
-    <p>{{ item.zip }}</p>
-    <p>{{ item.website }}</p>
-
-      <router-link v-bind:to="{name: 'ratingsBySeller'}">See Ratings</router-link>
-
-
+  <section class="rating-detail card">
+    <h1>{{ item.title }}</h1>
+    <p>{{ item.rating }}</p>
+    <p>{{ item.review }}</p>
 
     <button
       v-if="isAdmin"
       v-on:click="
-        $router.push({ name: 'sellerAdmin', params: { id: item.sellerId } })
+        $router.push({ name: 'ratingAdmin', params: { id: item.ratingId } })
       "
     >
-      Edit Seller
+      Edit Rating
     </button>
-    <button v-if="isAdmin" v-on:click="deleteThisSeller()">
-      Delete Seller
+    <button v-if="isAdmin" v-on:click="deleteThisRating()">
+      Delete Rating
     </button>
   </section>
 </template>
 
 <script>
-import sellerService from '../services/SellerService.js'
+import RatingService from "../services/RatingService";
 
 export default {
-  components: {},
-  name: "sellerDetail",
+  name: "ratingDetail",
   props: ["item"],
+  components: {},
   data() {
     return {
-      isAdmin: false,
-      seller: {},
+      rating: {},
     };
   },
   methods: {
-    deleteThisSeller() {
+    deleteThisRating() {
       let wasSuccess = false;
-      let errorMsg;
-      sellerService
-        .deleteSeller(this.item.sellerId)
+      let errorMsg = "";
+      RatingService.deleteRating(this.item.ratingId)
         .then((response) => {
           wasSuccess = response.status == 200;
           alert(
             wasSuccess
-              ? "Seller Deleted"
-              : "Seller deletion unsuccessful, please try again"
+              ? "Rating Deleted"
+              : "Rating deletion was unsuccessful, please try again."
           );
-          this.$router.go(0); //refresh view
+          this.$router.go(0);
         })
+
         .catch((error) => {
           if (error.response) {
             // error.response exists
@@ -74,9 +64,15 @@ export default {
           }
         });
     },
-    created() {
-      this.isAdmin = this.$store.state.user.role == "admin";
+    getThisRating(){
+      RatingService.getRatingBySellerId(this.$route.params.sellerId)
+      .then( (response) => {
+        this.rating = response.data;
+      });
     },
+  },
+  created() {
+    this.getThisRating();
   },
 };
 </script>
