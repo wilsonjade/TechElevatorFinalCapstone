@@ -2,17 +2,19 @@
 using Capstone.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 
 namespace Capstone.DAO
 {
-    public class PlantSqlDao: IPlantDao
+    public class PlantSqlDao : IPlantDao
     {
         private readonly string connectionString;
         private readonly string sqlGetPlants = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, img_url FROM plants;";
 
         private readonly string sqlGetPlantById = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, img_url FROM plants WHERE plant_id = @plantId;";
 
+        private readonly string sqlGetPlantsByUserId = @"SELECT user_id, vg.plant_id, plants.common_name, plants.description, plants.family, plants.genus, plants.img_url, plants.kingdom, plants.plant_id, plants.species, plants.[order], plants.subfamily FROM virtual_garden AS vg INNER JOIN plants ON plants.plant_id = vg.plant_id WHERE user_id = @user_id";
         public PlantSqlDao(string dbConnectionString)
         {
             connectionString = dbConnectionString;
@@ -31,7 +33,7 @@ namespace Capstone.DAO
                 {
                     cmd.Parameters.AddWithValue("@plantId", plantId);
 
-                    using(SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -65,7 +67,7 @@ namespace Capstone.DAO
         {
             List<Plant> plants = new List<Plant>();
 
-           //sql string stored as class var
+            //sql string stored as class var
 
             try
             {
@@ -88,6 +90,31 @@ namespace Capstone.DAO
                 throw new DaoException("SQL exception occurred", ex);
             }
 
+            return plants;
+        }
+        public List<Plant> GetPlantsByUserId(int userId)
+        {
+            Plant plant = new Plant();
+            List<Plant> plants = new List<Plant>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sqlGetPlantsByUserId, conn))
+                {
+                    cmd.Parameters.AddWithValue("@user_Id", userId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            plant = MapRowToPlant(reader);
+                            plants.Add(plant);
+                        }
+                    }
+                }
+            }
             return plants;
         }
     }

@@ -1,7 +1,10 @@
 ﻿using Capstone.DAO;
 using Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Capstone.Controllers
 {
@@ -30,6 +33,24 @@ namespace Capstone.Controllers
         public ActionResult<Plant> GetPlantById(int plantId)
         {
             return Ok(plantDao.GetPlantById(plantId));
+        }
+
+        [HttpGet("garden/{userId}")]
+        public ActionResult<List<Plant>> GetMyPlants(int userId)
+        {
+            List<Plant> result = new List<Plant>();
+
+            result = plantDao.GetPlantsByUserId(userId);
+          
+            if(result.Count > 0)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
+            
         }
 
     }
