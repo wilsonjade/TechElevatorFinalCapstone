@@ -1,5 +1,5 @@
 <template>
-  <section class="plant card">
+  <section class="plantCard">
     <h1 class="headline">Common name: {{ plant.commonName }}</h1>
     <p>Id: {{ plant.plantId }}</p>
     <p>Kingdom: {{ plant.kingdom }}</p>
@@ -13,7 +13,7 @@
       <img v-bind:src="plant.imgUrl" alt="a generic plant image"/>
     </section>
     <section>
-      <h2>Description and details</h2>
+      <button v-on:click="addToGarden()" > Add to My Virtual Garden </button>
       <router-link v-bind:to="{name: 'sellersByPlant'}">Find Retailers</router-link>
     </section>
   </section>
@@ -35,6 +35,13 @@ export default {
         console.log(response)
         this.plant = response.data})
     },
+    addToGarden(){
+      
+      plantService.addToGarden({plantId: this.plant.plantId, userId: this.$store.state.user.userId}).then(
+        this.$router.push({name: "virtualGardenView"}) 
+      ).catch(error=> alert("there was an error " + error.message))
+      
+    }
   },
 
   data(){
@@ -44,7 +51,6 @@ export default {
   },
 
   created(){
-  //  console.log("Reached created")
     this.getThisPlant();
 
   }
@@ -52,4 +58,7 @@ export default {
 </script>
 
 <style>
+.plantCard{
+  margin: auto;
+}
 </style>
