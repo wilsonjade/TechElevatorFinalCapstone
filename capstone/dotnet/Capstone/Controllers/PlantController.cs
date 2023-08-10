@@ -71,5 +71,17 @@ namespace Capstone.Controllers
                 }
         }
 
+        [HttpDelete("garden/")]
+
+        public ActionResult DeletePlantFromGarden(PlantUserPair pair)
+        {
+            bool isDeleted = plantDao.DeletePlantFromGarden(pair.PlantId, pair.UserId);
+            if (isDeleted)
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+
     }
 }
