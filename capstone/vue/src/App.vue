@@ -110,8 +110,7 @@ nav ul {
 #main {
   margin-left: 5rem;
   padding: 1rem;
-  position: fixed;
-  top: 5rem;
+  margin-top: 50px;
 }
 
 #header {
