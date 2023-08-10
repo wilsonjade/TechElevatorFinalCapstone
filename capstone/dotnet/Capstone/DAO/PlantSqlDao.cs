@@ -17,6 +17,8 @@ namespace Capstone.DAO
         private readonly string sqlGetPlantsByUserId = @"SELECT user_id, vg.plant_id, plants.common_name, plants.description, plants.family, plants.genus, plants.img_url, plants.kingdom, plants.plant_id, plants.species, plants.[order], plants.subfamily FROM virtual_garden AS vg INNER JOIN plants ON plants.plant_id = vg.plant_id WHERE user_id = @user_id";
 
         private readonly string sqlAddPlantToVG = @"INSERT INTO virtual_garden(plant_id, user_id) VALUES(@plant_id, @user_id)";
+
+        private readonly string sqlDeletePlantFromGarden = @"DELETE FROM virtual_garden WHERE @plant_id = plant_id AND @user_id = user_id";
         public PlantSqlDao(string dbConnectionString)
         {
             connectionString = dbConnectionString;
@@ -143,5 +145,36 @@ namespace Capstone.DAO
 
             
         }
+
+        public bool DeletePlantFromGarden(int plantId, int userId)
+        {
+            bool deleteSuccess = false;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                //delete foreign keyed table records plant
+               
+                using (SqlCommand cmd = new SqlCommand(sqlDeletePlantFromGarden, conn))
+                {
+
+                    cmd.Parameters.AddWithValue("@plant_id", plantId);
+                    cmd.Parameters.AddWithValue("@user_id", userId);
+
+                    int count = cmd.ExecuteNonQuery();
+                    if (count == 1)
+                    {
+                        deleteSuccess = true;
+                    }
+                    else
+                    {
+                        deleteSuccess = false;
+                    }
+
+                }
+                
+            }
+            return deleteSuccess;
+        }
+
     }
 }
