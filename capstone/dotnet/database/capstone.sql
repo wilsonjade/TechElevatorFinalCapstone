@@ -1,4 +1,4 @@
-﻿USE master
+USE master
 GO
 
 --drop database if it exists
@@ -82,7 +82,7 @@ CREATE TABLE sellers_products (
 	plant_id int NOT NULL,
 	CONSTRAINT [FK_user_id] FOREIGN KEY (user_id) REFERENCES [users](user_id),
 	CONSTRAINT [FK_plant_id] FOREIGN KEY (plant_id) REFERENCES [plants](plant_id),
-	CONSTRAINT UC_plant_id UNIQUE (plant_id)
+	CONSTRAINT UC_plant_id UNIQUE (user_id,plant_id)
 	)
 
 CREATE TABLE [ratings] (
