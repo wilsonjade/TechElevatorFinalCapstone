@@ -14,6 +14,7 @@
     </section>
     <section>
       <h2>Description and details</h2>
+      <router-link v-bind:to="{name: 'sellersByPlant'}">Find Retailers</router-link>
     </section>
   </section>
 

@@ -2,26 +2,25 @@ import axios from "axios";
 
 export default {
     listSellers() {
-        return axios.get("/sellers");
+        return axios.get("/seller");
     },
 
     getSellersById(sellerId) {
-        return axios.get(`/sellers/${sellerId}`)
+        return axios.get(`/seller/${sellerId}`)
     },
 
-    getSellersByPlant(plantId) {
-        return axios.get(`/sellers/${plantId}`)
+    getSellersByPlantId(plantId) {
+        return axios.get(`/seller/plant/${plantId}`)
     },
 
     deleteSeller(sellerId){
-        return axios.delete(`/sellers/${sellerId}`);
+        return axios.delete(`/seller/${sellerId}`);
     },
     createSeller(seller){
-        console.log("reached axios create")        
-        return axios.post("/sellers/", seller);
+        return axios.post("/seller/", seller);
     },
     updateSeller(sellerId, seller){
-        return axios.put(`/sellers/${sellerId}`,seller)
+        return axios.put(`/seller/${sellerId}`,seller)
     }
     
 }

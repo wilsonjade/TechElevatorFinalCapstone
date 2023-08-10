@@ -10,7 +10,7 @@
         public Seller CreateSeller(Seller newSeller);
         public Seller UpdateSeller(Seller sellerToUpdate);
         public bool DeleteSeller(int sellerId);
-        
+        public List<int> GetSellerByPlantId(int plantId);
 
     }
 }

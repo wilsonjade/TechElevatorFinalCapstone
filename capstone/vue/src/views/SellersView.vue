@@ -1,20 +1,17 @@
 <template>
   <section>
-    <h1>This is the SellersView</h1>
-    <p>list of sellers here</p>
-    <seller-detail v-for="seller in sellers" v-bind:key="seller.id" v-bind:item="seller"/>
-
+    <seller-list />
 
   </section>
 </template>
 
 <script>
-import SellerDetail from '../components/SellerDetail.vue'
+import SellerList from '../components/SellerList.vue'
 import sellerService from '../services/SellerService.js'
 
 export default {
     name: "sellerView",
-    components: {SellerDetail},
+    components: {SellerList},
     data() {
       return {
         sellers: {},

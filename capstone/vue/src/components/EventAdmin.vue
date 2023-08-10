@@ -98,9 +98,8 @@ export default {
       if(this.formData.eventId === 0 || this.formData.eventId == null){
         this.formData.userid = this.userid //set userId
 
-        const sendObj = this.formData
-        delete sendObj.eventId;
-        EventService.createEvent(sendObj).then(response=>
+        
+        EventService.createEvent(this.formData).then(response=>
         alert(
           response.status == 201 ? "Event created successfully" : response.status
         

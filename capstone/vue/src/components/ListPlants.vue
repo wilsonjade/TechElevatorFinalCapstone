@@ -10,8 +10,8 @@
 <script>
 import PlantDetail from "./PlantDetail.vue"
 export default {
-  components: { PlantDetail },
   name: "ListPlants",
+  components: { PlantDetail },
   data () {
       return {
         

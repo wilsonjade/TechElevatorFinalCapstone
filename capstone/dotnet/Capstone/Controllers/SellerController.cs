@@ -35,9 +35,21 @@ namespace Capstone.Controllers
             return Ok(sellerDao.GetSellerById(sellerId));
         }
 
+        [HttpGet("plant/{plantId}")]
+        [AllowAnonymous]
+        public ActionResult<List<int>> GetSellersByPlantId(int plantId)
+        {
+            return Ok(sellerDao.GetSellerByPlantId(plantId));
+            
+        }
+
+        //public ActionResult<Seller> GetSellerById(int sellerId)
+        //{
+        //    return Ok(sellerDao.GetSellerById(sellerId));
+        //}
 
         [HttpPut("{id}")]
-
+        
         public ActionResult<Seller> UpdateSeller(int id, Seller sellerToUpdate)
         {
             sellerToUpdate.SellerId = id;
@@ -55,6 +67,7 @@ namespace Capstone.Controllers
         }
 
         [HttpDelete("{id}")]
+        
         public ActionResult<Seller> DeleteSeller(int id)
         {
             bool isDeleted = sellerDao.DeleteSeller(id);
@@ -66,6 +79,7 @@ namespace Capstone.Controllers
         }
 
         [HttpPost()]
+        
         public ActionResult<Seller> AddSeller(Seller newSeller)
         {
             Seller added = sellerDao.CreateSeller(newSeller);

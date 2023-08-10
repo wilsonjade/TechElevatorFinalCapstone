@@ -1,68 +1,79 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'plantDetail', params:{plantId:1} }">Plant detail id1</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'myStuffView', params:{user: 'id'} }">My Stuff </router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'virtualGardenView', params:{user: 'id'} }">My Virtual Garden </router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'searchView'}">Search Plants </router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{name: 'eventsView'}">Events</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-      <router-link v-bind:to="{ name: 'login' }" v-else>Login</router-link>&nbsp;|&nbsp;  
-
-    </div>
-    <router-view />
-  </div>
+  <section>
+    <nav-bar />
+    <section id="main">
+      <header-component />
+      <router-view />
+      <footer-component />
+    </section>
+  </section>
 </template>
 
 
 <script>
+import HeaderComponent from "./components/HeaderComponent.vue";
+import NavBar from "./components/NavBar.vue";
+import FooterComponent from "./components/FooterComponent.vue";
 
 export default {
   name: "App",
-  components: {},
+  components: { NavBar, HeaderComponent, FooterComponent },
   data() {
     return {};
   },
   methods: {},
 
-  created () {
+  created() {
     this.$store.commit("LOAD_PLANTS");
-  }
-}
+    this.$store.commit("LOAD_SELLERS");
+  },
+};
 </script>
 
 
 
 
 <style>
-body {
-  background-color: #7dd87d;
-  color: #41304d;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+:root {
+  font-size: 16px;
 }
 
-a, button {
-  background-color: #4c9173;
-  color: #f6f7e8;
-  border-radius: 8px;
-  padding: 4px 6px;
-  border: 2px solid #266147;
+body {
+  background: url(assets/background-image.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  margin: 0;
+  padding: 0;
+
+  color: #41304d;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .card {
-  background-color: #4c9173;
+  background-color: #4c9173a8;
   color: #f6f7e8;
   border-radius: 8px;
   padding: 4px 6px;
   margin: 12px;
   border: 2px solid #266147;
+  max-width: 400px;
 }
 
-a:hover, button:hover {
+button {
+  background-color: #4c9173;
+  color: #f6f7e8;
+  border-radius: 8px;
+  padding: 4px 6px;
+  border: 2px solid #266147;
+}
+
+button:hover {
   font-weight: bold;
-  color: #da98cc; 
-  font-size: 1.1rem; 
+  color: #da98cc;
 }
 
 section.container {
@@ -72,35 +83,97 @@ section.container {
 }
 
 #nav {
+  grid-area: nav-bar;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 5rem;
+  height: 100vh;
+  position: fixed;
+  background-color: #7dd87d9c;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  padding: 5px 0 5px 0;
+}
+
+nav ul {  
+  list-style: none;
+}
+
+.nav-item:last-child {
+  margin-top: auto;
+}
+
+#main {
+  margin-left: 5rem;
+  padding: 1rem;
+  position: fixed;
+  top: 5rem;
+}
+
+#header {
+  grid-area: header;
+  position: fixed;
+  margin-left: 5rem;
+  padding: 1rem;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 35px;
   display: flex;
   justify-content: space-around;
+  align-items: center; 
+  background-color: #f0b45b75;
 }
 
-.off-white { 
-	background: #f6f7e8; 
+#footer {
+  grid-area: footer;
+  position: fixed;
+  margin-left: 5rem;
+  padding: 1rem;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  height: 35px;
+  background-color: darkolivegreen;
+  color: #f6f7e8;
+  width: 100%;
+  text-align: center;
 }
 
-.light-green { 
-	background: #7dd87d; 
-}
-	
-.medium-green { 
-	background: #4c9173; 
+img {
+  width: 300px;
+  border-radius: 100%;
 }
 
-.dark-green { 
-	background: #266147; 
+.off-white {
+  background: #f6f7e8;
 }
 
-.dark-purple { 
-	background: #41304d; 
+.light-green {
+  background: #7dd87d;
 }
 
-.medium-purple { 
-	background: #5b446a; 
+.medium-green {
+  background: #4c9173;
 }
 
-.light-purple { 
-	background: #da98cc; 
+.dark-green {
+  background: #266147;
+}
+
+.dark-purple {
+  background: #41304d;
+}
+
+.medium-purple {
+  background: #5b446a;
+}
+
+.light-purple {
+  background: #da98cc;
 }
 </style>
