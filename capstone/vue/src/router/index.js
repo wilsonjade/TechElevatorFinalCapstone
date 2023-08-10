@@ -16,6 +16,7 @@ import EventAdmin from '../components/EventAdmin.vue'
 import SellerList from '../components/SellerList.vue'
 import SellersView from '../views/SellersView.vue'
 import SellerAdmin from '../components/SellerAdmin.vue'
+import RatingsList from '../components/RatingsList.vue'
 
 Vue.use(Router)
 
@@ -145,6 +146,22 @@ const router = new Router({
       component: SellerAdmin,
       meta:{
         requiresAuth: true
+      }
+    },    
+    {
+      path: "/ratings",
+      name: "ratingsList",
+      component: RatingsList,
+      meta:{
+        requiresAuth: false
+      }
+    },  
+    {
+      path: "/ratings/seller/:sellerId",
+      name: "ratingsBySeller",
+      component: RatingsList,
+      meta:{
+        requiresAuth: false
       }
     },
   ]

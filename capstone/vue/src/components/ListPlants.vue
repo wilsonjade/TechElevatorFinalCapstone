@@ -9,6 +9,8 @@
 
 <script>
 import PlantDetail from "./PlantDetail.vue"
+
+
 export default {
   name: "ListPlants",
   components: { PlantDetail },

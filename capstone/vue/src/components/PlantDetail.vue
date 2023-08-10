@@ -44,7 +44,6 @@ export default {
   },
 
   created(){
-  //  console.log("Reached created")
     this.getThisPlant();
 
   }

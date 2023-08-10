@@ -29,7 +29,7 @@ export default {
   computed: {
     sellers() {
       return this.$store.state.sellers;
-    },
+    }, 
     filteredSellers() {
       if(this.filteredSellersByPlant.length>0){
       return this.$store.state.sellers.filter((seller) => {return this.filteredSellersByPlant.includes(seller.sellerId)})
@@ -38,7 +38,6 @@ export default {
     }
   },
   created() {
-    console.log('reached sellerlist created')
     this.isAdmin = this.$store.state.user.role == "admin";
     //call database for valid list of seller IDs
     if(this.$route.params.plantId){

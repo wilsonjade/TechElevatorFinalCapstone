@@ -26,6 +26,7 @@ export default {
   created() {
     this.$store.commit("LOAD_PLANTS");
     this.$store.commit("LOAD_SELLERS");
+    this.$store.commit("LOAD_RATINGS");
   },
 };
 </script>
@@ -109,6 +110,8 @@ nav ul {
 
 #main {
   margin-left: 5rem;
+  margin-bottom: 5rem;
+  margin-top: 5rem;
   padding: 1rem;
   margin-top: 50px;
   top: 5rem;
