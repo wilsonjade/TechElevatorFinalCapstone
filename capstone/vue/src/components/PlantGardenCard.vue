@@ -19,7 +19,7 @@ export default {
     ,
     methods: {
         remove(){
-            PlantService.removeFromGarden({userId: this.$store.state.user.userId, plantId: this.thisPlant.plantId}).then(
+            PlantService.removeFromGarden({plantId: this.thisPlant.plantId, userId: this.$store.state.user.userId}).then(
                 response=> {
                     if(response.status == 200){
                         this.$router.go(0); //refresh page
