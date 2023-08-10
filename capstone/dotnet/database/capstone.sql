@@ -75,22 +75,16 @@ CREATE TABLE sellers_products (
 	CONSTRAINT [FK_inventory_seller] FOREIGN KEY (seller_id) REFERENCES [sellers](seller_id),
 	CONSTRAINT [FK_inventory_plant] FOREIGN KEY (plant_id) REFERENCES [plants](plant_id)
 )
-<<<<<<< HEAD
-=======
---<<<<<<< HEAD
->>>>>>> f64d789ed2d307a1fac15a5989a4d4385016ca43
+
 
 	CREATE TABLE virtual_garden (
 	user_id int NOT NULL,
 	plant_id int NOT NULL,
 	CONSTRAINT [FK_user_id] FOREIGN KEY (user_id) REFERENCES [users](user_id),
-	CONSTRAINT [FK_plant_id] FOREIGN KEY (plant_id) REFERENCES [plants](plant_id)
+	CONSTRAINT [FK_plant_id] FOREIGN KEY (plant_id) REFERENCES [plants](plant_id),
+	CONSTRAINT UC_plant_id UNIQUE (plant_id)
 	)
-<<<<<<< HEAD
 
-=======
---=======
->>>>>>> f64d789ed2d307a1fac15a5989a4d4385016ca43
 CREATE TABLE [ratings] (
 	rating_id int IDENTITY(1,1) NOT NULL,
 	user_id int,
@@ -101,10 +95,7 @@ CREATE TABLE [ratings] (
 	CONSTRAINT [PK_rating_id] PRIMARY KEY (rating_id),
 	CONSTRAINT [FK_user_rating] FOREIGN KEY (user_id) REFERENCES [users](user_id),
 	CONSTRAINT [FK_seller_id] FOREIGN KEY (seller_id) REFERENCES [sellers](seller_id)
-<<<<<<< HEAD
-=======
--->>>>>>> fd5db8d79d3bb5513a04a126ea32fda3c4f088df
->>>>>>> f64d789ed2d307a1fac15a5989a4d4385016ca43
+
 	)
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
@@ -132,26 +123,13 @@ INSERT INTO sellers_products (seller_id, plant_id) VALUES (2,2);
 INSERT INTO sellers_products (seller_id, plant_id) VALUES (2,3);
 INSERT INTO sellers_products (seller_id, plant_id) VALUES (3,1);
 INSERT INTO sellers_products (seller_id, plant_id) VALUES (3,4);
-<<<<<<< HEAD
 
-=======
---<<<<<<< HEAD
->>>>>>> f64d789ed2d307a1fac15a5989a4d4385016ca43
---populate test virtual garden records
-INSERT INTO virtual_garden (user_id, plant_id) VALUES (1,1);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (1,1);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (1,2);
-INSERT INTO virtual_garden (user_id, plant_id) VALUES (1,2);
-INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,1);
-INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,3);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,3);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,4);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,5);
-<<<<<<< HEAD
 
-=======
---=======
->>>>>>> f64d789ed2d307a1fac15a5989a4d4385016ca43
 
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 1, 'Rating 1', 5, 'This is a review')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 2', 5, 'This is a review also')
@@ -159,9 +137,4 @@ INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'R
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 1, 'Rating 4', 5, 'This is a review also also also')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 5', 5, 'This is a review also also also also')
 
-<<<<<<< HEAD
-=======
-
--->>>>>>> fd5db8d79d3bb5513a04a126ea32fda3c4f088df
->>>>>>> f64d789ed2d307a1fac15a5989a4d4385016ca43
 GO

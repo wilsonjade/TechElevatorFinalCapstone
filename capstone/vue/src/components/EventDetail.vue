@@ -5,9 +5,8 @@
      <span>{{item.startTime}}</span><span>{{item.endTime}}</span>
       <p>{{item.longDescription}}</p>
    
-  <footer> 
   <button v-if="isAdmin" v-on:click="$router.push({name: 'eventAdmin', params:{id: item.eventId}})" >Edit Event</button> 
-  <button v-if="isAdmin" v-on:click="deleteThisEvent()">Delete Event</button>  </footer>
+  <button v-if="isAdmin" v-on:click="deleteThisEvent()">Delete Event</button> 
   </section>
 </template>
 
