@@ -75,6 +75,13 @@ CREATE TABLE sellers_products (
 	CONSTRAINT [FK_inventory_seller] FOREIGN KEY (seller_id) REFERENCES [sellers](seller_id),
 	CONSTRAINT [FK_inventory_plant] FOREIGN KEY (plant_id) REFERENCES [plants](plant_id)
 )
+
+	CREATE TABLE virtual_garden (
+	user_id int NOT NULL,
+	plant_id int NOT NULL,
+	CONSTRAINT [FK_user_id] FOREIGN KEY (user_id) REFERENCES [users](user_id),
+	CONSTRAINT [FK_plant_id] FOREIGN KEY (plant_id) REFERENCES [plants](plant_id)
+	)
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
@@ -101,4 +108,14 @@ INSERT INTO sellers_products (seller_id, plant_id) VALUES (2,2);
 INSERT INTO sellers_products (seller_id, plant_id) VALUES (2,3);
 INSERT INTO sellers_products (seller_id, plant_id) VALUES (3,1);
 INSERT INTO sellers_products (seller_id, plant_id) VALUES (3,4);
+--populate test virtual garden records
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (1,1);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (1,1);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (1,2);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (1,2);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,1);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,3);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,3);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,4);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,5);
 GO
