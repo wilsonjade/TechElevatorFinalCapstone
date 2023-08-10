@@ -99,11 +99,9 @@ export default {
         this.formData.userid = this.userid //set userId
 
         
-        EventService.createEvent(this.formData).then(response=>
-        alert(
-          response.status == 201 ? "Event created successfully" : response.status
-        
-        )
+        EventService.createEvent(this.formData).then(response=> {
+        alert(response.status == 201 ? "Event created successfully" : response.status)
+          this.$router.push({name: "eventsView"});} //refresh view
         ).catch((error)=>{
         alert(error.message)
         alert(error.statusText)}
@@ -111,9 +109,12 @@ export default {
       }else{
       //if id != 0 , call PUT
       EventService.updateEvent(this.formData.eventId,this.formData).then(
-          response=> {if(response.status == 200){alert("Update successful")}}
+          response=> {if(response.status == 200){alert("Update successful")}
+          
+          this.$router.push({name: "eventsView"}); //refresh view
+          }
       ).catch(error=> alert(error.message));}
-      this.$router.push({name: 'eventsView'})
+
     },
   },
   created(){

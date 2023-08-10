@@ -23,8 +23,8 @@ export default {
     }
   },
   methods:{
-    getListEvents() {
-      EventService.listEvents().then(response => this.events=response.data)
+   getListEvents() {
+      EventService.listEvents().then(response => this.events = response.data)
 
     },
     newEvent(){
@@ -32,6 +32,7 @@ export default {
     }
   },
   created(){
+    console.log('reached events view created')
     this.getListEvents()
     this.isAdmin = this.$store.state.user.role == 'admin'
   }

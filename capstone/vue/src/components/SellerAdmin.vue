@@ -74,12 +74,14 @@ export default {
       if (this.formData.sellerId === 0 || this.formData.sellerId == null) {
        
         SellerService.createSeller(this.formData)
-          .then((response) =>
+          .then((response) =>{
             alert(
               response.status == 201
                 ? "Seller created successfully"
                 : response.status
-            )
+            );
+            this.$store.commit('LOAD_SELLERS');
+      this.$router.push({ name: "sellersView" });}
           )
           .catch((error) => {
             alert(error.message);
@@ -96,7 +98,7 @@ export default {
         //   })
         //   .catch((error) => alert(error.message));
       }
-      this.$router.push({ name: "sellersView" });
+      
     },
   },
 };
