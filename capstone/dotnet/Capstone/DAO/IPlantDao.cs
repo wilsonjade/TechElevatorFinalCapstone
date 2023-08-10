@@ -12,6 +12,7 @@ namespace Capstone.DAO
 
         List<Plant> GetPlantsByUserId(int userId);
 
+        bool AddPlantToVG(int plantId, int userId);
 
     }
 }

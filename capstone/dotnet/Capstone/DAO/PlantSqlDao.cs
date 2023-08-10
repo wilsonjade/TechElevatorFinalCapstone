@@ -15,6 +15,8 @@ namespace Capstone.DAO
         private readonly string sqlGetPlantById = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, img_url FROM plants WHERE plant_id = @plantId;";
 
         private readonly string sqlGetPlantsByUserId = @"SELECT user_id, vg.plant_id, plants.common_name, plants.description, plants.family, plants.genus, plants.img_url, plants.kingdom, plants.plant_id, plants.species, plants.[order], plants.subfamily FROM virtual_garden AS vg INNER JOIN plants ON plants.plant_id = vg.plant_id WHERE user_id = @user_id";
+
+        private readonly string sqlAddPlantToVG = @"INSERT INTO virtual_garden(plant_id, user_id) VALUES(@plant_id, @user_id)";
         public PlantSqlDao(string dbConnectionString)
         {
             connectionString = dbConnectionString;
@@ -116,6 +118,30 @@ namespace Capstone.DAO
                 }
             }
             return plants;
+        }
+        public bool AddPlantToVG(int plantId, int userId)
+        {
+          
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+               
+                using (SqlCommand cmd = new SqlCommand(sqlAddPlantToVG, conn))
+                {
+                    cmd.Parameters.AddWithValue("@plant_id", plantId);
+                    cmd.Parameters.AddWithValue("@user_id", userId);
+                   
+
+                    //SqlCommand testcmd = new SqlCommand();
+                    plantId = (int)cmd.ExecuteNonQuery(); 
+                    userId = (int)cmd.ExecuteNonQuery();
+                    return true;
+                }
+
+            }
+
+            
         }
     }
 }
