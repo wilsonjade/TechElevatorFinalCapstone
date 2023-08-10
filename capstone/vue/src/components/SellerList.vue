@@ -38,6 +38,7 @@ export default {
     }
   },
   created() {
+    console.log('reached sellerlist created')
     this.isAdmin = this.$store.state.user.role == "admin";
     //call database for valid list of seller IDs
     if(this.$route.params.plantId){
