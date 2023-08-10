@@ -37,8 +37,10 @@ export default {
     },
     addToGarden(){
       
-      plantService.addToGarden({plantId: this.plant.plantId, userId: this.$store.state.user.userId}).then(
-        this.$router.push({name: "virtualGardenView"}) 
+      plantService.addToGarden({plantId: this.plant.plantId, userId: this.$store.state.user.userId}).then(response=>{
+        if(response.status == 200){
+        this.$router.push({name: "virtualGardenView"}) }
+      }
       ).catch(error=> alert("there was an error " + error.message))
       
     }

@@ -54,15 +54,18 @@ namespace Capstone.Controllers
         }
 
         [HttpPost("garden/")]
-        public ActionResult AddPantToVG(int plantId, int userId)
+        //public ActionResult AddPantToVG( int plantId, int userId)
+        public ActionResult AddPantToVG(PlantUserPair pair)
+
         {
-            bool added = plantDao.AddPlantToVG(userId, plantId);
+           
+            bool added = plantDao.AddPlantToVG(pair.PlantId, pair.UserId );
 
                 if(added == true)
                 {
                     return Ok();
                 }
-            else
+                else
                 {
                 return BadRequest();
                 }

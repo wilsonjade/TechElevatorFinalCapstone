@@ -135,7 +135,7 @@ namespace Capstone.DAO
 
                     //SqlCommand testcmd = new SqlCommand();
                     plantId = (int)cmd.ExecuteNonQuery(); 
-                    userId = (int)cmd.ExecuteNonQuery();
+                    
                     return true;
                 }
 
