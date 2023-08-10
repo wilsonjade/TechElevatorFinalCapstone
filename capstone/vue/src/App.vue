@@ -110,7 +110,11 @@ nav ul {
 #main {
   margin-left: 5rem;
   padding: 1rem;
+<<<<<<< HEAD
   margin-top: 50px;
+=======
+  top: 5rem;
+>>>>>>> 187832b89ccaf1d11fca74c82220d572fd72b815
 }
 
 #header {
