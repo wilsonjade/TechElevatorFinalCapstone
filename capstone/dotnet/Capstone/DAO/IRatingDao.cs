@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Capstone.DAO
 {
-    public class IRatingsDao 
+    public interface IRatingDao
     {
         public List<Ratings> GetRatings();
         public Ratings AddRatings(Ratings ratingToAdd);
-        public bool DeleteRatings(int ratingId);
+        public bool DeleteRating(int ratingId);
     }
 }

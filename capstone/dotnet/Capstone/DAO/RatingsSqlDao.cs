@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Capstone.DAO
 {
-    public class RatingsSqlDao : IRatingsDao
+    public class RatingsSqlDao : IRatingDao
     {
         private readonly string SqlGetRatings = @"SELECT rating_id, user_id, seller_id, title, rating, review FROM ratings;";
         private readonly string SqlAddRatings = @"INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (@user_id, @seller_id, @title, @rating, @review);";
@@ -68,7 +68,7 @@ namespace Capstone.DAO
             return ratingToAdd;
         }
 
-        public bool DeleteRatings(int ratingId)
+        public bool DeleteRating(int ratingId)
         {
             using(SqlConnection conn = new SqlConnection(connectionString))
             {
