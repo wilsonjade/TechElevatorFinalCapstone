@@ -5,7 +5,10 @@
       <p> {{thisPlant.species}}</p>
       <button v-on:click="remove()" id="remove">Remove from My Garden</button>
       <div class="tipcontainer">
-          <span class="tip" v-for="tip in tips" v-bind:key="tip" >{{tip}}</span>
+          <span> Care and Feeding </span>
+          <div class="tip sun" > Sun: {{thisPlant.sun}}</div>
+           <div class="tip water" >Water: {{thisPlant.water}}</div>
+            <div class="tip fertilizer" >Fertilizer: {{thisPlant.fertilizer}}</div>
      </div>
   </div>
 </template>
@@ -41,14 +44,37 @@ export default {
 .plantcardcontainer>.tipcontainer{
     display: none;
     margin-top: 10px;
+    font-size: 95%;
+    text-align: center;
 }
 .plantcardcontainer:hover>.tipcontainer{
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  justify-items: center;
     background-color: chartreuse;
 }
+.tipcontainer>span{
+    margin-left: auto;
+    margin-right: auto;
+}
 .tip{
+    display: block;
+    width: 100%;
+    font-size: 75%;
+    padding: 5px;
+    margin: 5px 0 5px 0;
     border-style: solid;
     border-radius: 10px;
+}
+.sun{
+    background-color: yellow;
+}
+.water{
+    background-color: gray;
+}
+.fertilizer{
+    background-color: goldenrod;
 }
 #cardimg{
     margin-left:10%;
@@ -62,6 +88,7 @@ export default {
 }
 .plantcardcontainer{
     width: 20%;
+    font-size: larger;
     margin-left: 20px;
     margin-right: 20px;
     padding: 15px;
