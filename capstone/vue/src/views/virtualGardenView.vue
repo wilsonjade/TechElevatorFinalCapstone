@@ -18,7 +18,7 @@ export default {
     ,
     data(){
       return {
-        myPlants : ['test1','test2']
+        myPlants : []
       }
     },
     created(){
