@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿USE master
+USE master
 GO
 
 --drop database if it exists
@@ -141,7 +140,7 @@ INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 3, 'R
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 2, 'Rating 7', 5, 'This is a review also also also also')
 
 GO
-=======
+
 USE master
 GO
 
@@ -262,6 +261,9 @@ INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_
 
 INSERT INTO events (user_id , address1 , city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, '123 Main St',  'Columbus', 'OH', '12345', 'www.website.com', 'Columbus Garden Tour', 'Visit local home gardens in Columbus', 'This is a long description. It is so long.  I love plants', 0, '2023-08-14 09:30:00', '2023-08-14 13:45:00')
 INSERT INTO events (user_id , website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, 'www.zoom.com/meeting123456', 'Green Morning America', 'Zoom chat for gardener talk', 'This is a long description. It is so long.  I love plants', 1, '2023-08-15 10:00:00', '2023-08-14 11:00:00')
+--past
+INSERT INTO events (user_id , website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, 'www.pasteventtest.com/meeting123456', 'Green Morning America', 'Zoom chat for gardener talk', 'This is a long description. It is so long.  I love plants', 1, '2023-08-09 10:00:00', '2023-08-10 11:00:00')
+
 INSERT INTO sellers (seller_name, seller_type) VALUES ('Fake Nursery', 'Retailer');
 INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website) VALUES ('Oakland Nursery Dublin','Retailer','4261 West Dublin-Granville Road','','Dublin','OH','43017','https://www.oaklandnursery.com/page/garden-centers/dublin');
 INSERT INTO sellers (seller_name ,seller_type ,address1 ,address2 ,city ,state ,zip ,website) VALUES ('Oakland Nursery Columbus','Retailer','1156 Oakland Park Avenue','','Columbus','OH','43224-3317','https://www.oaklandnursery.com/page/garden-centers/columbus');
@@ -290,4 +292,4 @@ INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 1, 'R
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 5', 5, 'This is a review also also also also')
 
 GO
->>>>>>> 0497c324637659160d5d0280b5a3ff3a95c9f97a
+
