@@ -122,7 +122,7 @@ export default new Vuex.Store({
     LOAD_FUTURE_EVENTS(state) {
       eventService.futureEvents()
       .then( (response) => {
-        state.ratings = response.data;
+        state.futureEvents = response.data;
       } )
       .catch((error) => {
         if (error.response) { 
