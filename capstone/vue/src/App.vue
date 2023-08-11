@@ -1,5 +1,6 @@
 <template>
   <section>
+    <notification-display />
     <nav-bar />
     <section id="main">
       <header-component />
@@ -14,10 +15,12 @@
 import HeaderComponent from "./components/HeaderComponent.vue";
 import NavBar from "./components/NavBar.vue";
 import FooterComponent from "./components/FooterComponent.vue";
+import NotificationDisplay from './components/NotificationDisplay.vue';
+
 
 export default {
   name: "App",
-  components: { NavBar, HeaderComponent, FooterComponent },
+  components: { NavBar, HeaderComponent, FooterComponent ,NotificationDisplay },
   data() {
     return {};
   },
