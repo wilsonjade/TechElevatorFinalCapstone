@@ -1,12 +1,12 @@
 <template>
-  <section>
-    <section class="garden-container">
-
-      <h1>this is the virtualGardenView</h1>
-      <p> list of owned plants here</p>
+  <div>
+      <h1 id="gardenheadline">this is the virtualGardenView</h1>
+  <section class="garden-container">
+      
       <plant-garden-card v-for="plant in myPlants" v-bind:key="plant.plantId" v-bind:thisPlant="plant"     />
-    </section>
+    
   </section>
+  </div>
 </template>
 
 <script>
@@ -31,9 +31,16 @@ export default {
 </script>
 
 <style>
+#gardenheadline{
+  display: block;
+  text-align: center;
+  margin: auto;
+}
 .garden-container{
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 </style>

@@ -12,7 +12,9 @@ export default {
     },
     addToGarden(plantUser){
         return axios.post(`/plant/garden`,plantUser)
-    }
-    
+    },
+    removeFromGarden(plantUser){
+        return axios.delete("/plant/garden/",{data: plantUser})
 
+    }
 }
