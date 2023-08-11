@@ -286,9 +286,9 @@ INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,5);
 
 
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 1, 'Rating 1', 5, 'This is a review')
-INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 2', 5, 'This is a review also')
-INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 3', 5, 'This is a review also also')
-INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 1, 'Rating 4', 5, 'This is a review also also also')
+INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 2, 'Rating 2', 5, 'This is a review also')
+INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 3, 'Rating 3', 5, 'This is a review also also')
+INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 4, 'Rating 4', 5, 'This is a review also also also')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 5', 5, 'This is a review also also also also')
 
 GO
