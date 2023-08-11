@@ -55,6 +55,10 @@ body {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+h1 {
+  font-size: 1.2rem;
+}
+
 .card {
   background-color: #4c9173a8;
   color: #f6f7e8;
