@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <form @submit.prevent="login">
+    <form class="card" @submit.prevent="login">
       <h1 >Please Sign In</h1>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!

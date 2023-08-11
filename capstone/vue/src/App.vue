@@ -1,7 +1,8 @@
 <template>
   <section>
-    <notification-display />
-    <nav-bar />
+    <aside>
+      <nav-bar />
+    </aside>
     <section id="main">
       <header-component />
       <router-view />
@@ -15,12 +16,10 @@
 import HeaderComponent from "./components/HeaderComponent.vue";
 import NavBar from "./components/NavBar.vue";
 import FooterComponent from "./components/FooterComponent.vue";
-import NotificationDisplay from './components/NotificationDisplay.vue';
-
 
 export default {
   name: "App",
-  components: { NavBar, HeaderComponent, FooterComponent ,NotificationDisplay },
+  components: { NavBar, HeaderComponent, FooterComponent,  },
   data() {
     return {};
   },
@@ -30,7 +29,6 @@ export default {
     this.$store.commit("LOAD_PLANTS");
     this.$store.commit("LOAD_SELLERS");
     this.$store.commit("LOAD_FUTURE_EVENTS");
-
   },
 };
 </script>
@@ -41,6 +39,8 @@ export default {
 <style>
 :root {
   font-size: 16px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -50,12 +50,11 @@ body {
   -o-background-size: cover;
   background-size: cover;
 
+  display: grid;
   margin: 0;
   padding: 0;
 
   color: #41304d;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 h1 {
@@ -92,10 +91,10 @@ section.container {
 }
 
 #nav {
-  grid-area: nav-bar;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   width: 5rem;
   height: 100vh;
   position: fixed;
@@ -105,15 +104,16 @@ section.container {
 }
 
 .nav-item {
-  padding: 5px 0 5px 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  height: 5rem;
 }
 
-nav ul {  
-  list-style: none;
-}
-
-.nav-item:last-child {
-  margin-top: auto;
+.nav-icon {
+  color: white;
+  font-size: 1.5rem;
 }
 
 #main {
@@ -126,7 +126,6 @@ nav ul {
 }
 
 #header {
-  grid-area: header;
   position: fixed;
   margin-left: 5rem;
   padding: 1rem;
@@ -136,12 +135,11 @@ nav ul {
   height: 35px;
   display: flex;
   justify-content: space-around;
-  align-items: center; 
+  align-items: center;
   background-color: #f0b45b75;
 }
 
 #footer {
-  grid-area: footer;
   position: fixed;
   margin-left: 5rem;
   padding: 1rem;
@@ -177,7 +175,7 @@ img {
 }
 
 .dark-purple {
-  background: #41304d;
+  background: #4d4355;
 }
 
 .medium-purple {
