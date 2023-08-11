@@ -5,7 +5,7 @@ export default {
         return axios.get("/ratings");
     },
 
-    getRatingsBySellerId(sellerId) {
+    listRatingsBySellerId(sellerId) {
         return axios.get(`/ratings/seller/${sellerId}`)
     },
 

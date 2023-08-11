@@ -19,6 +19,10 @@ export default {
     },
     updateEvent(eventId,eventObj){
         return axios.put(`/events/${eventId}`,eventObj)
+    },
+    futureEvents(){
+        console.log("reached axios future events")
+        return axios.get(`/events/future`)
     }
     
 }

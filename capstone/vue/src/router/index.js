@@ -17,6 +17,7 @@ import SellerList from '../components/SellerList.vue'
 import SellersView from '../views/SellersView.vue'
 import SellerAdmin from '../components/SellerAdmin.vue'
 import RatingsList from '../components/RatingsList.vue'
+import RatingsAdmin from '../components/RatingsAdmin.vue'
 
 Vue.use(Router)
 
@@ -162,6 +163,14 @@ const router = new Router({
       component: RatingsList,
       meta:{
         requiresAuth: false
+      }
+    },
+    {
+      path: "/ratingsadmin/:sellerId",
+      name: "ratingsAdmin",
+      component: RatingsAdmin,
+      meta:{
+        requiresAuth: true
       }
     },
   ]

@@ -9,6 +9,7 @@ namespace Capstone.DAO
     public class RatingsSqlDao : IRatingDao
     {
         private readonly string SqlGetRatings = @"SELECT rating_id, user_id, seller_id, title, rating, review FROM ratings;";
+        private readonly string SqlGetRatingsBySellerId = @"SELECT rating_id, user_id, seller_id, title, rating, review FROM ratings WHERE seller_id = @seller_id;";
         private readonly string SqlAddRatings = @"INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (@user_id, @seller_id, @title, @rating, @review);";
         private readonly string SqlDeleteRatings = @"DELETE FROM ratings WHERE rating_id = @rating_id;";
         private readonly string connectionString;
@@ -22,7 +23,6 @@ namespace Capstone.DAO
         public List<Ratings> GetRatings()
         {
             List<Ratings> ratingsList = new List<Ratings>();
-
             using(SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -45,7 +45,32 @@ namespace Capstone.DAO
             return ratingsList;
         }
 
-        
+        public List<Ratings> GetRatingsBySellerId(int sellerId)
+        {
+            List<Ratings> ratingsList = new List<Ratings>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(SqlGetRatingsBySellerId, conn))
+                {
+                    cmd.Parameters.AddWithValue("@seller_id", sellerId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Ratings rating = new Ratings();
+                            rating = MapRowToRatings(reader);
+                            ratingsList.Add(rating);
+                        }
+                    }
+                }
+            }
+            return ratingsList;
+        }
+
+
+
 
         public Ratings AddRatings(Ratings ratingToAdd)
         {

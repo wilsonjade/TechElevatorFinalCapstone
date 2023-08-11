@@ -7,7 +7,34 @@
         public string PasswordHash { get; set; }
         public string Salt { get; set; }
         public string Role { get; set; }
+
+        public int ExpertiseLevel { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public string Email { get; set; }
+
+        public int Region { get; set; }
+
+
+        public User (string username, string password, string role, int expertiseLevel, string firstName, string lastName, string email, int region)
+        {
+            Username = username;
+            PasswordHash = password;
+            Role = role;
+            ExpertiseLevel = expertiseLevel;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Region = region;
+        }
+
+        public User() { }
+
     }
+
+  
 
     /// <summary>
     /// Model of user data to return upon successful login
@@ -17,6 +44,8 @@
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Role { get; set; }
+
+
     }
 
     /// <summary>
@@ -46,5 +75,15 @@
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string Role { get; set; }
+
+        public int ExpertiseLevel { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public string Email { get; set; }
+
+        public int Region { get; set; }
+
     }
 }
