@@ -6,8 +6,8 @@
       <button v-on:click="remove()" id="remove">Remove from My Garden</button>
       <div class="tipcontainer">
           <span> Care and Feeding </span>
-          <div class="tip sun" > Sun: {{thisPlant.sun}}</div>
-           <div class="tip water" >Water: {{thisPlant.water}}</div>
+          <div class="tip sun" ><img class="icon" src="../assets/sunicon.png" /> Sun: {{thisPlant.sun}}</div>
+           <div class="tip water" ><img class="icon" src="../assets/watericon.png" />Water: {{thisPlant.water}}</div>
             <div class="tip fertilizer" >Fertilizer: {{thisPlant.fertilizer}}</div>
      </div>
   </div>
@@ -67,6 +67,8 @@ export default {
     border-style: solid;
     border-radius: 10px;
 }
+.icon{width: 5%;
+margin-right: 2%;}
 .sun{
     background-color: yellow;
 }
@@ -81,7 +83,7 @@ export default {
     margin-right:10%;
     justify-items: center;
     width: 80%;
-    height: 25%;
+    height: 100px;
     margin-top: 5%;
     object-fit: cover;
     border-radius: 0;
