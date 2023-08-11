@@ -1,7 +1,7 @@
 <template>
   <div v-bind:class="classes">
     <div v-on:click="hideAlert()" v-for="alert in alerts" v-bind:key="alert" class="alert">
-       {{ alert }} <img src="" />
+       <img src="../assets/checkicon.png" /> {{ alert }} 
     </div>
   </div>
 </template>
@@ -61,7 +61,11 @@ export default {
 </script>
 
 <style>
-
+div>img{
+  height:20px;
+  width: 20px; 
+  margin-right: 10px;
+}
 .show {
   display: flex;
 }
@@ -78,7 +82,7 @@ export default {
   justify-content: flex-start;
   flex-wrap: wrap;
   border-style: solid;
-  padding: 5px;
+  padding: 15px;
   box-shadow: 5px 10px darkslategray;
   border-radius: 30px;
   background-color: steelblue;
@@ -86,7 +90,7 @@ export default {
 .alert {
   min-width: 51%;
   margin-top: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
   border-style: solid;
   padding: 5px;
   box-shadow: 2px 2px slategrey;
