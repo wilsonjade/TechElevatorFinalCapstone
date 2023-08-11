@@ -26,7 +26,6 @@ export default {
   created() {
     this.$store.commit("LOAD_PLANTS");
     this.$store.commit("LOAD_SELLERS");
-    this.$store.commit("LOAD_RATINGS");
   },
 };
 </script>
