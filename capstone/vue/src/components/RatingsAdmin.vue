@@ -1,12 +1,12 @@
 <template>
-  <form v-on:submit.prevent="addRating">
+  <form v-on:submit.prevent="addRating" class="card">
       <div>
       <label for="title">Title: </label>
       <input type="text" name="title" id="rating-title" v-model="newRating.title">
       </div>
       <div>
       <label for="rating">Rating: </label>
-      <input type="number" min='1' max='5' name="rating" id="rating-rating" v-model="newRating.rating">
+      <input type="number" min='1' max='5' name="rating" id="rating-rating" v-model.number="newRating.rating">
       </div>
       <div>
       <label for="review">Review: </label>
@@ -25,6 +25,7 @@ export default {
     data() {
         return{
             newRating: {
+                ratingId: 0,
                 userId: this.$store.state.user.userId,
                 sellerId: parseInt(this.$route.params.sellerId),
                 title: '',
@@ -37,8 +38,8 @@ export default {
     },
     methods: {
         addRating() {
-
-            RatingService.createRating(this.newRating)
+          console.log("reached ratingsAdmin --> addRating()")
+            RatingService.createRating(parseInt(this.$route.params.sellerId), this.newRating)
             .then( () => {
                 this.$store.commit("LOAD_RATINGS");
                 this.$router.push({name: "ratingsBySeller"});
@@ -47,15 +48,15 @@ export default {
           if (error.response) {
             // error.response exists
             // Request was made, but response has error status (4xx or 5xx)
-            console.log("Error updating pets: ", error.response.status);
+            console.log("Error updating ratings: ", error.response.status);
           } else if (error.request) {
             // There is no error.response, but error.request exists
             // Request was made, but no response was received
-            console.log("Error updating pets: unable to communicate to server");
+            console.log("Error updating ratings: unable to communicate to server");
           } else {
             // Neither error.response and error.request exist
             // Request was *not* made
-            console.log("Error updating pets: error making request");
+            console.log("Error updating ratings: error making request");
           }
         });
 
