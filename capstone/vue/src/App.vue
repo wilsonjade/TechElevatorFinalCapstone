@@ -29,8 +29,6 @@ export default {
   created() {
     this.$store.commit("LOAD_PLANTS");
     this.$store.commit("LOAD_SELLERS");
-
-    this.$store.commit("LOAD_RATINGS");
     this.$store.commit("LOAD_FUTURE_EVENTS");
 
   },
@@ -58,6 +56,10 @@ body {
   color: #41304d;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  font-size: 1.2rem;
 }
 
 .card {

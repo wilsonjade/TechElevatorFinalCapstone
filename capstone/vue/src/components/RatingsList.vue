@@ -13,7 +13,7 @@ import RatingDetail from './RatingDetail.vue'
 export default {
     name: "listRatings",
     props: ["item"],
-  components: { RatingDetail },
+  components: { RatingDetail,  },
   data() {
       return {
           sellerId: this.$route.params.sellerId,
