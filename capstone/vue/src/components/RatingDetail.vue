@@ -1,13 +1,16 @@
 <template>
   <section class="rating-detail card">
-    <h1>{{ item.title }}</h1>
-    <p>{{ item.rating }}</p>
-    <p>{{ item.review }}</p>
+    <h1>Title: {{ item.title }}</h1>
+    <p>Rating ID: {{ item.ratingId }}</p>
+    <p>User ID: {{ item.userId }}</p>
+    <p>Seller ID: {{ item.sellerId }}</p>
+    <p>Rating: {{ item.rating }}</p>
+    <p>Review: {{ item.review }}</p>
 
     <button
       v-if="isAdmin"
       v-on:click="
-        $router.push({ name: 'ratingAdmin', params: { id: item.ratingId } })
+        $router.push({ name: 'ratingAdmin', params: { id: item.sellerId } })
       "
     >
       Edit Rating
@@ -27,6 +30,7 @@ export default {
   components: {},
   data() {
     return {
+      isAdmin: false,
       rating: {},
     };
   },
@@ -64,15 +68,16 @@ export default {
           }
         });
     },
-    getThisRating(){
-      RatingService.getRatingBySellerId(this.$route.params.sellerId)
-      .then( (response) => {
-        this.rating = response.data;
-      });
-    },
+    // getThisRating(){
+    //   RatingService.listRatingBySellerId(this.$route.params.sellerId)
+    //   .then( (response) => {
+    //     this.rating = response.data;
+    //   });
+    // },
   },
-  created() {
-    this.getThisRating();
+  created() {    
+    this.isAdmin = this.$store.state.user.role;
+    //this.getThisRating();
   },
 };
 </script>

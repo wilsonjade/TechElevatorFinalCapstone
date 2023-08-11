@@ -25,15 +25,19 @@ namespace Capstone.Controllers
             return Ok(ratingsDao.GetRatings());
         }
 
+        [HttpGet("seller/{sellerId}")]
+        [AllowAnonymous]
+        public ActionResult<List<Ratings>> GetRatingsBySellerId(int sellerId)
+        {
+            return Ok(ratingsDao.GetRatingsBySellerId(sellerId));
+        }
+
         [HttpPost()]
         public ActionResult<Ratings> AddRating(Ratings newRating)
         {
             Ratings added = ratingsDao.AddRatings(newRating);
             return Created($"/ratings/{added.RatingId}", added);
         }
-
-
-
 
         [HttpDelete("{id}")]
         public ActionResult<Ratings> DeleteRating(int id)
