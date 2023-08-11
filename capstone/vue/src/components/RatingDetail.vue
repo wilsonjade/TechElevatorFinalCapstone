@@ -7,14 +7,6 @@
     <p>Rating: {{ item.rating }}</p>
     <p>Review: {{ item.review }}</p>
 
-    <button
-      v-if="isAdmin"
-      v-on:click="
-        $router.push({ name: 'ratingAdmin', params: { id: item.sellerId } })
-      "
-    >
-      Edit Rating
-    </button>
     <button v-if="isAdmin" v-on:click="deleteThisRating()">
       Delete Rating
     </button>
@@ -68,16 +60,9 @@ export default {
           }
         });
     },
-    // getThisRating(){
-    //   RatingService.listRatingBySellerId(this.$route.params.sellerId)
-    //   .then( (response) => {
-    //     this.rating = response.data;
-    //   });
-    // },
   },
   created() {    
     this.isAdmin = this.$store.state.user.role;
-    //this.getThisRating();
   },
 };
 </script>

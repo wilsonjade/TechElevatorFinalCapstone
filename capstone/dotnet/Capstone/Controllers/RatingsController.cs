@@ -32,7 +32,7 @@ namespace Capstone.Controllers
             return Ok(ratingsDao.GetRatingsBySellerId(sellerId));
         }
 
-        [HttpPost()]
+        [HttpPost("seller/{sellerId}")]
         public ActionResult<Ratings> AddRating(Ratings newRating)
         {
             Ratings added = ratingsDao.AddRatings(newRating);

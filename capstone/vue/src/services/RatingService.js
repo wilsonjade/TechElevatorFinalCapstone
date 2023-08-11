@@ -12,7 +12,7 @@ export default {
     deleteRating(ratingId){
         return axios.delete(`/ratings/${ratingId}`);
     },
-    createRating(rating){
-        return axios.post("/ratings/", rating);
+    createRating(sellerId, rating){
+        return axios.post(`/ratings/seller/${sellerId}`, rating);
     },    
 }
