@@ -12,6 +12,9 @@
         public string? CommonName { get; set; }
         public string? Order { get; set; }
         public string Description { get; set; }
+        public string Sun { get; set; }
+        public string Water { get; set; }
+        public string Fertilizer { get; set; }
         public string? ImgUrl { get; set; }
 
         public Plant() { }

@@ -10,11 +10,11 @@ namespace Capstone.DAO
     public class PlantSqlDao : IPlantDao
     {
         private readonly string connectionString;
-        private readonly string sqlGetPlants = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, img_url FROM plants;";
+        private readonly string sqlGetPlants = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, sun, water, fertilizer, img_url FROM plants;";
 
-        private readonly string sqlGetPlantById = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, img_url FROM plants WHERE plant_id = @plantId;";
+        private readonly string sqlGetPlantById = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, sun, water, fertilizer, img_url FROM plants WHERE plant_id = @plantId;";
 
-        private readonly string sqlGetPlantsByUserId = @"SELECT user_id, vg.plant_id, plants.common_name, plants.description, plants.family, plants.genus, plants.img_url, plants.kingdom, plants.plant_id, plants.species, plants.[order], plants.subfamily FROM virtual_garden AS vg INNER JOIN plants ON plants.plant_id = vg.plant_id WHERE user_id = @user_id";
+        private readonly string sqlGetPlantsByUserId = @"SELECT user_id, vg.plant_id, plants.common_name, plants.description, plants.family, plants.genus, plants.img_url, plants.kingdom, plants.plant_id, plants.species, plants.[order], plants.subfamily, plants.sun, plants.water, plants.fertilizer FROM virtual_garden AS vg INNER JOIN plants ON plants.plant_id = vg.plant_id WHERE user_id = @user_id";
 
         private readonly string sqlAddPlantToVG = @"INSERT INTO virtual_garden(plant_id, user_id) VALUES(@plant_id, @user_id)";
 
@@ -61,6 +61,9 @@ namespace Capstone.DAO
             plant.Order = reader["order"] is DBNull ? null : Convert.ToString(reader["order"]);
             plant.Subfamily = reader["subfamily"] is DBNull ? null : Convert.ToString(reader["subfamily"]);
             plant.Description = reader["description"] is DBNull ? null : Convert.ToString(reader["description"]);
+            plant.Sun = reader["sun"] is DBNull ? null : Convert.ToString(reader["sun"]);
+            plant.Water = reader["water"] is DBNull ? null : Convert.ToString(reader["water"]);
+            plant.Fertilizer = reader["fertilizer"] is DBNull ? null : Convert.ToString(reader["fertilizer"]);
             plant.ImgUrl = reader["img_url"] is DBNull ? null : Convert.ToString(reader["img_Url"]);
 
             return plant;
