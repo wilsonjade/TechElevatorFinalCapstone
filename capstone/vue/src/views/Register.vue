@@ -1,5 +1,5 @@
 <template>
-  <div id="register" class="text-center">
+  <div id="register" class="text-center card">
     <form @submit.prevent="register">
       <h1>Create Account</h1>
       <div role="alert" v-if="registrationErrors">
@@ -16,6 +16,26 @@
       <div class="form-input-group">
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
+      </div>
+       <div class="form-input-group">
+        <label for="expertiseLevel">Level of Expertise</label>
+        <input type="number" id="expertiseLevel" v-model.number="user.expertiseLevel" required autofocus />
+      </div>
+      <div class="form-input-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" v-model="user.firstName" required autofocus />
+      </div>
+      <div class="form-input-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" v-model="user.lastName" required autofocus />
+      </div>
+      <div class="form-input-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" v-model="user.email" required autofocus />
+      </div>
+      <div class="form-input-group">
+        <label for="region">Region</label>
+        <input type="number" id="region" v-model.number="user.region" required autofocus />
       </div>
       <button type="submit">Create Account</button>
       <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
@@ -35,6 +55,13 @@ export default {
         password: '',
         confirmPassword: '',
         role: 'user',
+        firstName: '', 
+        lastName: '', 
+        expertiseLevel: 0, 
+        email: '',
+        region: 0,
+
+
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
