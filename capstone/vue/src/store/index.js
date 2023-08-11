@@ -96,8 +96,8 @@ export default new Vuex.Store({
       });
     },
 
-    LOAD_RATINGS(state) {
-      ratingService.listRatings()
+    LOAD_RATINGS(state, sellerId) {
+      ratingService.listRatingsBySellerId(sellerId)
       .then( (response) => {
         state.ratings = response.data;
       } )

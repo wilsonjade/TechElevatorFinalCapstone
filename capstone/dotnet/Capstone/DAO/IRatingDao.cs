@@ -7,6 +7,7 @@ namespace Capstone.DAO
 
     {
         public List<Ratings> GetRatings();
+        public List<Ratings> GetRatingsBySellerId(int sellerId);
         public Ratings AddRatings(Ratings ratingToAdd);
         public bool DeleteRating(int ratingId);
     }
