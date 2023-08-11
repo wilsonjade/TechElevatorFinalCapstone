@@ -5,7 +5,7 @@ import axios from 'axios'
 import plantService from "../services/PlantService.js";
 import sellerService from "../services/SellerService.js"
 import ratingService from "../services/RatingService.js"
-
+import eventService from "../services/EventService.js"
 Vue.use(Vuex)
 
 /*
@@ -28,7 +28,7 @@ export default new Vuex.Store({
     plants: [],
     sellers: [],
     ratings: [],
-    
+    futureEvents: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -116,6 +116,29 @@ export default new Vuex.Store({
           // Neither error.response and error.request exist
           // Request was *not* made
           console.log("Error loading ratings: make request")
+        }
+      });
+    },
+    LOAD_FUTURE_EVENTS(state) {
+      eventService.futureEvents()
+      .then( (response) => {
+        state.ratings = response.data;
+      } )
+      .catch((error) => {
+        if (error.response) { 
+          // error.response exists
+          // Request was made, but response has error status (4xx or 5xx)
+          console.log("Error loading events: ", error.response.status)
+        
+        } else if (error.request) { 
+          // There is no error.response, but error.request exists
+          // Request was made, but no response was received
+          console.log("Error loading events: unable to communicate to server")
+      
+        } else { 
+          // Neither error.response and error.request exist
+          // Request was *not* made
+          console.log("Error loading events: make request")
         }
       });
     }

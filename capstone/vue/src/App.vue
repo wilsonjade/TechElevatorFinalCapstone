@@ -27,6 +27,7 @@ export default {
     this.$store.commit("LOAD_PLANTS");
     this.$store.commit("LOAD_SELLERS");
     this.$store.commit("LOAD_RATINGS");
+    this.$store.commit("LOAD_FUTURE_EVENTS");
   },
 };
 </script>
