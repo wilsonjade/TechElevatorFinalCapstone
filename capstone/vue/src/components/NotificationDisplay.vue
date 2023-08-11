@@ -1,40 +1,67 @@
 <template>
   <div v-bind:class="classes">
-    <div v-for="alert in alerts" v-bind:key="alert" class="alert">
-      This is an alert {{ alert }}
+    <div v-on:click="hideAlert()" v-for="alert in alerts" v-bind:key="alert" class="alert">
+       {{ alert }} <img src="" />
     </div>
   </div>
 </template>
 
 <script>
+ import eventService from "../services/EventService.js"
+
 export default {
   data() {
-    return {};
+    return {
+      alerts : []
+      ,
+      futureEvents: []
+    };
+
   },
   name: "NotificationDisplay",
-  computed: {
-    classes() {
-      return "alertcontainer show";
+  methods: {
+    hideAlert(){
+      console.log('reachedhidealert')
+    //  document.getElementsByClassName("alert")[0].classList.add('hide');
+      this.alerts.pop();
     },
-    alerts() {
-      let events = this.$store.state.futureEvents;
+    getAlerts() {
+      
+      let events = this.futureEvents;
+      
       let alerts = [];
       events.forEach((e) => {
         let dt = new Date(e.startTime);
         let twoDays = 1000 * 60 * 60 * 48; //two days in milliseconds
         let now = new Date();
-        if (dt - now < twoDays) {
-          alerts.push(e.name);
+        if ((dt - now < twoDays) && (dt - now > 0)) {
+          this.alerts.push(
+            `Reminder! Upcoming event ${e.name} is on ${dt.toLocaleDateString('en-us', { weekday:"long",  month:"short", day:"numeric"})}`
+          )
         }
       });
 
       return alerts;
     },
   },
+  computed: {
+    classes() {
+      return `alertcontainer ${this.alerts.length > 0 ? "show" : "hide"}`;
+    },
+    
+  },
+  created(){
+    eventService.futureEvents().then(response=>{
+    this.futureEvents = response.data;
+    this.getAlerts();
+    }
+    );
+  }
 };
 </script>
 
 <style>
+
 .show {
   display: flex;
 }
@@ -46,7 +73,7 @@ export default {
   position: absolute;
   top: 20%;
   left: 15%;
-
+  max-width: 45%;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
