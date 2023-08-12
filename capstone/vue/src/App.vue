@@ -41,6 +41,10 @@ export default {
   font-size: 16px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    --text-primary: white;
+    --text-secondary: lightgray;
+    --bg-primary: blue;
+    --bg-secondary: aqua;
 }
 
 body {
@@ -91,29 +95,62 @@ section.container {
 }
 
 #nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
   width: 5rem;
   height: 100vh;
   position: fixed;
-  background-color: #7dd87d9c;
-  padding: 0;
-  margin: 0;
+  background-color: #a9d3a9;
+  transition: width 200ms ease;
 }
 
-.nav-item {
+#nav:hover {
+  width: 16rem;
+}
+
+#nav:hover .link-text {
+  display: block;
+}
+
+ul.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li.nav-item {
   padding: 0;
   margin: 0;
   display: flex;
   align-items: center;
-  height: 5rem;
 }
 
-.nav-icon {
-  color: white;
+.nav-link {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  color: #41304d;
+  text-decoration: none;
+}
+
+.link-text {
+  display: none;
+  margin-left: 1rem;
+}
+
+.nav-link svg {
+  min-width: 2rem;
+  margin: 0 1.5 rem;
+}
+
+svg.nav-icon {
+  fill: #41304d;
   font-size: 1.5rem;
+}
+
+svg.nav-icon:hover {
+  fill: white;
 }
 
 #main {
