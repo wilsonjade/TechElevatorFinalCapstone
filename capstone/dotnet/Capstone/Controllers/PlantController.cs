@@ -14,10 +14,12 @@ namespace Capstone.Controllers
     public class PlantController : Controller
     {
         public IPlantDao plantDao;
+        public ITasksDao tasksDao;
 
-        public PlantController(IPlantDao plantDao)
+        public PlantController(IPlantDao plantDao, ITasksDao tasksDao)
         {
             this.plantDao = plantDao;
+            this.tasksDao = tasksDao;
 
         }
         [HttpGet]
@@ -90,19 +92,12 @@ namespace Capstone.Controllers
         {
             
             List<Tasks> result = new List<Tasks>();
-
-           // result = tasksDao.Getname of list method here(userId);
-            int[] testresult = new int[4] { 1, 3, 5, 7 };
-
+            result = tasksDao.GetMyTaskReminders(userId);
             
-                return Ok(testresult);
-            //    return Ok(result);
-            
-            
-
+            return Ok(result);
         }
 
-        [HttpPut("tasks/{userId")]
+        [HttpPut("tasks/{userId}")]
         public ActionResult UpdateTaskAck(int userId)
         {
 
