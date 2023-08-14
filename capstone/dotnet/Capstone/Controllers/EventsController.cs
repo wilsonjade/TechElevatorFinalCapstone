@@ -35,6 +35,7 @@ namespace Capstone.Controllers
         }
 
         [HttpGet("future")] //getFutureEvents()
+        [AllowAnonymous]
         public ActionResult<List<Events>> GetFutureEvents()
         {
             return Ok(eventsDao.GetFutureEvents());
