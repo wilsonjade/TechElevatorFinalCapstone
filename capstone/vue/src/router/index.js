@@ -18,6 +18,9 @@ import SellersView from '../views/SellersView.vue'
 import SellerAdmin from '../components/SellerAdmin.vue'
 import RatingsList from '../components/RatingsList.vue'
 import RatingsAdmin from '../components/RatingsAdmin.vue'
+import CommunicationsList from '../components/CommunicationsList.vue'
+import CommunicationsAdmin from '../components/CommunicationsAdmin.vue'
+import CommunityView from '../views/CommunityView.vue'
 
 Vue.use(Router)
 
@@ -114,7 +117,6 @@ const router = new Router({
         requiresAuth: true
 
       }
-
     },
     {
       path: "/eventadmin/:id",
@@ -169,6 +171,30 @@ const router = new Router({
       path: "/ratingsadmin/:sellerId",
       name: "ratingsAdmin",
       component: RatingsAdmin,
+      meta:{
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/communications",
+      name: "communicationsList",
+      component: CommunicationsList,
+      meta:{
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/addcommunication",
+      name: "communicationsAdmin",
+      component: CommunicationsAdmin,
+      meta:{
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/community",
+      name: "communityView",
+      component: CommunityView,
       meta:{
         requiresAuth: true
       }
