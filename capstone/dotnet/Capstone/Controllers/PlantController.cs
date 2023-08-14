@@ -42,8 +42,8 @@ namespace Capstone.Controllers
             List<Plant> result = new List<Plant>();
 
             result = plantDao.GetPlantsByUserId(userId);
-          
-            if(result.Count > 0)
+
+            if (result.Count > 0)
             {
                 return Ok(result);
             }
@@ -51,7 +51,7 @@ namespace Capstone.Controllers
             {
                 return NotFound();
             }
-            
+
         }
 
         [HttpPost("garden/")]
@@ -59,17 +59,17 @@ namespace Capstone.Controllers
         public ActionResult AddPantToVG(PlantUserPair pair)
 
         {
-           
-            bool added = plantDao.AddPlantToVG(pair.PlantId, pair.UserId );
 
-                if(added == true)
-                {
-                    return Ok();
-                }
-                else
-                {
+            bool added = plantDao.AddPlantToVG(pair.PlantId, pair.UserId);
+
+            if (added == true)
+            {
+                return Ok();
+            }
+            else
+            {
                 return BadRequest();
-                }
+            }
         }
 
         [HttpDelete("garden/")]
@@ -87,27 +87,29 @@ namespace Capstone.Controllers
         [HttpGet("tasks/{userId}")]
         public ActionResult<int[]> GetMyTaskReminders(int userId)
         {
-            
+
             //List<Tasks> result = new List<Tasks>();
 
-           // result = tasksDao.Getname of list method here(userId);
+            // result = tasksDao.Getname of list method here(userId);
             int[] testresult = new int[4] { 1, 3, 5, 7 };
 
-            
-                return Ok(testresult);
+
+            return Ok(testresult);
             //    return Ok(result);
-            
-            
+
+
 
         }
 
-        [HttpPut("tasks/{userId")]
+        [HttpPut("tasks/{userId}")]
         public ActionResult UpdateTaskAck(int userId)
         {
 
 
             return Ok();
         }
+
+       
 
 
     }
