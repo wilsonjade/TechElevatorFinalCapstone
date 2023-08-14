@@ -84,11 +84,12 @@ namespace Capstone.Controllers
             return NotFound();
         }
 
+        //this section is for plant task reminders
         [HttpGet("tasks/{userId}")]
         public ActionResult<int[]> GetMyTaskReminders(int userId)
         {
             
-            //List<Tasks> result = new List<Tasks>();
+            List<Tasks> result = new List<Tasks>();
 
            // result = tasksDao.Getname of list method here(userId);
             int[] testresult = new int[4] { 1, 3, 5, 7 };
