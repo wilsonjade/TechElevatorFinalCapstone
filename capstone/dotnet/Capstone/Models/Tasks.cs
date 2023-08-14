@@ -8,7 +8,7 @@ namespace Capstone.Models
         public int PlantId { get; set; }
         public string? TaskDescription { get; set; }
 
-        public string? TaskCatagory { get; set; }
+        public string? TaskCategory { get; set; }
         public int? FrequencyDays { get; set; }
     }
 }

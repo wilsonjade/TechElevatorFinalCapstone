@@ -55,7 +55,7 @@ namespace Capstone.DAO
             return taskList;
         }
 
-        public Tasks GetEventById(int id)
+        public Tasks GetTasksById(int id)
         {
             Tasks tasks = new Tasks();
 
@@ -205,7 +205,7 @@ namespace Capstone.DAO
             tasks.TaskId = Convert.ToInt32(reader["task_id"]);
             tasks.PlantId = Convert.ToInt32(reader["plant_id"]);
             tasks.TaskDescription = Convert.ToString(reader["task_description"]);
-            tasks.TaskCatagory = Convert.ToString(reader["task_catagory"]);
+            tasks.TaskCategory = Convert.ToString(reader["task_catagory"]);
             tasks.FrequencyDays = Convert.ToInt32(reader["frequency_days"]);
            
            
