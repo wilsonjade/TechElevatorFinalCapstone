@@ -74,7 +74,7 @@ namespace Capstone.Controllers
             }
         }
 
-        [HttpDelete("garden")] //todo needs to take in id
+        [HttpDelete("garden")] 
 
         public ActionResult DeletePlantFromGarden(PlantUserPair pair)
         {
