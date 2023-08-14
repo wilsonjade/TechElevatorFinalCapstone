@@ -14,10 +14,12 @@ namespace Capstone.Controllers
     public class PlantController : Controller
     {
         public IPlantDao plantDao;
+        public ITasksDao tasksDao;
 
-        public PlantController(IPlantDao plantDao)
+        public PlantController(IPlantDao plantDao, ITasksDao tasksDao)
         {
             this.plantDao = plantDao;
+            this.tasksDao = tasksDao;
 
         }
 
@@ -42,8 +44,8 @@ namespace Capstone.Controllers
             List<Plant> result = new List<Plant>();
 
             result = plantDao.GetPlantsByUserId(userId);
-          
-            if(result.Count > 0)
+
+            if (result.Count > 0)
             {
                 return Ok(result);
             }
@@ -51,7 +53,7 @@ namespace Capstone.Controllers
             {
                 return NotFound();
             }
-            
+
         }
 
         [HttpPost("garden")]
@@ -59,17 +61,17 @@ namespace Capstone.Controllers
         public ActionResult AddPantToVG(PlantUserPair pair)
 
         {
-           
-            bool added = plantDao.AddPlantToVG(pair.PlantId, pair.UserId );
 
-                if(added == true)
-                {
-                    return Ok();
-                }
-                else
-                {
+            bool added = plantDao.AddPlantToVG(pair.PlantId, pair.UserId);
+
+            if (added == true)
+            {
+                return Ok();
+            }
+            else
+            {
                 return BadRequest();
-                }
+            }
         }
 
         [HttpDelete("garden")] //todo needs to take in id
@@ -86,29 +88,31 @@ namespace Capstone.Controllers
 
         //this section is for plant task reminders
         [HttpGet("tasks/{userId}")]
-        public ActionResult<int[]> GetMyTaskReminders(int userId)
-        {
-            
+        public ActionResult<List<Tasks>> GetMyTaskReminders(int userId)
+        {  
             List<Tasks> result = new List<Tasks>();
 
-           // result = tasksDao.Getname of list method here(userId);
-            int[] testresult = new int[4] { 1, 3, 5, 7 };
-
+            result = tasksDao.GetMyTaskReminders(userId);
             
-                return Ok(testresult);
-            //    return Ok(result);
-            
-            
+            return Ok(result);
 
         }
 
         [HttpPut("tasks/{userId}")]
-        public ActionResult UpdateTaskAck(int userId)
+        public ActionResult UpdateTaskAck(TasksAck ack)
         {
-
-
-            return Ok();
+            int count = tasksDao.UpdateTaskAck(ack);
+            if(count > 0)
+            {
+                return Ok(count);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
+
+       
 
 
     }

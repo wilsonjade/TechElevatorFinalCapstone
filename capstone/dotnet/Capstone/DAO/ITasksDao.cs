@@ -13,7 +13,9 @@
         /// <returns>Full List of Events</returns>
         public List<Tasks> GetTasks();
 
-        
+        public List<Tasks> GetMyTaskReminders(int userId);
         public bool DeleteTask(int taskId);
+
+        public int UpdateTaskAck(TasksAck ack);
     }
 }

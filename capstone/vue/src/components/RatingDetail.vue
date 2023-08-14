@@ -3,7 +3,7 @@
     <h1>Title: {{ item.title }}</h1>
     <p>Rating ID: {{ item.ratingId }}</p>
     <p>User ID: {{ item.userId }}</p>
-    <p>Seller ID: {{ item.sellerId }}</p>
+    <p>Seller : {{ item.sellerId }}</p>
     <p>Rating: {{ item.rating }}</p>
     <p>Review: {{ item.review }}</p>
 
