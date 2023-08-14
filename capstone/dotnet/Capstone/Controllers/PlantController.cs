@@ -2,6 +2,7 @@
 using Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -82,6 +83,32 @@ namespace Capstone.Controllers
             }
             return NotFound();
         }
+
+        [HttpGet("tasks/{userId}")]
+        public ActionResult<int[]> GetMyTaskReminders(int userId)
+        {
+            
+            //List<Tasks> result = new List<Tasks>();
+
+           // result = tasksDao.Getname of list method here(userId);
+            int[] testresult = new int[4] { 1, 3, 5, 7 };
+
+            
+                return Ok(testresult);
+            //    return Ok(result);
+            
+            
+
+        }
+
+        [HttpPut("tasks/{userId")]
+        public ActionResult UpdateTaskAck(int userId)
+        {
+
+
+            return Ok();
+        }
+
 
     }
 }

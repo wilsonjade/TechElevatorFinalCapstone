@@ -1,18 +1,24 @@
 <template>
   <div v-bind:class="classes">
-    <div v-on:click="hideAlert()" v-for="alert in alerts" v-bind:key="alert" class="alert">
-       <img src="../assets/checkicon.png" /> {{ alert }} 
+    <div v-on:click="ackAlertEvent(alertEvent)" v-for="alertEvent in alertsEvents" v-bind:key="alertEvent" class="alert">
+       <img src="../assets/checkicon.png" /> {{ alertEvent }} 
+    </div>
+    <div v-on:click="ackAlertTask(alertTask.taskId)" v-for="alertTask in alertsTasks" v-bind:key="alertTask" class="alert">
+       <img src="../assets/checkicon.png" /> {{ alertTask.taskId }} {{alertTask.descr}}
     </div>
   </div>
 </template>
 
 <script>
  import eventService from "../services/EventService.js"
+ import TaskService from "../services/TaskService.js"
 
 export default {
   data() {
     return {
-      alerts : []
+      alertsEvents : []
+      ,
+      alertsTasks: [{taskId: 1, descr: "test1"},{taskId: 2, descr: "test2"},{taskId: 3, descr: "test3"}]
       ,
       futureEvents: []
     };
@@ -20,22 +26,41 @@ export default {
   },
   name: "NotificationDisplay",
   methods: {
-    hideAlert(){
-      console.log('reachedhidealert')
-    //  document.getElementsByClassName("alert")[0].classList.add('hide');
-      this.alerts.pop();
+    ackAlertEvent(alertEvent){
+    
+      this.alertsEvents = this.alertsEvents.filter(e=> e != alertEvent) //update client list of alerts
+      //todo PUT to server to acknowledge event 
+      //refresh future events 
     },
-    getAlerts() {
+    ackAlertTask(taskId){
+      //todo PUT to server to acknowledge task user_ack_task object
+      const now = new Date();
+      let ackObj = {"taskId": taskId, "UserId": this.$store.state.user.userId, "LastAck": now }
+      TaskService.ackTaskReminder(ackObj).then(
+        this.getTaskAlerts() //refresh alerts
+        )
+      //this.alertsTasks = this.alertsTasks.filter(e=> e.taskId != taskId); //update client list of alerts
+    },
+    getTaskAlerts(){
+      TaskService.getTaskRemindersByUser(this.$store.state.user.userId).then(response=>
+        this.alertsTasks = response.data
+      ).catch(error=>
+        console.log(error.message)
+      )
+    }
+    ,
+    getEventAlerts() {
+      const role = this.$store.state.user.role;
+      let alerts = [];
+      if(role != 'user'){return alerts} //don't show any notifications if role is not user
       
       let events = this.futureEvents;
-      
-      let alerts = [];
       events.forEach((e) => {
         let dt = new Date(e.startTime);
         let twoDays = 1000 * 60 * 60 * 48; //two days in milliseconds
         let now = new Date();
         if ((dt - now < twoDays) && (dt - now > 0)) {
-          this.alerts.push(
+          this.alertsEvents.push(
             `Reminder! Upcoming event ${e.name} is on ${dt.toLocaleDateString('en-us', { weekday:"long",  month:"short", day:"numeric"})}`
           )
         }
@@ -46,14 +71,15 @@ export default {
   },
   computed: {
     classes() {
-      return `alertcontainer ${this.alerts.length > 0 ? "show" : "hide"}`;
+      return `alertcontainer ${(this.alertsEvents.length + this.alertsTasks.length) > 0 ? "show" : "hide"}`;
     },
     
   },
   created(){
     eventService.futureEvents().then(response=>{
     this.futureEvents = response.data;
-    this.getAlerts();
+    this.getEventAlerts();
+    this.getTaskAlerts();
     }
     );
   }
