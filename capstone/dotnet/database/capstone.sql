@@ -131,7 +131,7 @@ CREATE TABLE [tasks] (
 CREATE TABLE [user_ack_task](
 user_id int NOT NULL,
 task_id int NOT NULL,
-last_ack date NOT NULL,
+last_ack datetime NOT NULL,
 CONSTRAINT [FK_user_id2] FOREIGN KEY (user_id) REFERENCES [users](user_id),
 CONSTRAINT [FK_task_id] FOREIGN KEY (task_id) REFERENCES [tasks](task_id),
 
