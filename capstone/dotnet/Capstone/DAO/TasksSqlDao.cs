@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Capstone.DAO
 {
-    public class TasksSqlDao : ITasksDao
+    public class TasksSqlDao //: ITasksDao
     {
         private readonly string connectionString;
         private readonly string SqlGetTasks = @"SELECT [task_id],[plant_id],[task_description],[task_catagory],[frequency_days] FROM [final_capstone].[dbo].[tasks];";
