@@ -20,9 +20,9 @@ namespace Capstone.Controllers
             this.plantDao = plantDao;
 
         }
+
+
         [HttpGet]
-
-
         public ActionResult<List<Plant>> GetPlants()
         {
 
@@ -54,7 +54,7 @@ namespace Capstone.Controllers
             
         }
 
-        [HttpPost("garden/")]
+        [HttpPost("garden")]
         //public ActionResult AddPantToVG( int plantId, int userId)
         public ActionResult AddPantToVG(PlantUserPair pair)
 
@@ -72,7 +72,7 @@ namespace Capstone.Controllers
                 }
         }
 
-        [HttpDelete("garden/")]
+        [HttpDelete("garden")] //todo needs to take in id
 
         public ActionResult DeletePlantFromGarden(PlantUserPair pair)
         {
@@ -102,7 +102,7 @@ namespace Capstone.Controllers
 
         }
 
-        [HttpPut("tasks/{userId")]
+        [HttpPut("tasks/{userId}")]
         public ActionResult UpdateTaskAck(int userId)
         {
 
