@@ -26,7 +26,7 @@ namespace Capstone.DAO
         private readonly string SqlUpdateTask = @"UPDATE tasks SET task_description=@taskDescription, task_ategory=@taskCategory, frequency_days=@frequencyDays, " +
         "WHERE task_id = @taskId;";
 
-        
+
 
 
 
@@ -130,6 +130,44 @@ namespace Capstone.DAO
             }
         }
 
+        public int UpdateTaskAck(TasksAck ack)
+        {
+            string sqlUpdateTaskAck = @"UPDATE user_ack_task 
+                                        SET last_ack = GETDATE()
+                                        WHERE user_ack_task.user_id = @user_id AND user_ack_task.task_id = @task_id;";
+            string sqlCreateTaskAck = @"INSERT INTO user_ack_task (user_id, task_id, last_ack) VALUES (@user_id, @task_id, GETDATE());";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sqlUpdateTaskAck, conn))
+                {
+                    cmd.Parameters.AddWithValue("@user_id", ack.UserId);
+                    cmd.Parameters.AddWithValue("@task_id", ack.TaskId);
+
+
+                    int count = cmd.ExecuteNonQuery();
+                    if (count == 0)
+                    {
+                        using (SqlCommand cmdInsert = new SqlCommand(sqlCreateTaskAck, conn))
+                        {
+                            //insert row if update not completed
+                            cmd.Parameters.AddWithValue("@user_id", ack.UserId);
+                            cmd.Parameters.AddWithValue("@task_id", ack.TaskId);
+                            int countAdded = cmd.ExecuteNonQuery();
+                            return countAdded;
+                        }
+                    }
+                    else
+                    {
+                        return count;
+                    }
+
+                }
+            }
+
+
+        }
         //public List<Events> GetFutureEvents()
         //{
         //    List<Events> eventsList = new List<Events>();
@@ -162,12 +200,12 @@ namespace Capstone.DAO
 
                 using (SqlCommand cmd = new SqlCommand(SqlAddTask, conn))
                 {
-                    
+
                     cmd.Parameters.AddWithValue("@plantId", taskToAdd.PlantId);
                     cmd.Parameters.AddWithValue("@task_description", taskToAdd.TaskDescription);
                     cmd.Parameters.AddWithValue("@task_category", taskToAdd.TaskCategory);
                     cmd.Parameters.AddWithValue("@frequency_days", taskToAdd.FrequencyDays);
-                    
+
                     taskToAdd.TaskId = (int)cmd.ExecuteNonQuery();
                 }
 
@@ -204,7 +242,7 @@ namespace Capstone.DAO
         }
 
 
- 
+
 
 
 

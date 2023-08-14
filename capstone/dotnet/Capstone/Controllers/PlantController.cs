@@ -101,9 +101,15 @@ namespace Capstone.Controllers
         [HttpPut("tasks/{userId}")]
         public ActionResult UpdateTaskAck(TasksAck ack)
         {
-            
-
-            return Ok();
+            int count = tasksDao.UpdateTaskAck(ack);
+            if(count > 0)
+            {
+                return Ok(count);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
        
