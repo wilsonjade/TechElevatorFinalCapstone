@@ -6,25 +6,30 @@ using System.Data.SqlClient;
 
 namespace Capstone.DAO
 {
-    public class TasksSqlDao //: ITasksDao
+    public class TasksSqlDao : ITasksDao
     {
         private readonly string connectionString;
-        private readonly string SqlGetTasks = @"SELECT [task_id],[plant_id],[task_description],[task_catagory],[frequency_days] FROM [final_capstone].[dbo].[tasks];";
+        private readonly string SqlGetTasks = @"SELECT [task_id],[plant_id],[task_description],[task_category],[frequency_days] FROM [final_capstone].[dbo].[tasks];";
 
-        private readonly string SqlGetTasksById = @"SELECT [task_id],[plant_id],[task_description],[task_catagory],[frequency_days] FROM [final_capstone].[dbo].[tasks] WHERE task_id = @taskId;";
+        private readonly string SqlGetTasksById = @"SELECT [task_id],[plant_id],[task_description],[task_category],[frequency_days] FROM [final_capstone].[dbo].[tasks] WHERE task_id = @taskId;";
         private readonly string SqlDeleteTask = @"DELETE tasks WHERE task_id = @task_id;";
-//        private readonly string SqlGetFutureEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
-//      ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events]  WHERE start_time > GETDATE();";
+        private readonly string sqlGetMyTaskReminders = @"SELECT tasks.task_id, tasks.plant_id, tasks.task_category, tasks.task_description, tasks.frequency_days FROM tasks
+                                                        JOIN virtual_garden ON virtual_garden.plant_id = tasks.plant_id
+                                                        JOIN plants ON plants.plant_id = tasks.plant_id
+                                                        JOIN user_ack_task ON user_ack_task.task_id = tasks.task_id
+                                                        WHERE virtual_garden.user_id = @user_id AND user_ack_task.user_id = @user_id AND DAY(GETDATE() - user_ack_task.last_ack) > tasks.frequency_days  ;";
+        //        private readonly string SqlGetFutureEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
+        //      ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events]  WHERE start_time > GETDATE();";
 
-//        private readonly string SqlUpdateEvents = @"UPDATE events SET address1=@address1, address2=@address2, city=@city, " +
-//            "state=@state, zip=@zip, website=@website, name=@name, short_description=@short_description, long_description=@long_description, " +
-//            "is_virtual=@is_virtual, start_time=@start_time, end_time=@end_time " +
-//            "WHERE event_id = @eventId;";
+        //        private readonly string SqlUpdateEvents = @"UPDATE events SET address1=@address1, address2=@address2, city=@city, " +
+        //            "state=@state, zip=@zip, website=@website, name=@name, short_description=@short_description, long_description=@long_description, " +
+        //            "is_virtual=@is_virtual, start_time=@start_time, end_time=@end_time " +
+        //            "WHERE event_id = @eventId;";
 
-//        private readonly string SqlDeleteEvent = @"DELETE FROM events WHERE event_id = @eventId;";
+        //        private readonly string SqlDeleteEvent = @"DELETE FROM events WHERE event_id = @eventId;";
 
-//        private readonly string SqlAddEvents = @"INSERT INTO events (user_id, address1, address2, city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) 
-//VALUES (@userId, @address1, @address2, @city, @state, @zip, @website, @name, @short_description, @long_description, @is_virtual, @start_time, @end_time);";
+        //        private readonly string SqlAddEvents = @"INSERT INTO events (user_id, address1, address2, city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) 
+        //VALUES (@userId, @address1, @address2, @city, @state, @zip, @website, @name, @short_description, @long_description, @is_virtual, @start_time, @end_time);";
 
         public TasksSqlDao(string dbConnectionString)
         {
@@ -34,15 +39,41 @@ namespace Capstone.DAO
         {
             List<Tasks> taskList = new List<Tasks>();
 
-            using(SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
-                using(SqlCommand cmd = new SqlCommand(SqlGetTasks, conn))
+                using (SqlCommand cmd = new SqlCommand(SqlGetTasks, conn))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while(reader.Read())
+                        while (reader.Read())
+                        {
+                            Tasks tasks = new Tasks();
+                            tasks = MapRowToTasks(reader);
+                            taskList.Add(tasks);
+
+                        }
+                    }
+                }
+            }
+            return taskList;
+        }
+
+        public List<Tasks> GetMyTaskReminders(int userId)
+        {
+            List<Tasks> taskList = new List<Tasks>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sqlGetMyTaskReminders, conn))
+                {
+                    cmd.Parameters.AddWithValue("user_id", userId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
                         {
                             Tasks tasks = new Tasks();
                             tasks = MapRowToTasks(reader);
@@ -205,10 +236,10 @@ namespace Capstone.DAO
             tasks.TaskId = Convert.ToInt32(reader["task_id"]);
             tasks.PlantId = Convert.ToInt32(reader["plant_id"]);
             tasks.TaskDescription = Convert.ToString(reader["task_description"]);
-            tasks.TaskCategory = Convert.ToString(reader["task_catagory"]);
+            tasks.TaskCategory = Convert.ToString(reader["task_category"]);
             tasks.FrequencyDays = Convert.ToInt32(reader["frequency_days"]);
-           
-           
+
+
             return tasks;
         }
     }
