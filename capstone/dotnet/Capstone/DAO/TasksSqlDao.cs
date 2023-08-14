@@ -12,7 +12,7 @@ namespace Capstone.DAO
         private readonly string SqlGetTasks = @"SELECT [task_id],[plant_id],[task_description],[task_catagory],[frequency_days] FROM [final_capstone].[dbo].[tasks];";
 
         private readonly string SqlGetTasksById = @"SELECT [task_id],[plant_id],[task_description],[task_catagory],[frequency_days] FROM [final_capstone].[dbo].[tasks] WHERE task_id = @taskId;";
-
+        private readonly string SqlDeleteTask = @"DELETE tasks WHERE task_id = @task_id;";
 //        private readonly string SqlGetFutureEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
 //      ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events]  WHERE start_time > GETDATE();";
 
@@ -55,7 +55,7 @@ namespace Capstone.DAO
             return taskList;
         }
 
-        public Tasks GetEventById(int id)
+        public Tasks GetTasksById(int id)
         {
             Tasks tasks = new Tasks();
 
@@ -77,8 +77,29 @@ namespace Capstone.DAO
             }
             return tasks;
         }
+        public bool DeleteTask(int taskId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
 
-       
+                using (SqlCommand cmd = new SqlCommand(SqlDeleteTask, conn))
+                {
+                    cmd.Parameters.AddWithValue("@task_id", taskId);
+
+                    int count = cmd.ExecuteNonQuery();
+                    if (count == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
         //public List<Events> GetFutureEvents()
         //{
         //    List<Events> eventsList = new List<Events>();
@@ -102,7 +123,7 @@ namespace Capstone.DAO
         //    }
         //    return eventsList;
         //}
-       
+
         //public Events AddEvent(Events eventToAdd)
         //{
         //    using(SqlConnection conn = new SqlConnection(connectionString))
@@ -132,7 +153,7 @@ namespace Capstone.DAO
 
         //    return eventToAdd;
         //}
-        
+
         //public Events UpdateEvent(Events eventsToUpdate)
         //{
         //   using(SqlConnection conn = new SqlConnection(connectionString))
@@ -165,32 +186,11 @@ namespace Capstone.DAO
         //                return null;
         //            }
 
+
         //        }
         //    }                     
         //}
-        
-        //public bool DeleteEvent(int eventId)
-        //{
-        //    using (SqlConnection conn = new SqlConnection(connectionString))
-        //    {
-        //        conn.Open();
 
-        //        using (SqlCommand cmd = new SqlCommand(SqlDeleteEvent, conn))
-        //        {
-        //            cmd.Parameters.AddWithValue("@eventId", eventId);
-
-        //            int count = cmd.ExecuteNonQuery();
-        //            if (count == 1)
-        //            {
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //    }
-        //}
 
         //public Events CreateEvent(Events newEvent)
         //{
@@ -205,7 +205,7 @@ namespace Capstone.DAO
             tasks.TaskId = Convert.ToInt32(reader["task_id"]);
             tasks.PlantId = Convert.ToInt32(reader["plant_id"]);
             tasks.TaskDescription = Convert.ToString(reader["task_description"]);
-            tasks.TaskCatagory = Convert.ToString(reader["task_catagory"]);
+            tasks.TaskCategory = Convert.ToString(reader["task_catagory"]);
             tasks.FrequencyDays = Convert.ToInt32(reader["frequency_days"]);
            
            
