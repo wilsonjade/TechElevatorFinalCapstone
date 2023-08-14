@@ -1,7 +1,8 @@
 <template>
   <section>
-    <notification-display />
-    <nav-bar />
+    <aside>
+      <nav-bar />
+    </aside>
     <section id="main">
       <header-component />
       <router-view />
@@ -15,12 +16,10 @@
 import HeaderComponent from "./components/HeaderComponent.vue";
 import NavBar from "./components/NavBar.vue";
 import FooterComponent from "./components/FooterComponent.vue";
-import NotificationDisplay from './components/NotificationDisplay.vue';
-
 
 export default {
   name: "App",
-  components: { NavBar, HeaderComponent, FooterComponent ,NotificationDisplay },
+  components: { NavBar, HeaderComponent, FooterComponent,  },
   data() {
     return {};
   },
@@ -30,7 +29,6 @@ export default {
     this.$store.commit("LOAD_PLANTS");
     this.$store.commit("LOAD_SELLERS");
     this.$store.commit("LOAD_FUTURE_EVENTS");
-
   },
 };
 </script>
@@ -41,6 +39,12 @@ export default {
 <style>
 :root {
   font-size: 16px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    --text-primary: white;
+    --text-secondary: lightgray;
+    --bg-primary: blue;
+    --bg-secondary: aqua;
 }
 
 body {
@@ -50,12 +54,11 @@ body {
   -o-background-size: cover;
   background-size: cover;
 
+  display: grid;
   margin: 0;
   padding: 0;
 
   color: #41304d;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 h1 {
@@ -92,28 +95,62 @@ section.container {
 }
 
 #nav {
-  grid-area: nav-bar;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 5rem;
   height: 100vh;
   position: fixed;
-  background-color: #7dd87d9c;
+  background-color: #a9d3a9;
+  transition: width 200ms ease;
+}
+
+#nav:hover {
+  width: 16rem;
+}
+
+#nav:hover .link-text {
+  display: block;
+}
+
+ul.navbar-nav {
+  list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.nav-item {
-  padding: 5px 0 5px 0;
+li.nav-item {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 
-nav ul {  
-  list-style: none;
+.nav-link {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  color: #41304d;
+  text-decoration: none;
 }
 
-.nav-item:last-child {
-  margin-top: auto;
+.link-text {
+  display: none;
+  margin-left: 1rem;
+}
+
+.nav-link svg {
+  min-width: 2rem;
+  margin: 0 1.5 rem;
+}
+
+svg.nav-icon {
+  fill: #41304d;
+  font-size: 1.5rem;
+}
+
+svg.nav-icon:hover {
+  fill: white;
 }
 
 #main {
@@ -126,7 +163,6 @@ nav ul {
 }
 
 #header {
-  grid-area: header;
   position: fixed;
   margin-left: 5rem;
   padding: 1rem;
@@ -136,12 +172,11 @@ nav ul {
   height: 35px;
   display: flex;
   justify-content: space-around;
-  align-items: center; 
+  align-items: center;
   background-color: #f0b45b75;
 }
 
 #footer {
-  grid-area: footer;
   position: fixed;
   margin-left: 5rem;
   padding: 1rem;
@@ -177,7 +212,7 @@ img {
 }
 
 .dark-purple {
-  background: #41304d;
+  background: #4d4355;
 }
 
 .medium-purple {
