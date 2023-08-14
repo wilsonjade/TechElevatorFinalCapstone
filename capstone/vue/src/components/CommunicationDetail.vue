@@ -1,24 +1,48 @@
 <template>
-  <section class="communication-detail card">
-    <h1>Title: {{ item.title }}</h1>
-    <p>Type: {{ item.type }}</p>
-    <p>Description: {{ item.description }}</p>
+    <form class="communication-detail card poll">
+      <h3>{{ item.title }}</h3>
+      <div>
+        <input type="radio" name="poll-item" id="poll-option1" />
+        <label for="poll-option1">{{ item.pollOption1 }}</label>
+      </div>
 
-    <button>Join this {{item.type}}</button>
+      <div>
+        <input type="radio" name="poll-item" id="poll-option2" />
+        <label for="poll-option2">{{ item.pollOption2 }}</label>
+      </div>
 
+      <div>
+        <input type="radio" name="poll-item" id="poll-option3" />
+        <label for="poll-option3">{{ item.pollOption3 }}</label>
+      </div>
 
+      <div>
+        <input type="radio" name="poll-item" id="poll-option4" />
+        <label for="poll-option4">{{ item.pollOption4 }}</label>
+      </div>
 
-  </section>
+      <button>Submit your answer!</button>
+    </form>
 </template>
 
 <script>
 export default {
-    name: "communicationsDetail",
-    props: ["item"],
-
-}
+  name: "communicationsDetail",
+  props: ["item"],
+};
 </script>
 
-<style>
+<style scoped>
+h1 {
+  text-align: center;
+}
 
+.poll {
+  display: flex;
+  flex-direction: column;
+}
+
+div {
+  padding: 4px;
+}
 </style>
