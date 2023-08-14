@@ -27,11 +27,11 @@ WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) >
 
         private readonly string SqlAddTask = @"INSERT INTO tasks (plant_id, task_description, task_category, frequency_days)
         VALUES (@plant_id, @task_description, @task_category, @frequency_days);";
-        //        private readonly string SqlGetFutureEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
-        //      ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events]  WHERE start_time > GETDATE();";
+        
 
         private readonly string SqlUpdateTask = @"UPDATE tasks SET task_description=@taskDescription, task_ategory=@taskCategory, frequency_days=@frequencyDays, " +
         "WHERE task_id = @taskId;";
+        private readonly string SqlGetTasksByPlantId = @"SELECT [task_id],[plant_id],[task_description],[task_category],[frequency_days] FROM [final_capstone].[dbo].[tasks] WHERE plant_id = @plantId;";
 
 
 
@@ -92,7 +92,7 @@ WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) >
             return taskList;
         }
 
-        public Tasks GetTasksById(int id)
+        public Tasks GetTasksById(int taskId)
         {
             Tasks tasks = new Tasks();
 
@@ -102,7 +102,7 @@ WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) >
 
                 using (SqlCommand cmd = new SqlCommand(SqlGetTasksById, conn))
                 {
-                    cmd.Parameters.AddWithValue("@taskId", id);
+                    cmd.Parameters.AddWithValue("@taskId", taskId);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -114,6 +114,32 @@ WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) >
             }
             return tasks;
         }
+
+        public List<Tasks> GetTasksByPlantId(int plantId)
+        {
+            List<Tasks> taskList = new List<Tasks>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(SqlGetTasksByPlantId, conn))
+                {
+                    cmd.Parameters.AddWithValue("@plantId", plantId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Tasks tasks = new Tasks();
+                            tasks = MapRowToTasks(reader);
+                            taskList.Add(tasks);
+                        }
+                    }
+                }
+            }
+            return taskList;
+        }
+
         public bool DeleteTask(int taskId)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))

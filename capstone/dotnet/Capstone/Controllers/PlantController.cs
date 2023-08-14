@@ -1,4 +1,5 @@
 ﻿using Capstone.DAO;
+using Capstone.Exceptions;
 using Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -112,8 +113,65 @@ namespace Capstone.Controllers
             }
         }
 
-       
+        [HttpGet("tasks/ad/{taskId}")]
+        public ActionResult<Tasks> GetTasksById(int taskId)
+        {
+            Tasks result = new Tasks();
 
+            result = tasksDao.GetTasksById(taskId);
 
+            return Ok(result);
+
+        }
+
+        [HttpGet("tasks/plant/{plantId}")]
+        public ActionResult<List<Tasks>> GetTasksByPlantId(int plantId)
+        {
+            List<Tasks> result = new List<Tasks>();
+
+            result = tasksDao.GetTasksByPlantId(plantId);
+
+            return Ok(result);
+
+        }
+
+        [HttpPut("{taskId}")]
+
+        public ActionResult<Events> UpdateTask(int id, Tasks taskToUpdate)
+        {
+            taskToUpdate.TaskId = id;
+
+            try
+            {
+                Tasks result = tasksDao.UpdateTask(taskToUpdate);
+                return Ok(result);
+            }
+            catch (DaoException)
+            {
+                return NotFound();
+            }
+
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Tasks> DeleteTask(int id)
+        {
+            bool isDeleted = tasksDao.DeleteTask(id);
+            if (isDeleted)
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [HttpPost()]
+        public ActionResult<Tasks> AddTask(Tasks newTask)
+        {
+            Tasks added = tasksDao.AddTask(newTask);
+            return Created($"/tasks/{added.TaskId}", added);
+        }
     }
+
+
 }
+
