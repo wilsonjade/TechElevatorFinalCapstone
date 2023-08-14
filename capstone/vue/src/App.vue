@@ -100,6 +100,7 @@ section.container {
   position: fixed;
   background-color: #a9d3a9;
   transition: width 200ms ease;
+  z-index: 10;
 }
 
 #nav:hover {
