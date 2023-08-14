@@ -18,18 +18,17 @@ namespace Capstone.DAO
                                                         JOIN plants ON plants.plant_id = tasks.plant_id
                                                         JOIN user_ack_task ON user_ack_task.task_id = tasks.task_id
                                                         WHERE virtual_garden.user_id = @user_id AND user_ack_task.user_id = @user_id AND DAY(GETDATE() - user_ack_task.last_ack) > tasks.frequency_days  ;";
+        private readonly string SqlAddTask = @"INSERT INTO tasks (plant_id, task_description, task_category, frequency_days)
+        VALUES (@plant_id, @task_description, @task_category, @frequency_days);";
         //        private readonly string SqlGetFutureEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
         //      ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events]  WHERE start_time > GETDATE();";
 
-        //        private readonly string SqlUpdateEvents = @"UPDATE events SET address1=@address1, address2=@address2, city=@city, " +
-        //            "state=@state, zip=@zip, website=@website, name=@name, short_description=@short_description, long_description=@long_description, " +
-        //            "is_virtual=@is_virtual, start_time=@start_time, end_time=@end_time " +
-        //            "WHERE event_id = @eventId;";
+        private readonly string SqlUpdateTask = @"UPDATE tasks SET task_description=@taskDescription, task_ategory=@taskCategory, frequency_days=@frequencyDays, " +
+        "WHERE task_id = @taskId;";
 
-        //        private readonly string SqlDeleteEvent = @"DELETE FROM events WHERE event_id = @eventId;";
+        
 
-        //        private readonly string SqlAddEvents = @"INSERT INTO events (user_id, address1, address2, city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) 
-        //VALUES (@userId, @address1, @address2, @city, @state, @zip, @website, @name, @short_description, @long_description, @is_virtual, @start_time, @end_time);";
+
 
         public TasksSqlDao(string dbConnectionString)
         {
@@ -155,78 +154,57 @@ namespace Capstone.DAO
         //    return eventsList;
         //}
 
-        //public Events AddEvent(Events eventToAdd)
-        //{
-        //    using(SqlConnection conn = new SqlConnection(connectionString))
-        //    {
-        //        conn.Open();
+        public Tasks AddTask(Tasks taskToAdd)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
 
-        //        using (SqlCommand cmd = new SqlCommand(SqlAddEvents, conn))
-        //        {
-        //            cmd.Parameters.AddWithValue("@userId", eventToAdd.UserId);
-        //            cmd.Parameters.AddWithValue("@address1", eventToAdd.Address1);
-        //            cmd.Parameters.AddWithValue("@address2", eventToAdd.Address2);
-        //            cmd.Parameters.AddWithValue("@city", eventToAdd.City);
-        //            cmd.Parameters.AddWithValue("@state", eventToAdd.State);
-        //            cmd.Parameters.AddWithValue("@zip", eventToAdd.Zip);
-        //            cmd.Parameters.AddWithValue("@website", eventToAdd.Website);
-        //            cmd.Parameters.AddWithValue("@name", eventToAdd.Name);
-        //            cmd.Parameters.AddWithValue("@short_description", eventToAdd.ShortDescription);
-        //            cmd.Parameters.AddWithValue("@long_description", eventToAdd.LongDescription);
-        //            cmd.Parameters.AddWithValue("@is_virtual", eventToAdd.IsVirtual);
-        //            cmd.Parameters.AddWithValue("@start_time", eventToAdd.StartTime);
-        //            cmd.Parameters.AddWithValue("@end_time", eventToAdd.EndTime);
+                using (SqlCommand cmd = new SqlCommand(SqlAddTask, conn))
+                {
+                    
+                    cmd.Parameters.AddWithValue("@plantId", taskToAdd.PlantId);
+                    cmd.Parameters.AddWithValue("@task_description", taskToAdd.TaskDescription);
+                    cmd.Parameters.AddWithValue("@task_category", taskToAdd.TaskCategory);
+                    cmd.Parameters.AddWithValue("@frequency_days", taskToAdd.FrequencyDays);
+                    
+                    taskToAdd.TaskId = (int)cmd.ExecuteNonQuery();
+                }
 
-        //            eventToAdd.EventId = (int)cmd.ExecuteNonQuery();
-        //        }
+            }
 
-        //    }
+            return taskToAdd;
+        }
 
-        //    return eventToAdd;
-        //}
+        public Tasks UpdateTask(Tasks taskToUpdate)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
 
-        //public Events UpdateEvent(Events eventsToUpdate)
-        //{
-        //   using(SqlConnection conn = new SqlConnection(connectionString))
-        //    {
-        //        conn.Open();
-
-        //        using (SqlCommand cmd = new SqlCommand(SqlUpdateEvents, conn))
-        //        {
-        //            cmd.Parameters.AddWithValue("@eventId", eventsToUpdate.EventId);
-        //            cmd.Parameters.AddWithValue("@address1", eventsToUpdate.Address1);
-        //            cmd.Parameters.AddWithValue("@address2", eventsToUpdate.Address2);
-        //            cmd.Parameters.AddWithValue("@city", eventsToUpdate.City);
-        //            cmd.Parameters.AddWithValue("@state", eventsToUpdate.State);
-        //            cmd.Parameters.AddWithValue("@zip", eventsToUpdate.Zip);
-        //            cmd.Parameters.AddWithValue("@website", eventsToUpdate.Website);
-        //            cmd.Parameters.AddWithValue("@name", eventsToUpdate.Name);
-        //            cmd.Parameters.AddWithValue("@short_description", eventsToUpdate.ShortDescription);
-        //            cmd.Parameters.AddWithValue("@long_description", eventsToUpdate.LongDescription);
-        //            cmd.Parameters.AddWithValue("@is_virtual", eventsToUpdate.IsVirtual);
-        //            cmd.Parameters.AddWithValue("@start_time", eventsToUpdate.StartTime);
-        //            cmd.Parameters.AddWithValue("@end_time", eventsToUpdate.EndTime);
-
-        //            int count = cmd.ExecuteNonQuery();
-        //            if (count == 1)
-        //            {
-        //                return eventsToUpdate;
-        //            }
-        //            else
-        //            {
-        //                return null;
-        //            }
+                using (SqlCommand cmd = new SqlCommand(SqlUpdateTask, conn))
+                {
+                    cmd.Parameters.AddWithValue("@plantId", taskToUpdate.PlantId);
+                    cmd.Parameters.AddWithValue("@task_description", taskToUpdate.TaskDescription);
+                    cmd.Parameters.AddWithValue("@task_category", taskToUpdate.TaskCategory);
+                    cmd.Parameters.AddWithValue("@frequency_days", taskToUpdate.FrequencyDays);
+                    int count = cmd.ExecuteNonQuery();
+                    if (count == 1)
+                    {
+                        return taskToUpdate;
+                    }
+                    else
+                    {
+                        return null;
+                    }
 
 
-        //        }
-        //    }                     
-        //}
+                }
+            }
+        }
 
 
-        //public Events CreateEvent(Events newEvent)
-        //{
-
-        //}
+ 
 
 
 
