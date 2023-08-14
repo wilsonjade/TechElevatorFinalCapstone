@@ -18,7 +18,7 @@ export default {
     return {
       alertsEvents : []
       ,
-      alertsTasks: [{taskId: 1, descr: "test1"},{taskId: 2, descr: "test2"},{taskId: 3, descr: "test3"}]
+      alertsTasks: []
       ,
       futureEvents: []
     };
