@@ -20,9 +20,9 @@ namespace Capstone.Controllers
             this.plantDao = plantDao;
 
         }
+
+
         [HttpGet]
-
-
         public ActionResult<List<Plant>> GetPlants()
         {
 
@@ -54,7 +54,7 @@ namespace Capstone.Controllers
 
         }
 
-        [HttpPost("garden/")]
+        [HttpPost("garden")]
         //public ActionResult AddPantToVG( int plantId, int userId)
         public ActionResult AddPantToVG(PlantUserPair pair)
 
@@ -72,7 +72,7 @@ namespace Capstone.Controllers
             }
         }
 
-        [HttpDelete("garden/")]
+        [HttpDelete("garden")] //todo needs to take in id
 
         public ActionResult DeletePlantFromGarden(PlantUserPair pair)
         {
@@ -84,11 +84,17 @@ namespace Capstone.Controllers
             return NotFound();
         }
 
+        //this section is for plant task reminders
         [HttpGet("tasks/{userId}")]
         public ActionResult<int[]> GetMyTaskReminders(int userId)
         {
+<<<<<<< HEAD
 
             //List<Tasks> result = new List<Tasks>();
+=======
+            
+            List<Tasks> result = new List<Tasks>();
+>>>>>>> a2395a33727ab3a1bb964a487351a5ec887a7954
 
             // result = tasksDao.Getname of list method here(userId);
             int[] testresult = new int[4] { 1, 3, 5, 7 };

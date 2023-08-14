@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Capstone.DAO
 {
-    public class CommunicationsSqlDao //: ICommunicationDao
+    public class CommunicationsSqlDao : ICommunicationDao
     {
         private readonly string connectionString;
 
