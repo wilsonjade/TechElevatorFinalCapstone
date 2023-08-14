@@ -111,9 +111,12 @@ CREATE TABLE [ratings] (
 	user_id int,
 	type varchar(50),
 	title varchar(MAX),
-	description varchar(MAX),
 	start_time datetime NOT NULL,
 	end_time datetime NOT NULL,
+	poll_option1 varchar(150),
+	poll_option2 varchar(150),
+	poll_option3 varchar(150),
+	poll_option4 varchar(150),
 	CONSTRAINT [PK_communication_id] PRIMARY KEY (communication_id),
 	CONSTRAINT [FK_user_communication] FOREIGN KEY (user_id) REFERENCES [users](user_id),
 	)
@@ -180,12 +183,11 @@ INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 4, 'R
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 5', 5, 'This is a review also also also also')
 
 
-INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'challenge', 'This is a challenge for users to interact with!', 'Interact with this challenge in order to win a badge!', '2023-08-15 10:00:00', '2023-08-14 11:00:00');
-INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'competition', 'This is a competition for users to interact with!', 'Compete with other users in order to win a badge!', '2023-08-15 10:00:00', '2023-08-14 11:00:00');
-INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'poll', 'This is a poll for users to interact with!', 'Take this poll! The winner will win a badge!', '2023-08-15 10:00:00', '2023-08-14 11:00:00');
-INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'competition', 'Largest Virtual Garden', 'Add as many of your p', '2023-08-20 09:30:00', '2023-08-27 09:30:00');
-INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'challenge', 'This is a plant challenge!', 'Challenging plant owners to do something specific, in a certain amount of time!', '2023-08-20 09:30:00', '2023-08-27 09:30:00');
-INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'poll', 'What is the best houseplant for beginners?', 'Choose the best houseplant for beginners from our list!', '2023-08-20 09:30:00', '2023-08-27 09:30:00');
+INSERT INTO communications (user_id, type, title, start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4) VALUES (2, 'poll', 'Which is your favorite hanging plant?', '2023-08-12 10:00:00', '2023-08-14 11:00:00', 'Pothos', 'String of Peals', 'Spider Plant', 'Philodendron');
+INSERT INTO communications (user_id, type, title, start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4) VALUES (2, 'poll', 'How many plants do you have in your home?', '2023-08-15 10:00:00', '2023-08-14 11:00:00', '0-5', '5-10', '10-25', '25+');
+INSERT INTO communications (user_id, type, title, start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4) VALUES (2, 'poll', 'What was your first houseplant?', '2023-08-20 09:30:00', '2023-08-27 09:30:00', 'Cactus', 'Pothos', 'Monstera', 'Succulent');
+INSERT INTO communications (user_id, type, title, start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4) VALUES (2, 'poll', 'Do you prefer indoor plants or outdoor gardening?', '2023-08-20 09:30:00', '2023-08-27 09:30:00', 'Indoor', 'Outdoor', 'Little of Both', 'I could never choose!');
+INSERT INTO communications (user_id, type, title, start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4) VALUES (2, 'poll', 'What is the best houseplant for beginners?', '2023-08-20 09:30:00', '2023-08-27 09:30:00', 'Succulent', 'Palm', 'Snake Plant', 'Pothos');
 
 --populate tasks table
 INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (1, 'water', 1)
