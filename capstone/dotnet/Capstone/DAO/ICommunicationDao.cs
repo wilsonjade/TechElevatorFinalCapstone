@@ -6,7 +6,7 @@ namespace Capstone.DAO
     public interface ICommunicationDao
     {
         public List<Communication> GetCommunications();
-        //public List<Communication> GetCommunicationsByType();
+        public List<Communication> GetCommunicationsByType(string type);
         public List<Communication> GetFutureCommunications();
         public Communication GetCommunicationById(int id);
         public Communication AddCommunication(Communication communicationToAdd);

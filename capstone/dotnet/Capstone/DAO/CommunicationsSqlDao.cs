@@ -1,4 +1,5 @@
 ﻿using Capstone.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -19,16 +20,16 @@ namespace Capstone.DAO
 
         private readonly string SqlGetFutureCommunications = "SELECT communication_id, user_id, type, title, description, " +
             "start_time, end_time FROM communications " +
-            "WHERE start_time >= @start_time;";
+            "WHERE start_time > GETDATE();";
 
         private readonly string SqlGetCommunicationById = "SELECT communication_id, user_id, type, title, description, " +
             "start_time, end_time FROM communications " +
             "WHERE communication_id = @communication_id;";
 
-        private readonly string SqlAddCommunication = "INSERT INTO events (user_id, title, type, description, " +
-            "start_time, end_time) VALUES (@userId, @title, @type, @description, @start_time, @end_time);";
+        private readonly string SqlAddCommunication = "INSERT INTO communications (user_id, title, type, description, " +
+            "start_time, end_time) VALUES (@user_id, @title, @type, @description, @start_time, @end_time);";
 
-        private readonly string SqlUpdateCommunication = "UPDATE events " +
+        private readonly string SqlUpdateCommunication = "UPDATE communications " +
             "SET user_id=@user_id, title=@title, type=@type, description=@description, " +
             "start_time=@start_time, end_time=@end_time " +
             "WHERE communication_id = @communication_id;";
@@ -41,6 +42,7 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
+        [HttpGet]
         public List<Communication> GetCommunications()
         {
             List<Communication> communicationsList = new List<Communication>();
@@ -64,6 +66,8 @@ namespace Capstone.DAO
             }
             return communicationsList;
         }
+       
+        [HttpGet("{type}")]
         public List<Communication> GetCommunicationsByType(string type)
         {
             List<Communication> communicationsList = new List<Communication>();
@@ -121,7 +125,7 @@ namespace Capstone.DAO
 
                 using (SqlCommand cmd = new SqlCommand(SqlGetCommunicationById, conn))
                 {
-                    cmd.Parameters.AddWithValue("@communivation_id", id);
+                    cmd.Parameters.AddWithValue("@communication_id", id);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -140,7 +144,7 @@ namespace Capstone.DAO
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(SqlAddCommunication, conn))
                 {
-                    cmd.Parameters.AddWithValue("@userId", communicationToAdd.UserId);
+                    cmd.Parameters.AddWithValue("@user_id", communicationToAdd.UserId);
                     cmd.Parameters.AddWithValue("@title", communicationToAdd.Title);
                     cmd.Parameters.AddWithValue("@type", communicationToAdd.Type);
                     cmd.Parameters.AddWithValue("@description", communicationToAdd.Description);
@@ -161,7 +165,7 @@ namespace Capstone.DAO
                 using (SqlCommand cmd = new SqlCommand(SqlUpdateCommunication, conn))
                 {
                     cmd.Parameters.AddWithValue("@communication_id", communicationToUpdate.CommunicationId);
-                    cmd.Parameters.AddWithValue("@user-id", communicationToUpdate.UserId);
+                    cmd.Parameters.AddWithValue("@user_id", communicationToUpdate.UserId);
                     cmd.Parameters.AddWithValue("@title", communicationToUpdate.Title);
                     cmd.Parameters.AddWithValue("@type", communicationToUpdate.Type);
                     cmd.Parameters.AddWithValue("@description", communicationToUpdate.Description);

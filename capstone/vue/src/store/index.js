@@ -6,6 +6,8 @@ import plantService from "../services/PlantService.js";
 import sellerService from "../services/SellerService.js"
 import ratingService from "../services/RatingService.js"
 import eventService from "../services/EventService.js"
+import communicationService from "../services/CommunicationService.js"
+
 Vue.use(Vuex)
 
 /*
@@ -29,6 +31,8 @@ export default new Vuex.Store({
     sellers: [],
     ratings: [],
     futureEvents: [],
+    communications: [],
+    futureCommunications: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -47,7 +51,6 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-
     LOAD_PLANTS(state) {
       plantService.listPlants()
       .then( (response) => {
@@ -71,7 +74,6 @@ export default new Vuex.Store({
         }
       });
     },
-
     LOAD_SELLERS(state) {
       sellerService.listSellers()
       .then( (response) => {
@@ -95,7 +97,6 @@ export default new Vuex.Store({
         }
       });
     },
-
     LOAD_RATINGS(state, sellerId) {
       ratingService.listRatingsBySellerId(sellerId)
       .then( (response) => {
@@ -141,6 +142,53 @@ export default new Vuex.Store({
           console.log("Error loading events: make request")
         }
       });
-    }
+    },
+    LOAD_COMMUNICATIONS(state) {
+      console.log("Reached LOAD_COMMUNICATIONS");
+      communicationService.listCommunications()
+      .then( (response) => {
+        state.communications = response.data;
+      } )
+      .catch((error) => {
+        if (error.response) { 
+          // error.response exists
+          // Request was made, but response has error status (4xx or 5xx)
+          console.log("Error loading communications: ", error.response.status)
+        
+        } else if (error.request) { 
+          // There is no error.response, but error.request exists
+          // Request was made, but no response was received
+          console.log("Error loading communications: unable to communicate to server")
+      
+        } else { 
+          // Neither error.response and error.request exist
+          // Request was *not* made
+          console.log("Error loading communications: make request")
+        }
+      });
+    },    
+    LOAD_FUTURE_COMMUNICATIONS(state) {
+      communicationService.getFutureCommunications()
+      .then( (response) => {
+        state.futureCommunications = response.data;
+      } )
+      .catch((error) => {
+        if (error.response) { 
+          // error.response exists
+          // Request was made, but response has error status (4xx or 5xx)
+          console.log("Error loading communications: ", error.response.status)
+        
+        } else if (error.request) { 
+          // There is no error.response, but error.request exists
+          // Request was made, but no response was received
+          console.log("Error loading communications: unable to communicate to server")
+      
+        } else { 
+          // Neither error.response and error.request exist
+          // Request was *not* made
+          console.log("Error loading communications: make request")
+        }
+      });
+    },
   }
 })
