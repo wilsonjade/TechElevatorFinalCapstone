@@ -117,6 +117,25 @@ CREATE TABLE [ratings] (
 	CONSTRAINT [PK_communication_id] PRIMARY KEY (communication_id),
 	CONSTRAINT [FK_user_communication] FOREIGN KEY (user_id) REFERENCES [users](user_id),
 	)
+
+CREATE TABLE [tasks] (
+	task_id int IDENTITY(1,1) NOT NULL,
+	plant_id int NOT NULL,
+	task_description varchar(MAX),
+	task_catagory varchar(MAX),
+	freqauency_days int,
+	CONSTRAINT [PK_task_id] PRIMARY KEY (task_id),
+	CONSTRAINT [FK_plant_id2] FOREIGN KEY (plant_id) REFERENCES [plants](plant_id)
+		)
+
+CREATE TABLE [user_ack_task](
+user_id int NOT NULL,
+task_id int NOT NULL,
+last_ack date NOT NULL,
+CONSTRAINT [FK_user_id2] FOREIGN KEY (user_id) REFERENCES [users](user_id),
+CONSTRAINT [FK_task_id] FOREIGN KEY (task_id) REFERENCES [tasks](task_id),
+
+)
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role, expertise_level, first_name, last_name, email, region) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user', 1, 'Jade', 'Wilson', 'jade@gmail.com', 2);
 INSERT INTO users (username, password_hash, salt, user_role, expertise_level, first_name, last_name, email, region) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin', 2, 'Emily', 'Bates', 'emily@gmail.com', 3);
@@ -128,8 +147,8 @@ INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, sun, water, fertilizer, img_url) VALUES('Plantae', 'Zingiberales', 'Strelitziaceae', '', 'Strelitzia', 'S. reginia', 'Bird of Paradise', ' The leaves are evergreen and arranged in two ranks, making a fan-shaped crown. The flowers stand above the foliage at the tips of long stalks. The hard, beak-like sheath from which the flower emerges is termed the spathe.', 'partial-sun','daily','annually', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Bird_of_Paradise_flower.JPG/330px-Bird_of_Paradise_flower.JPG');
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, sun, water, fertilizer, img_url) VALUES('Plantae', 'Caryophyllales', 'Cactaceae', 'Cactoideae', 'Rhipsalidopsis', 'R. gaertneri', 'Spring Cactus', 'R. gaertneri grows on trees (epiphytic) or less often rocks (lithophytic) in sub-tropical rain forest. Together with the hybrid with R. rosea, Rhipsalidopsis × graeseri, it is known, in English speaking countries in the Northern Hemisphere, as Easter cactus or Whitsun cactus and is a widely cultivated ornamental plant.', 'full-sun','daily','biannually', 'https://upload.wikimedia.org/wikipedia/commons/c/c0/Hatiora_gaertneri.jpg');
 
-INSERT INTO events (user_id , address1 , city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, '123 Main St',  'Columbus', 'OH', '12345', 'www.website.com', 'Columbus Garden Tour', 'Visit local home gardens in Columbus', 'This is a long description. It is so long.  I love plants', 0, '2023-08-14 09:30:00', '2023-08-14 13:45:00')
-INSERT INTO events (user_id , website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, 'www.zoom.com/meeting123456', 'Green Morning America', 'Zoom chat for gardener talk', 'This is a long description. It is so long.  I love plants', 1, '2023-08-15 10:00:00', '2023-08-14 11:00:00')
+INSERT INTO events (user_id , address1 , city, state, zip, website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, '123 Main St',  'Columbus', 'OH', '12345', 'www.website.com', 'Columbus Garden Tour', 'Visit local home gardens in Columbus', 'This is a long description. It is so long.  I love plants', 0, '2023-08-17 09:30:00', '2023-08-17 13:45:00')
+INSERT INTO events (user_id , website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, 'www.zoom.com/meeting123456', 'Green Morning America', 'Zoom chat for gardener talk', 'This is a long description. It is so long.  I love plants', 1, '2023-08-15 10:00:00', '2023-08-16 11:00:00')
 --past
 INSERT INTO events (user_id , website, name, short_description, long_description, is_virtual, start_time, end_time) VALUES (2, 'www.pasteventtest.com/meeting123456', 'Green Morning America', 'Zoom chat for gardener talk', 'This is a long description. It is so long.  I love plants', 1, '2023-08-09 10:00:00', '2023-08-10 11:00:00')
 
@@ -160,11 +179,26 @@ INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 3, 'R
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 4, 'Rating 4', 5, 'This is a review also also also')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 5', 5, 'This is a review also also also also')
 
+<<<<<<< HEAD
 INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'challenge', 'This is a challenge for users to interact with!', 'Interact with this challenge in order to win a badge!', '2023-08-15 10:00:00', '2023-08-14 11:00:00');
 INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'competition', 'This is a competition for users to interact with!', 'Compete with other users in order to win a badge!', '2023-08-15 10:00:00', '2023-08-14 11:00:00');
 INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'poll', 'This is a poll for users to interact with!', 'Take this poll! The winner will win a badge!', '2023-08-15 10:00:00', '2023-08-14 11:00:00');
 INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'competition', 'Largest Virtual Garden', 'Add as many of your p', '2023-08-20 09:30:00', '2023-08-27 09:30:00');
 INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'challenge', 'This is a plant challenge!', 'Challenging plant owners to do something specific, in a certain amount of time!', '2023-08-20 09:30:00', '2023-08-27 09:30:00');
 INSERT INTO communications (user_id, type, title, description, start_time, end_time) VALUES (2, 'poll', 'What is the best houseplant for beginners?', 'Choose the best houseplant for beginners from our list!', '2023-08-20 09:30:00', '2023-08-27 09:30:00');
+=======
+--populate tasks table
+INSERT INTO tasks (plant_id, task_catagory, freqauency_days) VALUES (1, 'water', 1)
+INSERT INTO tasks (plant_id, task_catagory, freqauency_days) VALUES (1, 'fertilizer', 180)
+INSERT INTO tasks (plant_id, task_catagory, freqauency_days) VALUES (2, 'water', 7)
+INSERT INTO tasks (plant_id, task_catagory, freqauency_days) VALUES (2, 'fertilizer', 365)
+
+--populate user_ack_task table
+
+INSERT INTO user_ack_task(user_id, task_id, last_ack) VALUES (1, 1, '2023-08-13')
+INSERT INTO user_ack_task(user_id, task_id, last_ack) VALUES (1, 2, '2023-02-13')
+INSERT INTO user_ack_task(user_id, task_id, last_ack) VALUES (1, 3, '2023-08-03')
+INSERT INTO user_ack_task(user_id, task_id, last_ack) VALUES (1, 4, '2023-05-13')
+>>>>>>> 5c8ccb021ae779d06cc262c92f7f8b087f833345
 GO
 
