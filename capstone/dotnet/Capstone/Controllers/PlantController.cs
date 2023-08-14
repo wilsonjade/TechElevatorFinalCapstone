@@ -22,9 +22,9 @@ namespace Capstone.Controllers
             this.tasksDao = tasksDao;
 
         }
+
+
         [HttpGet]
-
-
         public ActionResult<List<Plant>> GetPlants()
         {
 
@@ -44,8 +44,8 @@ namespace Capstone.Controllers
             List<Plant> result = new List<Plant>();
 
             result = plantDao.GetPlantsByUserId(userId);
-          
-            if(result.Count > 0)
+
+            if (result.Count > 0)
             {
                 return Ok(result);
             }
@@ -53,28 +53,28 @@ namespace Capstone.Controllers
             {
                 return NotFound();
             }
-            
+
         }
 
-        [HttpPost("garden/")]
+        [HttpPost("garden")]
         //public ActionResult AddPantToVG( int plantId, int userId)
         public ActionResult AddPantToVG(PlantUserPair pair)
 
         {
-           
-            bool added = plantDao.AddPlantToVG(pair.PlantId, pair.UserId );
 
-                if(added == true)
-                {
-                    return Ok();
-                }
-                else
-                {
+            bool added = plantDao.AddPlantToVG(pair.PlantId, pair.UserId);
+
+            if (added == true)
+            {
+                return Ok();
+            }
+            else
+            {
                 return BadRequest();
-                }
+            }
         }
 
-        [HttpDelete("garden/")]
+        [HttpDelete("garden")] //todo needs to take in id
 
         public ActionResult DeletePlantFromGarden(PlantUserPair pair)
         {
@@ -89,12 +89,13 @@ namespace Capstone.Controllers
         //this section is for plant task reminders
         [HttpGet("tasks/{userId}")]
         public ActionResult<int[]> GetMyTaskReminders(int userId)
-        {
-            
+        {  
             List<Tasks> result = new List<Tasks>();
+
             result = tasksDao.GetMyTaskReminders(userId);
             
             return Ok(result);
+
         }
 
         [HttpPut("tasks/{userId}")]
@@ -104,6 +105,8 @@ namespace Capstone.Controllers
 
             return Ok();
         }
+
+       
 
 
     }
