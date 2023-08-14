@@ -1,5 +1,6 @@
 <template>
   <form v-on:submit.prevent="addRating" class="card">
+    <h1>New review form</h1>
       <div>
       <label for="title">Title: </label>
       <input type="text" name="title" id="rating-title" v-model="newRating.title">

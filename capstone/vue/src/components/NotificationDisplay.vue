@@ -3,8 +3,8 @@
     <div v-on:click="ackAlertEvent(alertEvent)" v-for="alertEvent in alertsEvents" v-bind:key="alertEvent" class="alert">
        <img src="../assets/checkicon.png" /> {{ alertEvent }} 
     </div>
-    <div v-on:click="ackAlertTask(alertTask.taskId)" v-for="alertTask in alertsTasks" v-bind:key="alertTask" class="alert">
-       <img src="../assets/checkicon.png" /> {{ alertTask.taskId }} {{alertTask.descr}}
+    <div v-on:click="ackAlertTask(alertTask.taskId)" v-for="alertTask in alertsTasks" v-bind:key="alertTask.taskId" class="alert">
+       <img src="../assets/checkicon.png" /> {{ alertTask.taskId }} {{alertTask.plantId}}{{alertTask.category}} {{alertTask.descr}}
     </div>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
     ackAlertTask(taskId){
       //todo PUT to server to acknowledge task user_ack_task object
       const now = new Date();
-      let ackObj = {"taskId": taskId, "UserId": this.$store.state.user.userId, "LastAck": now }
+      let ackObj = {"taskId": taskId, "userId": this.$store.state.user.userId, "lastAck": now }
       TaskService.ackTaskReminder(ackObj).then(
         this.getTaskAlerts() //refresh alerts
         )

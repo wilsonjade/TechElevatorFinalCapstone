@@ -5,7 +5,7 @@ export default {
         return axios.get(`/plant/tasks/${userId}`)
     },
     ackTaskReminder(ackObj){
-        return axios.put("/plant/tasks/",ackObj)
+        return axios.put(`/plant/tasks/${ackObj.userId}`,ackObj)
     }
     /*
     listSellers() {
