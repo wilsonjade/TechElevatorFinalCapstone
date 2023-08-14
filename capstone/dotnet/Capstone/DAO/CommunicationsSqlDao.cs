@@ -33,7 +33,7 @@ namespace Capstone.DAO
             "start_time=@start_time, end_time=@end_time " +
             "WHERE communication_id = @communication_id;";
 
-        private readonly string SqlDeleteCommunication = @"DELETE FROM communications WHERE communication_id = @communication_id;";
+        private readonly string SqlDeleteCommunication = "DELETE FROM communications WHERE communication_id = @communication_id;";
 
 
 
@@ -203,7 +203,6 @@ namespace Capstone.DAO
                 }
             }
         }
-
         private Communication MapRowToCommunications(SqlDataReader reader)
         {
             Communication communication = new Communication();
