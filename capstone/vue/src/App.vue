@@ -45,10 +45,6 @@ export default {
   font-size: 16px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    --text-primary: white;
-    --text-secondary: lightgray;
-    --bg-primary: blue;
-    --bg-secondary: aqua;
 }
 
 body {
@@ -63,10 +59,6 @@ body {
   padding: 0;
 
   color: #41304d;
-}
-
-h1 {
-  font-size: 1.2rem;
 }
 
 .card {
