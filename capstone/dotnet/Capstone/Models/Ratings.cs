@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using System.Globalization;
 
 namespace Capstone.Models
 {
@@ -11,9 +12,12 @@ namespace Capstone.Models
         public int Rating { get; set; }
         public string Review { get; set; }
 
+        public string FirstName { get; set; }
+
+        public string SellerName { get; set; }
         public Ratings() {}
 
-        public Ratings(int ratingId, int userId, int sellerId, string title, int rating, string review)
+        public Ratings(int ratingId, int userId, int sellerId, string title, int rating, string review, string firstName, string sellerName)
         {
             RatingId = ratingId;
             UserId = userId;
@@ -21,6 +25,9 @@ namespace Capstone.Models
             Title = title;
             Rating = rating;
             Review = review;
+
+            FirstName = firstName;
+            SellerName = sellerName;
         }
     }
 }

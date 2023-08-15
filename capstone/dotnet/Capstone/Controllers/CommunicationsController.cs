@@ -92,5 +92,14 @@ namespace Capstone.Controllers
             Communication added = communicationsDao.AddCommunication(newCommunication);
             return Created($"/communications/{added.CommunicationId}", added);
         }
+
+        // TODO - NEED METHOD TO POST USER'S POLL RESPONSE
+        //[HttpPost("/{type}/{id}")]
+        //[Authorize(Roles = "admin, user")]
+        //public ActionResult<Communication> AddPollResponse(Communication pollResponse)
+        //{
+        //    Communication pollResponse = communicationsDao.AddPollResponse(pollResponse);
+        //    return Created($"/communications/polls/{pollResponse.pollId}");
+        //}
     }
 }

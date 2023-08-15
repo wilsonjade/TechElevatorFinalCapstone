@@ -1,16 +1,12 @@
 <template>
-  <form v-on:submit.prevent="addCommunication" class="card">
-      <div>
-      <label for="title">Title: </label>
-      <input type="text" name="title" id="communication-title" v-model="newCommunication.title">
-      </div>
+  <form v-on:submit.prevent="addCommunication()" class="card">
       <div>
       <label for="type">Type: </label>
       <input type="text" name="type" id="communication-type" v-model="newCommunication.type">
       </div>
       <div>
-      <label for="description">Description: </label>
-      <textarea rows="4" cols="50" name="description" id="communication-description" v-model="newCommunication.description" />
+      <label for="title">Title: </label>
+      <input type="text" name="title" id="communication-title" v-model="newCommunication.title" placeholder="Type poll question here">
       </div>
       <div>
       <label for="start-time">Start Time: </label>
@@ -19,6 +15,29 @@
       <div>
       <label for="end-time">End Time: </label>
       <input type="datetime-local" name="end-time" id="communication-end-time" v-model="newCommunication.endTime" />
+      </div>
+
+
+      <div class="poll-form" v-show="newCommunication.type == 'poll'">
+        <p>Please enter poll options below:</p>
+        <div>
+          <label for="poll-option1">Option 1: </label>
+          <input type="text" name="type" v-model="newCommunication.pollOption1">
+        </div>
+        <div>
+          <label for="poll-option1">Option 2: </label>
+          <input type="text" name="type" v-model="newCommunication.pollOption2">
+        </div>
+        <div>
+          <label for="poll-option1">Option 3: </label>
+          <input type="text" name="type" v-model="newCommunication.pollOption3">
+        </div>
+        <div>
+          <label for="poll-option1">Option 4: </label>
+          <input type="text" name="type" v-model="newCommunication.pollOption4">
+        </div>
+
+
       </div>
 
 
@@ -36,7 +55,7 @@ export default {
                 communicationId: 0,
                 userId: this.$store.state.user.userId,
                 title: '',
-                type: '',
+                type: 'poll',
                 description: '',
                 startTime: '',
                 endTime: '',

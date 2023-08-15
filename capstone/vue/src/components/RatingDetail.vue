@@ -1,11 +1,10 @@
 <template>
   <section class="rating-detail card">
-    <h1>Title: {{ item.title }}</h1>
-    <p>Rating ID: {{ item.ratingId }}</p>
-    <p>User ID: {{ item.userId }}</p>
-    <p>Seller : {{ item.sellerId }}</p>
+    <p>Title: {{ item.title }}</p>
     <p>Rating: {{ item.rating }}</p>
+    <p>Retailer: {{ item.sellerName }}</p>
     <p>Review: {{ item.review }}</p>
+    <p>User: {{ item.firstName }}</p>
 
     <button v-if="isAdmin" v-on:click="deleteThisRating()">
       Delete Rating

@@ -33,6 +33,8 @@ export default new Vuex.Store({
     futureEvents: [],
     communications: [],
     futureCommunications: [],
+    polls: [],
+    
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -144,7 +146,6 @@ export default new Vuex.Store({
       });
     },
     LOAD_COMMUNICATIONS(state) {
-      console.log("Reached LOAD_COMMUNICATIONS");
       communicationService.listCommunications()
       .then( (response) => {
         state.communications = response.data;
@@ -190,5 +191,28 @@ export default new Vuex.Store({
         }
       });
     },
+    LOAD_POLLS(state) {
+      communicationService.listPolls()
+      .then( (response) => {
+        state.polls = response.data;
+      } )
+      .catch((error) => {
+        if (error.response) { 
+          // error.response exists
+          // Request was made, but response has error status (4xx or 5xx)
+          console.log("Error loading polls: ", error.response.status)
+        
+        } else if (error.request) { 
+          // There is no error.response, but error.request exists
+          // Request was made, but no response was received
+          console.log("Error loading polls: unable to communicate to server")
+      
+        } else { 
+          // Neither error.response and error.request exist
+          // Request was *not* made
+          console.log("Error loading polls: make request")
+        }
+      });
+    },    
   }
 })

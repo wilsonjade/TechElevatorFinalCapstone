@@ -105,6 +105,11 @@
         >
       </p>
     </form>
+
+     <section>
+ <img class="chart" src="../assets/plantingzones.jpg" />
+    </section>
+    
   </div>
 </template>
 
@@ -170,4 +175,12 @@ export default {
 label {
   margin-right: 0.5rem;
 }
+
+.chart {
+  max-width: 500%;
+  max-height: 550%;
+  
+}
+
+
 </style>
