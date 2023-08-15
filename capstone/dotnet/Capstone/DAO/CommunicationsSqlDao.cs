@@ -70,13 +70,13 @@ namespace Capstone.DAO
             }
             return communicationsList;
         }
-<<<<<<< HEAD
+
        
 
-=======
+
 
         [HttpGet("{type}")]
->>>>>>> 8338992ddf07fea422593c7993416452a876a259
+
         public List<Communication> GetCommunicationsByType(string type)
         {
             List<Communication> communicationsList = new List<Communication>();
@@ -158,18 +158,18 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToAdd.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToAdd.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToAdd.EndTime);
-<<<<<<< HEAD
+
 
 
                    
 
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 530399f521e678a1b02c7061ad193e8585920b00
 
 
->>>>>>> 8338992ddf07fea422593c7993416452a876a259
+
+
+
+
+
                     communicationToAdd.CommunicationId = (int)cmd.ExecuteNonQuery();
                 }
             }
@@ -189,18 +189,18 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToUpdate.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToUpdate.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToUpdate.EndTime);
-<<<<<<< HEAD
+
 
 
                 
 
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 530399f521e678a1b02c7061ad193e8585920b00
 
 
->>>>>>> 8338992ddf07fea422593c7993416452a876a259
+
+
+
+
+
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
                     {
@@ -245,16 +245,16 @@ namespace Capstone.DAO
             communication.Type = Convert.ToString(reader["type"]);
             communication.StartTime = Convert.ToDateTime(reader["start_time"]);
             communication.EndTime = Convert.ToDateTime(reader["end_time"]);
-<<<<<<< HEAD
+
          
 
 
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> 8338992ddf07fea422593c7993416452a876a259
->>>>>>> 530399f521e678a1b02c7061ad193e8585920b00
+
+
+
+
+
             return communication;
         }
 
