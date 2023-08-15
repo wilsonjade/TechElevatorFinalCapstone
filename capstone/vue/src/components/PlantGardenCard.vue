@@ -48,10 +48,13 @@ export default {
         },
         showTips(){
 
-        }
-    }
+        },
+    },
 }
 }
+
+
+
 </script>
 
 <style scoped>
