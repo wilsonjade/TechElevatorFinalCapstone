@@ -10,7 +10,7 @@
            <div class="tip water" ><img class="icon" src="../assets/watericon.png" />Water: {{thisPlant.water}}</div>
             <div class="tip fertilizer" >Fertilizer: {{thisPlant.fertilizer}}</div>
      </div>
-      <button v-on:click="remove()" id="remove">Remove from My Garden</button>
+      <button v-if="isMine" v-on:click="remove()" id="remove">Remove from My Garden</button>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
             tips: []
         }
     },
-    props: ["thisPlant"]
+    props: ["thisPlant","isMine"]
     ,
     methods: {
         remove(){

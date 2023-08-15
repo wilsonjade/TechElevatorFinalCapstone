@@ -35,7 +35,7 @@ export default {
       document.getElementById(alertEvent).classList.add("closealert");
       setTimeout(()=>{
       this.alertsEvents = this.alertsEvents.filter(e=> e != alertEvent) //update client list of alerts
-      },700)
+      },500)
       //todo PUT to server to acknowledge event 
       //refresh future events 
     },
@@ -148,7 +148,7 @@ div>img{
   border-radius: 30px;
   background-color: rgba(192, 211, 228, 0.308);
   border-color: rgb(131, 144, 155);
- /* animation-name: opencontainer;*/
+  animation-name: opencontainer;
   animation-duration: 4s;
 }
 .alert {
@@ -160,14 +160,14 @@ div>img{
   box-shadow: 2px 2px slategrey;
   border-radius: 10px;
   background-color: hwb(110 49% 4%);
- /*  animation-name: openalerts;*/
+  animation-name: openalerts;
   animation-duration: 6s;
 }
 .containertitle{
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 17pt;
   margin-left: auto; margin-right: auto;
- /* animation-name: openalerts;*/
+  animation-name: openalerts;
   animation-duration: 4s;
 }
 .closealert{

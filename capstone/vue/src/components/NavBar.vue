@@ -61,7 +61,7 @@
       <li class="nav-item">
         <router-link
           class="nav-link"
-          v-bind:to="{ name: 'virtualGardenView', params: { user: 'id' } }"
+          v-bind:to="{ name: 'virtualGardenView', params: { user: $store.state.user.userId } }"
         >
           <svg
             class="nav-icon"
