@@ -58,7 +58,7 @@ namespace Capstone.DAO
 
                 using (SqlCommand cmd = new SqlCommand(SqlGetRatingsBySellerId, conn))
                 {
-                    cmd.Parameters.AddWithValue("@sellers.seller_id", sellerId);
+                    cmd.Parameters.AddWithValue("@seller_id", sellerId);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -130,7 +130,8 @@ namespace Capstone.DAO
             rating.Title = Convert.ToString(reader["title"]);
             rating.Rating = Convert.ToInt32(reader["rating"]);
             rating.Review = Convert.ToString(reader["review"]);
-
+            rating.FirstName = Convert.ToString(reader["first_name"]);
+            rating.SellerName = Convert.ToString(reader["seller_name"]);
             return rating;
 
         }
