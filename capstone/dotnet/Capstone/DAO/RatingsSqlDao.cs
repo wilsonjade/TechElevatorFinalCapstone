@@ -11,7 +11,7 @@ namespace Capstone.DAO
         private readonly string SqlGetRatings = @"SELECT rating_id, user_id, seller_id, title, rating, review FROM ratings;";
 
 
-        private readonly string SqlGetRatingsBySellerId = @"SELECT username, first_name, rating_id, users.user_id, sellers.seller_id, title, rating, review, seller_name FROM users JOIN sellers ON users.user_id = sellers.seller_id JOIN ratings ON sellers.seller_id = ratings.rating_id WHERE sellers.seller_id = @sellers.seller_id;";
+        private readonly string SqlGetRatingsBySellerId = @"SELECT username, first_name, rating_id, users.user_id, sellers.seller_id, title, rating, review, seller_name FROM users JOIN sellers ON users.user_id = sellers.seller_id JOIN ratings ON sellers.seller_id = ratings.rating_id WHERE sellers.seller_id = @seller_id;";
 
 
         private readonly string SqlAddRatings = @"INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (@user_id, @seller_id, @title, @rating, @review);";
