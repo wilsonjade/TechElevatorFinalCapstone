@@ -56,6 +56,23 @@ namespace Capstone.Controllers
             }
 
         }
+        [HttpGet("gardens/")]
+        public ActionResult<List<int>> GetAllGardens()
+        {
+            List<int> result = new List<int>();
+
+            result = plantDao.GetAllGardens();
+
+            if (result.Count > 0)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
 
         [HttpPost("garden")]
         //public ActionResult AddPantToVG( int plantId, int userId)
