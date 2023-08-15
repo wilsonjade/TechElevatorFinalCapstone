@@ -1,18 +1,20 @@
 <template>
   <div v-bind:class="classes">
-    <div v-on:click="ackAlertEvent(alertEvent)" v-for="alertEvent in alertsEvents" v-bind:key="alertEvent" class="alert">
+    <span class="containertitle"> Notifications </span>
+    <div v-on:click="ackAlertEvent(alertEvent)" v-bind:id="alertEvent" v-for="alertEvent in alertsEvents" v-bind:key="alertEvent" class="alert">
        <img src="../assets/checkicon.png" /> {{ alertEvent }} 
     </div>
-    <div v-on:click="ackAlertTask(alertTask.taskId)" v-for="alertTask in alertsTasks" v-bind:key="alertTask.taskId" class="alert">
+    <div v-on:click="ackAlertTask(alertTask.taskId)" v-bind:id="alertTask.taskId" v-for="alertTask in alertsTasks" v-bind:key="alertTask.taskId" class="alert">
        <img src="../assets/checkicon.png" /> Reminder! It's time to give your {{name(alertTask.plantId)}} {{alertTask.taskCategory}}!
+       
     </div>
   </div>
 </template>
 
 <script>
- import eventService from "../services/EventService.js"
+import eventService from "../services/EventService.js"
 import PlantService from '../services/PlantService.js';
- import TaskService from "../services/TaskService.js"
+import TaskService from "../services/TaskService.js"
 
 export default {
   data() {
@@ -30,18 +32,22 @@ export default {
   name: "NotificationDisplay",
   methods: {
     ackAlertEvent(alertEvent){
-    
+      document.getElementById(alertEvent).classList.add("closealert");
+      setTimeout(()=>{
       this.alertsEvents = this.alertsEvents.filter(e=> e != alertEvent) //update client list of alerts
+      },700)
       //todo PUT to server to acknowledge event 
       //refresh future events 
     },
     ackAlertTask(taskId){
-      //todo PUT to server to acknowledge task user_ack_task object
+      document.getElementById(taskId).classList.add("closealert");
+     setTimeout(()=>{
+      
       const now = new Date();
       let ackObj = {"taskId": taskId, "userId": this.$store.state.user.userId, "lastAck": now }
       TaskService.ackTaskReminder(ackObj).then(
         this.getTaskAlerts() //refresh alerts
-        )
+    )},700)
       //this.alertsTasks = this.alertsTasks.filter(e=> e.taskId != taskId); //update client list of alerts
     },
     getTaskAlerts(){
@@ -136,10 +142,14 @@ div>img{
   justify-content: flex-start;
   flex-wrap: wrap;
   border-style: solid;
+  
   padding: 15px;
   box-shadow: 5px 10px darkslategray;
   border-radius: 30px;
-  background-color: steelblue;
+  background-color: rgba(192, 211, 228, 0.308);
+  border-color: rgb(131, 144, 155);
+ /* animation-name: opencontainer;*/
+  animation-duration: 4s;
 }
 .alert {
   min-width: 51%;
@@ -149,6 +159,44 @@ div>img{
   padding: 5px;
   box-shadow: 2px 2px slategrey;
   border-radius: 10px;
-  background-color: springgreen;
+  background-color: hwb(110 49% 4%);
+ /*  animation-name: openalerts;*/
+  animation-duration: 6s;
+}
+.containertitle{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 17pt;
+  margin-left: auto; margin-right: auto;
+ /* animation-name: openalerts;*/
+  animation-duration: 4s;
+}
+.closealert{
+  animation-name: closealert;
+  animation-duration: 2s;
+}
+
+@keyframes opencontainer {
+  0% {width:0; height: 75px;
+  }
+  50% {}
+  75% {height: 60%;}
+  100%{width: 45% ; height: auto;}
+}
+@keyframes openalerts {
+  0% {visibility: hidden;
+  display: none; max-height: 50px;
+      }
+  25% { visibility: hidden;
+  display: none;}
+  50% {visibility: hidden;
+  display: none;
+  }
+  75% {display: flex;max-height: 50px; }
+
+  100% {height: auto;}
+}
+@keyframes closealert {
+  from {opacity: 1}
+  to {opacity: 0}
 }
 </style>
