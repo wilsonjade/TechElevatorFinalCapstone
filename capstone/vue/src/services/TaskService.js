@@ -20,7 +20,7 @@ export default {
         return axios.delete(`/plant/${taskId}`);
     },
     addTask(task){
-        return axios.post("/plant/", task);
+        return axios.post("/plant/tasks/", task);
     },
     updateTask(taskId, taskToUpdate){
         return axios.put(`/plant/tasks/ad/${taskId}`,taskToUpdate)
