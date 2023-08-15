@@ -26,10 +26,10 @@ LEFT OUTER JOIN user_ack_task ON tasks.task_id = user_ack_task.task_id
 WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) > tasks.frequency_days OR user_ack_task.last_ack IS NULL) ;";  //v2.0
 
         private readonly string SqlAddTask = @"INSERT INTO tasks (plant_id, task_description, task_category, frequency_days)
-        VALUES (@plant_id, @task_description, @task_category, @frequency_days);";
+        VALUES (@plantId, @taskDescription, @taskCategory, @frequencyDays);";
         
 
-        private readonly string SqlUpdateTask = @"UPDATE tasks SET task_description=@taskDescription, task_ategory=@taskCategory, frequency_days=@frequencyDays, " +
+        private readonly string SqlUpdateTask = @"UPDATE tasks SET task_description=@taskDescription, task_category=@taskCategory, frequency_days=@frequencyDays " +
         "WHERE task_id = @taskId;";
         private readonly string SqlGetTasksByPlantId = @"SELECT [task_id],[plant_id],[task_description],[task_category],[frequency_days] FROM [final_capstone].[dbo].[tasks] WHERE plant_id = @plantId;";
 
@@ -245,11 +245,11 @@ WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) >
 
                 using (SqlCommand cmd = new SqlCommand(SqlAddTask, conn))
                 {
-
+                    cmd.Parameters.AddWithValue("@taskId", taskToAdd.TaskId);
                     cmd.Parameters.AddWithValue("@plantId", taskToAdd.PlantId);
-                    cmd.Parameters.AddWithValue("@task_description", taskToAdd.TaskDescription);
-                    cmd.Parameters.AddWithValue("@task_category", taskToAdd.TaskCategory);
-                    cmd.Parameters.AddWithValue("@frequency_days", taskToAdd.FrequencyDays);
+                    cmd.Parameters.AddWithValue("@taskDescription", taskToAdd.TaskDescription);
+                    cmd.Parameters.AddWithValue("@taskCategory", taskToAdd.TaskCategory);
+                    cmd.Parameters.AddWithValue("@frequencyDays", taskToAdd.FrequencyDays);
 
                     taskToAdd.TaskId = (int)cmd.ExecuteNonQuery();
                 }
@@ -267,10 +267,13 @@ WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) >
 
                 using (SqlCommand cmd = new SqlCommand(SqlUpdateTask, conn))
                 {
+
+
+                    cmd.Parameters.AddWithValue("@taskId", taskToUpdate.TaskId);
                     cmd.Parameters.AddWithValue("@plantId", taskToUpdate.PlantId);
-                    cmd.Parameters.AddWithValue("@task_description", taskToUpdate.TaskDescription);
-                    cmd.Parameters.AddWithValue("@task_category", taskToUpdate.TaskCategory);
-                    cmd.Parameters.AddWithValue("@frequency_days", taskToUpdate.FrequencyDays);
+                    cmd.Parameters.AddWithValue("@taskDescription", taskToUpdate.TaskDescription);
+                    cmd.Parameters.AddWithValue("@taskCategory", taskToUpdate.TaskCategory);
+                    cmd.Parameters.AddWithValue("@frequencyDays", taskToUpdate.FrequencyDays);
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
                     {

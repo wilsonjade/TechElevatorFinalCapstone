@@ -135,11 +135,11 @@ namespace Capstone.Controllers
 
         }
 
-        [HttpPut("{taskId}")]
+        [HttpPut("tasks/ad/{taskId}")]
 
-        public ActionResult<Events> UpdateTask(int id, Tasks taskToUpdate)
+        public ActionResult<Tasks> UpdateTask(int taskId, Tasks taskToUpdate)
         {
-            taskToUpdate.TaskId = id;
+            taskToUpdate.TaskId = taskId;
 
             try
             {
@@ -164,7 +164,7 @@ namespace Capstone.Controllers
             return NotFound();
         }
 
-        [HttpPost()]
+        [HttpPost("tasks")]
         public ActionResult<Tasks> AddTask(Tasks newTask)
         {
             Tasks added = tasksDao.AddTask(newTask);
