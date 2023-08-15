@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div
     id="plantcardcontainer"
     class="plantcardcontainer"
@@ -21,6 +22,20 @@
       <div class="tip fertilizer">Fertilizer: {{ thisPlant.fertilizer }}</div>
     </div>
     <button v-on:click="remove()" id="remove">Remove from My Garden</button>
+=======
+  <div id="plantcardcontainer" class="plantcardcontainer" v-on:hover="showTips()">
+      <h1 class="cardtitle"> {{thisPlant.commonName}}</h1>
+      <img id="cardimg" class="cardimg" v-bind:src="thisPlant.imgUrl" />
+      <div class="species"> {{thisPlant.species}}</div>
+      <div class="descr"> {{thisPlant.description}} </div>
+      <div class="tipcontainer">
+          <span> Care and Feeding </span>
+          <div class="tip sun" ><img class="icon" src="../assets/sunicon.png" /> Sun: {{thisPlant.sun}}</div>
+           <div class="tip water" ><img class="icon" src="../assets/watericon.png" />Water: {{thisPlant.water}}</div>
+            <div class="tip fertilizer" >Fertilizer: {{thisPlant.fertilizer}}</div>
+     </div>
+      <button v-if="isMine" v-on:click="remove()" id="remove">Remove from My Garden</button>
+>>>>>>> 2179d2e73c2759ed1fb866845dc451578c93056e
   </div>
 </template>
 
@@ -44,9 +59,29 @@ export default {
         }
       });
     },
+<<<<<<< HEAD
     showTips() {},
   },
 };
+=======
+    props: ["thisPlant","isMine"]
+    ,
+    methods: {
+        remove(){
+            PlantService.removeFromGarden({plantId: this.thisPlant.plantId, userId: this.$store.state.user.userId}).then(
+                response=> {
+                    if(response.status == 200){
+                        this.$router.go(0); //refresh page
+                    }
+                }
+            )
+        },
+        showTips(){
+
+        }
+    }
+}
+>>>>>>> 2179d2e73c2759ed1fb866845dc451578c93056e
 </script>
 
 <style scoped>
