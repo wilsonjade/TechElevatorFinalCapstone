@@ -21,6 +21,7 @@ import RatingsAdmin from '../components/RatingsAdmin.vue'
 import CommunicationsList from '../components/CommunicationsList.vue'
 import CommunicationsAdmin from '../components/CommunicationsAdmin.vue'
 import CommunityView from '../views/CommunityView.vue'
+import TaskAdmin from '../components/TaskAdmin.vue'
 
 Vue.use(Router)
 
@@ -203,6 +204,14 @@ const router = new Router({
       path: "/community",
       name: "communityView",
       component: CommunityView,
+      meta:{
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/plant/tasks",
+      name: "taskAdmin",
+      component: TaskAdmin,
       meta:{
         requiresAuth: true
       }
