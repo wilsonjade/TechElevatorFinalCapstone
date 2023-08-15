@@ -154,21 +154,6 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToAdd.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToAdd.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToAdd.EndTime);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-
-                   
-
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 530399f521e678a1b02c7061ad193e8585920b00
-
-
->>>>>>> 8338992ddf07fea422593c7993416452a876a259
->>>>>>> 2179d2e73c2759ed1fb866845dc451578c93056e
                     communicationToAdd.CommunicationId = (int)cmd.ExecuteNonQuery();
                 }
             }
@@ -188,21 +173,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToUpdate.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToUpdate.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToUpdate.EndTime);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 
-
-                
-
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 530399f521e678a1b02c7061ad193e8585920b00
-
-
->>>>>>> 8338992ddf07fea422593c7993416452a876a259
->>>>>>> 2179d2e73c2759ed1fb866845dc451578c93056e
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
                     {
@@ -247,19 +218,6 @@ namespace Capstone.DAO
             communication.Type = Convert.ToString(reader["type"]);
             communication.StartTime = Convert.ToDateTime(reader["start_time"]);
             communication.EndTime = Convert.ToDateTime(reader["end_time"]);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-         
-
-
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 8338992ddf07fea422593c7993416452a876a259
->>>>>>> 530399f521e678a1b02c7061ad193e8585920b00
->>>>>>> 2179d2e73c2759ed1fb866845dc451578c93056e
             return communication;
         }
 
