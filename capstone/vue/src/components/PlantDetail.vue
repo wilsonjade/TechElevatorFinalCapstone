@@ -10,6 +10,9 @@
     <p>Species: {{ plant.species }}</p>
     <p>Description: {{ plant.description }}</p>
     <section>
+      <p><router-link :to="{ name: 'taskAdmin' }">Edit and add task.</router-link></p>
+      </section>
+    <section>
       <img v-bind:src="plant.imgUrl" alt="a generic plant image"/>
     </section>
     <section>
@@ -23,6 +26,8 @@
 <script>
 
 import plantService from "../services/PlantService.js"
+
+
 
 export default {
   name: "plant",

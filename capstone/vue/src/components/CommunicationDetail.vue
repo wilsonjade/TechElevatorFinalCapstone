@@ -5,7 +5,7 @@
   >
     <h3>{{ item.title }}</h3>
 
-    <section class="poll-options" v-show="item.type == 'poll'">
+    <section class="poll-details" v-show="item.type == 'poll'">
       <div>
         <input type="radio" name="poll-item" id="poll-option1" />
         <label for="poll-option1">{{ item.pollOption1 }}</label>
@@ -25,11 +25,19 @@
         <input type="radio" name="poll-item" id="poll-option4" />
         <label for="poll-option4">{{ item.pollOption4 }}</label>
       </div>
+    <button>Submit your answer!</button>
     </section>
 
-    <button>Submit your answer!</button>
+    <section class="challenge-details" v-show="item.type == 'challenge'">
+      <button>Challenge Completed</button>
+    </section>
 
-    <button v-on:click="deleteCommunication()" v-show="isAdmin">Delete this {{ item.type }}</button>
+    <section class="competition-details" v-show="item.type == 'competition'">
+      <button>Join the Competition!</button>
+    </section>
+
+
+    <button v-on:click="deleteCommunication" v-show="isAdmin">Delete this {{ item.type }}</button>
   </form>
 </template>
 
