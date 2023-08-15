@@ -57,9 +57,9 @@ namespace Capstone.Controllers
 
         }
         [HttpGet("gardens/")]
-        public ActionResult<List<int>> GetAllGardens()
+        public ActionResult<List<Garden>> GetAllGardens()
         {
-            List<int> result = new List<int>();
+            List<Garden> result = new List<Garden>();
 
             result = plantDao.GetAllGardens();
 

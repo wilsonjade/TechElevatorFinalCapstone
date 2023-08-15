@@ -6,7 +6,7 @@ namespace Capstone.DAO
 {
     public interface IPlantDao
     {
-        public List<int> GetAllGardens();
+        public List<Garden> GetAllGardens();
         List<Plant> GetPlants();
 
         Plant GetPlantById(int plantId);
