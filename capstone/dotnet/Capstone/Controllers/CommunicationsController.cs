@@ -23,7 +23,7 @@ namespace Capstone.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult<List<Communication>> GetCommunications()
         {
             return Ok(communicationsDao.GetCommunications());
@@ -48,6 +48,12 @@ namespace Capstone.Controllers
         }
 
 
+        [HttpGet("type/{communicationType}")]
+        //[Authorize(Roles = "admin, user")]
+        public ActionResult<List<Communication>> GetCommunicationsByType(string communicationType)
+        {
+            return Ok(communicationsDao.GetCommunicationsByType(communicationType));
+        }
 
 
         [HttpPut("{id}")]
@@ -71,7 +77,7 @@ namespace Capstone.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult<Communication> DeleteCommunication(int id)
         {
             bool isDeleted = communicationsDao.DeleteCommunication(id);
@@ -86,14 +92,14 @@ namespace Capstone.Controllers
 
 
         [HttpPost()]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult<Communication> AddCommunication(Communication newCommunication)
         {
             Communication added = communicationsDao.AddCommunication(newCommunication);
             return Created($"/communications/{added.CommunicationId}", added);
         }
 
-        // TODO - NEED METHOD TO POST USER'S POLL RESPONSE
+        //TODO - NEED METHOD TO POST USER'S POLL RESPONSE
         //[HttpPost("/{type}/{id}")]
         //[Authorize(Roles = "admin, user")]
         //public ActionResult<Communication> AddPollResponse(Communication pollResponse)
