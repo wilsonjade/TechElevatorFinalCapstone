@@ -31,6 +31,7 @@ export default {
     this.$store.commit("LOAD_FUTURE_EVENTS");
     this.$store.commit("LOAD_COMMUNICATIONS");
     this.$store.commit("LOAD_FUTURE_COMMUNICATIONS");
+    this.$store.commit("LOAD_TASKS");
 
     
   },

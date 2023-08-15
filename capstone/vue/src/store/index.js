@@ -34,11 +34,8 @@ export default new Vuex.Store({
     futureEvents: [],
     communications: [],
     futureCommunications: [],
-<<<<<<< HEAD
-    tasks: [],
-=======
     polls: [],
->>>>>>> a84d9fb52ff6d55a17e45195ba22699bb352d0a0
+    tasks: [],
     
   },
   mutations: {
@@ -218,6 +215,29 @@ export default new Vuex.Store({
           console.log("Error loading polls: make request")
         }
       });
-    },    
+    }, 
+    LOAD_TASKS(state) {
+      taskService.listTasks()
+      .then( (response) => {
+        state.tasks = response.data;
+      } )
+      .catch((error) => {
+        if (error.response) { 
+          // error.response exists
+          // Request was made, but response has error status (4xx or 5xx)
+          console.log("Error loading tasks: ", error.response.status)
+        
+        } else if (error.request) { 
+          // There is no error.response, but error.request exists
+          // Request was made, but no response was received
+          console.log("Error loading tasks: unable to communicate to server")
+      
+        } else { 
+          // Neither error.response and error.request exist
+          // Request was *not* made
+          console.log("Error loading tasks: make request")
+        }
+      });
+    },       
   }
 })
