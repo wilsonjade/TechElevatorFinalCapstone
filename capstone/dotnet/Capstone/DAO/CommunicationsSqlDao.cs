@@ -33,6 +33,12 @@ namespace Capstone.DAO
             "start_time, end_time) VALUES (@user_id, " +
             "@title, @type, @start_time, @end_time);";
 
+        private readonly string SqlAddPollOption = "INSERT INTO poll_options (text) VALUES (@text);";
+
+        private readonly string SqlGetPollOptionsByPollId = "SELECT * FROM communications " +
+            "JOIN poll_options ON poll_options.poll_id = communication_id " +
+            "WHERE type = 'poll' AND poll_id = @poll_id;";
+
         private readonly string SqlUpdateCommunication = "UPDATE communications " +
             "SET user_id=@user_id, title=@title, type=@type, start_time=@start_time, " +
             "end_time=@end_time" +
@@ -46,7 +52,7 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
-        [HttpGet]
+        
         public List<Communication> GetCommunications()
         {
             List<Communication> communicationsList = new List<Communication>();
@@ -72,7 +78,7 @@ namespace Capstone.DAO
         }
 
 
-        [HttpGet("{type}")]
+        
         public List<Communication> GetCommunicationsByType(string type)
         {
             List<Communication> communicationsList = new List<Communication>();
@@ -160,6 +166,45 @@ namespace Capstone.DAO
             }
             return communicationToAdd;
         }
+
+        public List<PollOptions> GetPollOptionsByPollId(int id)
+        {
+            List<PollOptions> pollOptionsList = new List<PollOptions>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(SqlGetPollOptionsByPollId, conn))
+                {
+                    cmd.Parameters.AddWithValue("@poll_id", id);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PollOptions polloption = MapToPollOptions(reader);
+                            pollOptionsList.Add(polloption);
+                        }
+                    }
+                }
+            }
+            return pollOptionsList;
+
+        }
+        public PollOptions AddPollOption(PollOptions newPollOption)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(SqlAddPollOption, conn))
+                {
+                    cmd.Parameters.AddWithValue("@text", newPollOption.Text);
+                    newPollOption.OptionId = (int)cmd.ExecuteNonQuery();
+                }
+            }
+            return newPollOption;
+
+        }
         public Communication UpdateCommunication(Communication communicationToUpdate)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -230,8 +275,6 @@ namespace Capstone.DAO
             pollOption.PollId = Convert.ToInt32(reader["poll_id"]);
             pollOption.Text = Convert.ToString(reader["text"]);
             return pollOption;
-
-
         }
         private PollResponse MapToPollResponse(SqlDataReader reader)
         {

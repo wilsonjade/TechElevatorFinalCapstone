@@ -16,8 +16,8 @@ export default {
     createCommunication(newCommunication){        
         return axios.post("/communications/", newCommunication);
     },
-    createPoll(newPoll) {
-        return axios.post(`/communications/polls`, newPoll)
+    createPollOption(newPollOption) {
+        return axios.post(`/communications/polls`, newPollOption)
     },
     updateCommunication(communicationId, updatedCommunication){
         return axios.put(`/communications/${communicationId}`,updatedCommunication)

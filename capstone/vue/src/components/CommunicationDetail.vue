@@ -47,8 +47,7 @@ export default {
   name: "communicationsDetail",
   props: ["item"],
   methods: {
-    submitPollResponse() {},
-    
+    submitPollResponse() {},    
     deleteCommunication() {
       let wasSuccess = false;
       let errorMsg;
@@ -86,12 +85,11 @@ export default {
   data() {
     return {
       isAdmin: false,
-      currentCommunication: {},
+      pollOptions: [],
     };
   },
   created() {
     this.isAdmin = this.$store.state.user.role == "admin";
-    this.currentCommunication.title = this.item.title;
   },
 };
 </script>
