@@ -1,9 +1,11 @@
 ﻿using Capstone.Models;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using static Capstone.Models.Communication;
 
 namespace Capstone.DAO
 {
@@ -14,9 +16,8 @@ namespace Capstone.DAO
         private readonly string SqlGetAllCommunications = "SELECT communication_id, user_id, type, title, " +
             "start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4 FROM communications;";
 
-        private readonly string SqlGetCommunicationsByType = "SELECT communication_id, user_id, type, title, " +
-            "start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4 FROM communications " +
-            "WHERE type = @type;";
+        private readonly string SqlGetCommunicationsByType = @"SELECT * FROM communications JOIN poll_response ON poll_response.poll_id = communication_id " +
+            "WHERE type = 'poll' AND poll_id = @poll_id;";
 
         private readonly string SqlGetFutureCommunications = "SELECT communication_id, user_id, type, title, " +
             "start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4 FROM communications " +
@@ -69,7 +70,7 @@ namespace Capstone.DAO
             }
             return communicationsList;
         }
-       
+
         [HttpGet("{type}")]
         public List<Communication> GetCommunicationsByType(string type)
         {
@@ -152,7 +153,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToAdd.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToAdd.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToAdd.EndTime);
-                   
+
 
                     communicationToAdd.CommunicationId = (int)cmd.ExecuteNonQuery();
                 }
@@ -173,7 +174,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToUpdate.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToUpdate.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToUpdate.EndTime);
-                
+
 
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
@@ -219,9 +220,32 @@ namespace Capstone.DAO
             communication.Type = Convert.ToString(reader["type"]);
             communication.StartTime = Convert.ToDateTime(reader["start_time"]);
             communication.EndTime = Convert.ToDateTime(reader["end_time"]);
-         
+
 
             return communication;
         }
+
+        private PollOptions MapToPollOptions(SqlDataReader reader)
+        {
+            PollOptions pollOption = new PollOptions();
+            pollOption.OptionId = Convert.ToInt32(reader["option_id"]);
+            pollOption.PollId = Convert.ToInt32(reader["poll_id"]);
+            pollOption.Text = Convert.ToString(reader["text"]);
+            return pollOption;
+
+
+        }
+        private PollResponse MapToPollResponse(SqlDataReader reader)
+        {
+            PollResponse pollResponse = new PollResponse();
+            pollResponse.ResponseId = Convert.ToInt32(reader["poll_id"]);
+            pollResponse.UserId = Convert.ToInt32(reader["user_id"]);
+            pollResponse.PollId = Convert.ToInt32(reader["poll_id"]);
+            pollResponse.OptionId = Convert.ToInt32(reader["option_id"]);
+            pollResponse.SubmissionDate = Convert.ToDateTime(reader["submission_date"]);
+            return pollResponse;
+        }
+
+
     }
 }
