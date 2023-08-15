@@ -1,5 +1,5 @@
 <template>
-    <form class="communication-detail card poll">
+    <form v-on:submit.prevent="submitPollResponse()" class="communication-detail card poll">
       <h3>{{ item.title }}</h3>
       <div>
         <input type="radio" name="poll-item" id="poll-option1" />
@@ -29,6 +29,11 @@
 export default {
   name: "communicationsDetail",
   props: ["item"],
+  methods: {
+    submitPollResponse() {
+      
+    }
+  }
 };
 </script>
 

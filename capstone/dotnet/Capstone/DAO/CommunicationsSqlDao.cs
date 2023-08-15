@@ -14,28 +14,32 @@ namespace Capstone.DAO
         private readonly string connectionString;
 
         private readonly string SqlGetAllCommunications = "SELECT communication_id, user_id, type, title, " +
-            "start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4 FROM communications;";
+            "start_time, end_time FROM communications;";
 
+<<<<<<< HEAD
         private readonly string SqlGetCommunicationsByType = @"SELECT * FROM communications JOIN poll_response ON poll_response.poll_id = communication_id " +
             "WHERE type = 'poll' AND poll_id = @poll_id;";
+=======
+        private readonly string SqlGetCommunicationsByType = "SELECT communication_id, user_id, type, title, " +
+            "start_time, end_time FROM communications " +
+            "WHERE type = @type;";
+>>>>>>> a84d9fb52ff6d55a17e45195ba22699bb352d0a0
 
         private readonly string SqlGetFutureCommunications = "SELECT communication_id, user_id, type, title, " +
-            "start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4 FROM communications " +
+            "start_time, end_time FROM communications " +
             "WHERE start_time > GETDATE();";
 
         private readonly string SqlGetCommunicationById = "SELECT communication_id, user_id, type, title, " +
-            "start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4 FROM communications " +
+            "start_time, end_time FROM communications " +
             "WHERE communication_id = @communication_id;";
 
         private readonly string SqlAddCommunication = "INSERT INTO communications (user_id, title, type, " +
-            "start_time, end_time, poll_option1, poll_option2, poll_option3, poll_option4) VALUES (@user_id, " +
-            "@title, @type, @description, @start_time, @end_time, @poll_option1, @poll_option2, @poll_option3, " +
-            "@poll_option4);";
+            "start_time, end_time) VALUES (@user_id, " +
+            "@title, @type, @description, @start_time, @end_time);";
 
         private readonly string SqlUpdateCommunication = "UPDATE communications " +
             "SET user_id=@user_id, title=@title, type=@type, start_time=@start_time, " +
-            "end_time=@end_time, poll_option1=@poll_option1, poll_option2=@poll_option2, " +
-            "poll_option3=@poll_option3, poll_option4=@poll_option4" +
+            "end_time=@end_time" +
             "WHERE communication_id = @communication_id;";
 
         private readonly string SqlDeleteCommunication = "DELETE FROM communications WHERE communication_id = @communication_id;";
@@ -153,7 +157,14 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToAdd.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToAdd.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToAdd.EndTime);
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+                   
+>>>>>>> a909d2e4ecc1a6238f7d28229d3b4bc53ec0f6c8
+>>>>>>> a84d9fb52ff6d55a17e45195ba22699bb352d0a0
 
                     communicationToAdd.CommunicationId = (int)cmd.ExecuteNonQuery();
                 }
@@ -174,7 +185,14 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToUpdate.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToUpdate.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToUpdate.EndTime);
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+                
+>>>>>>> a909d2e4ecc1a6238f7d28229d3b4bc53ec0f6c8
+>>>>>>> a84d9fb52ff6d55a17e45195ba22699bb352d0a0
 
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
@@ -220,8 +238,15 @@ namespace Capstone.DAO
             communication.Type = Convert.ToString(reader["type"]);
             communication.StartTime = Convert.ToDateTime(reader["start_time"]);
             communication.EndTime = Convert.ToDateTime(reader["end_time"]);
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+         
+>>>>>>> a84d9fb52ff6d55a17e45195ba22699bb352d0a0
 
+>>>>>>> a909d2e4ecc1a6238f7d28229d3b4bc53ec0f6c8
             return communication;
         }
 
