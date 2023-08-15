@@ -34,7 +34,7 @@ export default new Vuex.Store({
     futureEvents: [],
     communications: [],
     futureCommunications: [],
-    polls: [],
+    pollOptions: [],
     tasks: [],
     
   },
@@ -193,10 +193,11 @@ export default new Vuex.Store({
         }
       });
     },
-    LOAD_POLLS(state) {
-      communicationService.listPolls()
+    LOAD_POLL_OPTIONS(state, pollId) {
+      console.log("Reached LOAD_POLL_OPTIONS, pollId: " + pollId)
+      communicationService.getPollOptionsByPollId(pollId)
       .then( (response) => {
-        state.polls = response.data;
+        state.pollOptions = response.data;
       } )
       .catch((error) => {
         if (error.response) { 

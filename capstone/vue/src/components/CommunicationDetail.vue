@@ -8,22 +8,22 @@
     <section class="poll-details" v-show="item.type == 'poll'">
       <div>
         <input type="radio" name="poll-item" id="poll-option1" />
-        <label for="poll-option1">{{ item.pollOption1 }}</label>
+        <label for="poll-option1">{{ pollOptions[0].text }}</label>
       </div>
 
       <div>
         <input type="radio" name="poll-item" id="poll-option2" />
-        <label for="poll-option2">{{ item.pollOption2 }}</label>
+        <label for="poll-option2">{{ pollOptions[1].text }}</label>
       </div>
 
       <div>
         <input type="radio" name="poll-item" id="poll-option3" />
-        <label for="poll-option3">{{ item.pollOption3 }}</label>
+        <label for="poll-option3">{{ pollOptions[2].text }}</label>
       </div>
 
       <div>
         <input type="radio" name="poll-item" id="poll-option4" />
-        <label for="poll-option4">{{ item.pollOption4 }}</label>
+        <label for="poll-option4">{{ pollOptions[3].text }}</label>
       </div>
     <button>Submit your answer!</button>
     </section>
@@ -85,11 +85,17 @@ export default {
   data() {
     return {
       isAdmin: false,
-      pollOptions: [],
+      pollId: this.item.communicationId,
     };
+  },
+  computed: {
+    pollOptions() {
+      return this.$store.state.pollOptions;
+    }
   },
   created() {
     this.isAdmin = this.$store.state.user.role == "admin";
+    this.$store.commit("LOAD_POLL_OPTIONS", this.item.communicationId);
   },
 };
 </script>
