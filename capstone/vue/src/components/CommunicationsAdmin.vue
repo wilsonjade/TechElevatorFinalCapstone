@@ -2,11 +2,15 @@
   <form v-on:submit.prevent="addCommunication()" class="card">
       <div>
       <label for="type">Type: </label>
-      <input type="text" name="type" id="communication-type" v-model="newCommunication.type">
+      <select name="type" id="communication-type" v-model="newCommunication.type" required>
+        <option value="poll">Poll</option>
+        <option value="competition">Competition</option>
+        <option value="challenge">Challenge</option>
+      </select>
       </div>
       <div>
       <label for="title">Title: </label>
-      <input type="text" name="title" id="communication-title" v-model="newCommunication.title" placeholder="Type poll question here">
+      <input type="text" name="title" id="communication-title" v-model="newCommunication.title">
       </div>
       <div>
       <label for="start-time">Start Time: </label>
@@ -22,19 +26,19 @@
         <p>Please enter poll options below:</p>
         <div>
           <label for="poll-option1">Option 1: </label>
-          <input type="text" name="type" v-model="newCommunication.pollOption1">
+          <input type="text" name="type" v-model="newPollOption1.text">
         </div>
         <div>
           <label for="poll-option1">Option 2: </label>
-          <input type="text" name="type" v-model="newCommunication.pollOption2">
+          <input type="text" name="type" v-model="newPollOption2.text">
         </div>
         <div>
           <label for="poll-option1">Option 3: </label>
-          <input type="text" name="type" v-model="newCommunication.pollOption3">
+          <input type="text" name="type" v-model="newPollOption3.text">
         </div>
         <div>
           <label for="poll-option1">Option 4: </label>
-          <input type="text" name="type" v-model="newCommunication.pollOption4">
+          <input type="text" name="type" v-model="newPollOption4.text">
         </div>
 
 
@@ -60,13 +64,32 @@ export default {
                 startTime: '',
                 endTime: '',
             },
+            newPollOption1: {
+              pollId: 0,
+              userId: this.$store.state.user.userId,
+              text: '',
+            },
+            newPollOption2: {
+              pollId: 0,
+              userId: this.$store.state.user.userId,
+              text: '',
+            },
+            newPollOption3: {
+              pollId: 0,
+              userId: this.$store.state.user.userId,
+              text: '',
+            },
+            newPollOption4: {
+              pollId: 0,
+              userId: this.$store.state.user.userId,
+              text: '',
+            },
         }
     },
     computed: {
     },
     methods: {
         addCommunication() {
-          console.log("reached communicationsAdmin --> addCommunication()")
             CommunicationService.createCommunication(this.newCommunication)
             .then( () => {
                 this.$store.commit("LOAD_COMMUNICATIONS");
@@ -86,9 +109,29 @@ export default {
             // Request was *not* made
             console.log("Error updating communications: error making request");
           }
+    
         });
+        
+        
+          if (this.newPollOption1.text != '') {
+            this.addPollOptions();
+          }
 
-        }
+          },
+          addPollOptions() {
+            if (this.newPollOption1 != '') {
+            CommunicationService.createPollOption(this.newCommunication.communicationId, this.newPollOption1);
+            }
+            if (this.newPollOption2 != '') {
+            CommunicationService.createPollOption(this.newCommunication.communicationId, this.newPollOption2);
+            }
+            if (this.newPollOption3 != '') {
+            CommunicationService.createPollOption(this.newCommunication.communicationId, this.newPollOption3);
+            }
+            if (this.newPollOption4 != '') {
+            CommunicationService.createPollOption(this.newCommunication.communicationId, this.newPollOption4);
+            }
+          }
     }
 
 }
