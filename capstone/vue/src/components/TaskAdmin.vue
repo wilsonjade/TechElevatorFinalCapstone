@@ -2,11 +2,11 @@
   <form v-on:submit.prevent="submitForm()">
       <div>
       <label for="taskId">Task Id:</label>
-      <input v-model="formData.taskId" type="number" id="name"  />
+      <input v-model.number="formData.taskId" type="number" id="name"  />
     </div>
     <div>
       <label for="plantId">Plant Id:</label>
-      <input v-model="formData.plantId" v-bind:placeholder="plantId"  type="number" id="plantId"  />
+      <input v-model.number="formData.plantId" v-bind:placeholder="plantId"  type="number" id="plantId"  />
     </div>
     <div>
       <label for="taskDescription">Description:</label>
@@ -18,7 +18,7 @@
     </div>
     <div>
       <label for="frequencyDays">Frequency in Days:</label>
-      <input v-model="formData.frequencyDays" type="number" id="frequencyDays"  />
+      <input v-model.number="formData.frequencyDays" type="number" id="frequencyDays"  />
     </div>
    
     <button type="submit">Submit</button>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import TaskService from '../services/TaskService';
+import taskService from '../services/TaskService';
 export default {
     name: 'taskAdmin',
   data() {
@@ -53,7 +53,7 @@ export default {
         // this.formData.userid = this.userid //set userId
 
         
-        TaskService.addTask(this.formData).then(response=> {
+        taskService.addTask(this.formData).then(response=> {
         alert(response.status == 201 ? "Task created successfully" : response.status)
           this.$router.push({name: "searchView"});} //refresh view
         ).catch((error)=>{
@@ -62,7 +62,7 @@ export default {
         );
       }else{
       //if id != 0 , call PUT
-      TaskService.updateTask(this.formData.taskId,this.formData).then(
+      taskService.updateTask(this.formData.taskId,this.formData).then(
           response=> {if(response.status == 200){alert("Update successful")}
           
           this.$router.push({name: "searchView"}); //refresh view
@@ -109,7 +109,7 @@ export default {
      this.isAdmin = this.$store.state.user.role == "admin";
     //call database for valid list of seller IDs
     if (this.$route.params.plantId) {
-      TaskService.getTasksByPlantId(this.$route.params.plantId).then(
+      taskService.getTasksByPlantId(this.$route.params.plantId).then(
         (response) => {
           this.filteredTasksByPlant = response.data;
         }
