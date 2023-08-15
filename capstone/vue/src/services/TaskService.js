@@ -6,6 +6,9 @@ export default {
     },
     ackTaskReminder(ackObj){
         return axios.put(`/plant/tasks/${ackObj.userId}`,ackObj)
-    }
+    },
+    listTasks() {
+        return axios.get("/tasks/ad");
+    },
     
 }

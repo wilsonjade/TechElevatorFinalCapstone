@@ -113,6 +113,13 @@ namespace Capstone.Controllers
             }
         }
 
+        [HttpGet("tasks/ad")]
+        public ActionResult<List<Tasks>> GetTasks()
+        {
+            return Ok(tasksDao.GetTasks());
+
+        }
+
         [HttpGet("tasks/ad/{taskId}")]
         public ActionResult<Tasks> GetTasksById(int taskId)
         {
