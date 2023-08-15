@@ -58,7 +58,11 @@ body {
   margin: 0;
   padding: 0;
 
-  color: #41304d;
+  color: #22311d;
+}
+
+a {
+  color: #22311d;
 }
 
 .card {
@@ -88,66 +92,6 @@ section.container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-#nav {
-  width: 5rem;
-  height: 100vh;
-  position: fixed;
-  background-color: #a9d3a9;
-  transition: width 200ms ease;
-  z-index: 10;
-}
-
-#nav:hover {
-  width: 16rem;
-}
-
-#nav:hover .link-text {
-  display: block;
-}
-
-ul.navbar-nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-li.nav-item {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  height: 5rem;
-  color: #41304d;
-  text-decoration: none;
-}
-
-.link-text {
-  display: none;
-  margin-left: 1rem;
-}
-
-.nav-link svg {
-  min-width: 2rem;
-  margin: 0 1.5 rem;
-}
-
-svg.nav-icon {
-  fill: #41304d;
-  font-size: 1.5rem;
-}
-
-svg.nav-icon:hover {
-  fill: white;
 }
 
 #main {
