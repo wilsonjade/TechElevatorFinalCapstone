@@ -152,10 +152,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToAdd.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToAdd.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToAdd.EndTime);
-                    cmd.Parameters.AddWithValue("@poll_option1", communicationToAdd.PollOption1);
-                    cmd.Parameters.AddWithValue("@poll_option2", communicationToAdd.PollOption2);
-                    cmd.Parameters.AddWithValue("@poll_option3", communicationToAdd.PollOption3);
-                    cmd.Parameters.AddWithValue("@poll_option4", communicationToAdd.PollOption4);
+                   
 
                     communicationToAdd.CommunicationId = (int)cmd.ExecuteNonQuery();
                 }
@@ -176,10 +173,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToUpdate.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToUpdate.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToUpdate.EndTime);
-                    cmd.Parameters.AddWithValue("@poll_option1", communicationToUpdate.PollOption1);
-                    cmd.Parameters.AddWithValue("@poll_option2", communicationToUpdate.PollOption2);
-                    cmd.Parameters.AddWithValue("@poll_option3", communicationToUpdate.PollOption3);
-                    cmd.Parameters.AddWithValue("@poll_option4", communicationToUpdate.PollOption4);
+                
 
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
@@ -221,15 +215,11 @@ namespace Capstone.DAO
             Communication communication = new Communication();
             communication.CommunicationId = Convert.ToInt32(reader["communication_id"]);
             communication.UserId = Convert.ToInt32(reader["user_id"]);
-
             communication.Title = Convert.ToString(reader["title"]);
             communication.Type = Convert.ToString(reader["type"]);
             communication.StartTime = Convert.ToDateTime(reader["start_time"]);
             communication.EndTime = Convert.ToDateTime(reader["end_time"]);
-            communication.PollOption1 = Convert.ToString(reader["poll_option1"]);
-            communication.PollOption2 = Convert.ToString(reader["poll_option2"]);
-            communication.PollOption3 = Convert.ToString(reader["poll_option3"]);
-            communication.PollOption4 = Convert.ToString(reader["poll_option4"]);
+         
 
             return communication;
         }
