@@ -41,7 +41,11 @@ export default {
         if(response.status == 200){
         this.$router.push({name: "virtualGardenView"}) }
       }
-      ).catch(error=> alert("there was an error " + error.message))
+      ).catch(error=> {
+        console.log(error.message)
+        this.$router.push({name: "virtualGardenView"})
+      
+      })
       
     }
   },

@@ -13,18 +13,25 @@ namespace Capstone.DAO
 
         private readonly string SqlGetTasksById = @"SELECT [task_id],[plant_id],[task_description],[task_category],[frequency_days] FROM [final_capstone].[dbo].[tasks] WHERE task_id = @taskId;";
         private readonly string SqlDeleteTask = @"DELETE tasks WHERE task_id = @task_id;";
-        private readonly string sqlGetMyTaskReminders = @"SELECT tasks.task_id, tasks.plant_id, tasks.task_category, tasks.task_description, tasks.frequency_days FROM tasks
-                                                        JOIN virtual_garden ON virtual_garden.plant_id = tasks.plant_id
-                                                        JOIN plants ON plants.plant_id = tasks.plant_id
-                                                        JOIN user_ack_task ON user_ack_task.task_id = tasks.task_id
-                                                        WHERE virtual_garden.user_id = @user_id AND user_ack_task.user_id = @user_id AND DAY(GETDATE() - user_ack_task.last_ack) > tasks.frequency_days  ;";
-        private readonly string SqlAddTask = @"INSERT INTO tasks (plant_id, task_description, task_category, frequency_days)
-        VALUES (@plant_id, @task_description, @task_category, @frequency_days);";
-        //        private readonly string SqlGetFutureEvents = @"SELECT [event_id],[user_id],[address1],[address2],[city],[state],[zip],[website],[name],[short_description]
-        //      ,[long_description],[is_virtual],[start_time],[end_time] FROM [final_capstone].[dbo].[events]  WHERE start_time > GETDATE();";
+        /* v1.0  private readonly string sqlGetMyTaskReminders = @"SELECT tasks.task_id, tasks.plant_id, tasks.task_category, tasks.task_description, tasks.frequency_days FROM tasks
+                                                          JOIN virtual_garden ON virtual_garden.plant_id = tasks.plant_id
+                                                          JOIN plants ON plants.plant_id = tasks.plant_id
+                                                          JOIN user_ack_task ON user_ack_task.task_id = tasks.task_id
+                                                          WHERE virtual_garden.user_id = @user_id AND user_ack_task.user_id = @user_id AND DAY(GETDATE() - user_ack_task.last_ack) > tasks.frequency_days  ;"; */
 
-        private readonly string SqlUpdateTask = @"UPDATE tasks SET task_description=@taskDescription, task_ategory=@taskCategory, frequency_days=@frequencyDays, " +
+        private readonly string sqlGetMyTaskReminders = @"SELECT tasks.task_id, tasks.plant_id, tasks.task_category, tasks.task_description, tasks.frequency_days 
+FROM tasks
+LEFT OUTER JOIN virtual_garden ON virtual_garden.plant_id = tasks.plant_id
+LEFT OUTER JOIN user_ack_task ON tasks.task_id = user_ack_task.task_id
+WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) > tasks.frequency_days OR user_ack_task.last_ack IS NULL) ;";  //v2.0
+
+        private readonly string SqlAddTask = @"INSERT INTO tasks (plant_id, task_description, task_category, frequency_days)
+        VALUES (@plantId, @taskDescription, @taskCategory, @frequencyDays);";
+        
+
+        private readonly string SqlUpdateTask = @"UPDATE tasks SET task_description=@taskDescription, task_category=@taskCategory, frequency_days=@frequencyDays " +
         "WHERE task_id = @taskId;";
+        private readonly string SqlGetTasksByPlantId = @"SELECT [task_id],[plant_id],[task_description],[task_category],[frequency_days] FROM [final_capstone].[dbo].[tasks] WHERE plant_id = @plantId;";
 
 
 
@@ -85,7 +92,7 @@ namespace Capstone.DAO
             return taskList;
         }
 
-        public Tasks GetTasksById(int id)
+        public Tasks GetTasksById(int taskId)
         {
             Tasks tasks = new Tasks();
 
@@ -95,7 +102,7 @@ namespace Capstone.DAO
 
                 using (SqlCommand cmd = new SqlCommand(SqlGetTasksById, conn))
                 {
-                    cmd.Parameters.AddWithValue("@taskId", id);
+                    cmd.Parameters.AddWithValue("@taskId", taskId);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -107,6 +114,32 @@ namespace Capstone.DAO
             }
             return tasks;
         }
+
+        public List<Tasks> GetTasksByPlantId(int plantId)
+        {
+            List<Tasks> taskList = new List<Tasks>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(SqlGetTasksByPlantId, conn))
+                {
+                    cmd.Parameters.AddWithValue("@plantId", plantId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Tasks tasks = new Tasks();
+                            tasks = MapRowToTasks(reader);
+                            taskList.Add(tasks);
+                        }
+                    }
+                }
+            }
+            return taskList;
+        }
+
         public bool DeleteTask(int taskId)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -132,9 +165,7 @@ namespace Capstone.DAO
 
         public int UpdateTaskAck(TasksAck ack)
         {
-            string sqlUpdateTaskAck = @"UPDATE user_ack_task 
-                                        SET last_ack = GETDATE()
-                                        WHERE user_ack_task.user_id = @user_id AND user_ack_task.task_id = @task_id;";
+            string sqlUpdateTaskAck = @"UPDATE user_ack_task SET last_ack = GETDATE() WHERE user_ack_task.user_id = @user_id AND user_ack_task.task_id = @task_id;";
             string sqlCreateTaskAck = @"INSERT INTO user_ack_task (user_id, task_id, last_ack) VALUES (@user_id, @task_id, GETDATE());";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -146,17 +177,11 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@task_id", ack.TaskId);
 
 
-                    int count = cmd.ExecuteNonQuery();
+                    int count = (int)cmd.ExecuteNonQuery();
                     if (count == 0)
                     {
-                        using (SqlCommand cmdInsert = new SqlCommand(sqlCreateTaskAck, conn))
-                        {
-                            //insert row if update not completed
-                            cmd.Parameters.AddWithValue("@user_id", ack.UserId);
-                            cmd.Parameters.AddWithValue("@task_id", ack.TaskId);
-                            int countAdded = cmd.ExecuteNonQuery();
-                            return countAdded;
-                        }
+                        int countAdded = CreateTaskAck(ack);
+                        return countAdded;
                     }
                     else
                     {
@@ -167,6 +192,26 @@ namespace Capstone.DAO
             }
 
 
+        }
+
+        public int CreateTaskAck(TasksAck ack)
+        {
+            string sqlCreateTaskAck = @"INSERT INTO user_ack_task (user_id, task_id, last_ack) VALUES (@user_id, @task_id, GETDATE());";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sqlCreateTaskAck, conn))
+                {
+                    cmd.Parameters.AddWithValue("@user_id", ack.UserId);
+                    cmd.Parameters.AddWithValue("@task_id", ack.TaskId);
+
+                    int count = (int)cmd.ExecuteNonQuery();
+                    return count;
+                    
+
+                }
+            }
         }
         //public List<Events> GetFutureEvents()
         //{
@@ -200,11 +245,11 @@ namespace Capstone.DAO
 
                 using (SqlCommand cmd = new SqlCommand(SqlAddTask, conn))
                 {
-
+                    cmd.Parameters.AddWithValue("@taskId", taskToAdd.TaskId);
                     cmd.Parameters.AddWithValue("@plantId", taskToAdd.PlantId);
-                    cmd.Parameters.AddWithValue("@task_description", taskToAdd.TaskDescription);
-                    cmd.Parameters.AddWithValue("@task_category", taskToAdd.TaskCategory);
-                    cmd.Parameters.AddWithValue("@frequency_days", taskToAdd.FrequencyDays);
+                    cmd.Parameters.AddWithValue("@taskDescription", taskToAdd.TaskDescription);
+                    cmd.Parameters.AddWithValue("@taskCategory", taskToAdd.TaskCategory);
+                    cmd.Parameters.AddWithValue("@frequencyDays", taskToAdd.FrequencyDays);
 
                     taskToAdd.TaskId = (int)cmd.ExecuteNonQuery();
                 }
@@ -222,10 +267,13 @@ namespace Capstone.DAO
 
                 using (SqlCommand cmd = new SqlCommand(SqlUpdateTask, conn))
                 {
+
+
+                    cmd.Parameters.AddWithValue("@taskId", taskToUpdate.TaskId);
                     cmd.Parameters.AddWithValue("@plantId", taskToUpdate.PlantId);
-                    cmd.Parameters.AddWithValue("@task_description", taskToUpdate.TaskDescription);
-                    cmd.Parameters.AddWithValue("@task_category", taskToUpdate.TaskCategory);
-                    cmd.Parameters.AddWithValue("@frequency_days", taskToUpdate.FrequencyDays);
+                    cmd.Parameters.AddWithValue("@taskDescription", taskToUpdate.TaskDescription);
+                    cmd.Parameters.AddWithValue("@taskCategory", taskToUpdate.TaskCategory);
+                    cmd.Parameters.AddWithValue("@frequencyDays", taskToUpdate.FrequencyDays);
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
                     {

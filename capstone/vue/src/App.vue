@@ -29,6 +29,10 @@ export default {
     this.$store.commit("LOAD_PLANTS");
     this.$store.commit("LOAD_SELLERS");
     this.$store.commit("LOAD_FUTURE_EVENTS");
+    this.$store.commit("LOAD_COMMUNICATIONS");
+    this.$store.commit("LOAD_FUTURE_COMMUNICATIONS");
+
+    
   },
 };
 </script>
@@ -41,10 +45,6 @@ export default {
   font-size: 16px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    --text-primary: white;
-    --text-secondary: lightgray;
-    --bg-primary: blue;
-    --bg-secondary: aqua;
 }
 
 body {
@@ -59,10 +59,6 @@ body {
   padding: 0;
 
   color: #41304d;
-}
-
-h1 {
-  font-size: 1.2rem;
 }
 
 .card {

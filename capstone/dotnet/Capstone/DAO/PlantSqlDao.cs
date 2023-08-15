@@ -136,10 +136,19 @@ namespace Capstone.DAO
                 {
                     cmd.Parameters.AddWithValue("@plant_id", plantId);
                     cmd.Parameters.AddWithValue("@user_id", userId);
-                   
+
 
                     //SqlCommand testcmd = new SqlCommand();
-                    plantId = (int)cmd.ExecuteNonQuery(); 
+                    try
+                    {
+                        plantId = (int)cmd.ExecuteNonQuery(); 
+
+                    }
+                    catch (SqlException)
+                    {
+                        return false;
+                        
+                    }
                     
                     return true;
                 }

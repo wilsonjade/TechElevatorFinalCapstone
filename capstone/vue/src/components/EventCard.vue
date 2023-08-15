@@ -6,7 +6,7 @@
      
     </section>
     <section>
-      <event-detail v-bind:item="item" v-bind:display="display"/>
+      <event-detail v-bind:item="item" />
     </section>
   </div>
 </template>

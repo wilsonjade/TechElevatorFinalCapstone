@@ -4,13 +4,14 @@
        <img src="../assets/checkicon.png" /> {{ alertEvent }} 
     </div>
     <div v-on:click="ackAlertTask(alertTask.taskId)" v-for="alertTask in alertsTasks" v-bind:key="alertTask.taskId" class="alert">
-       <img src="../assets/checkicon.png" /> {{ alertTask.taskId }} {{alertTask.plantId}}{{alertTask.category}} {{alertTask.descr}}
+       <img src="../assets/checkicon.png" /> Reminder! It's time to give your {{name(alertTask.plantId)}} {{alertTask.taskCategory}}!
     </div>
   </div>
 </template>
 
 <script>
  import eventService from "../services/EventService.js"
+import PlantService from '../services/PlantService.js';
  import TaskService from "../services/TaskService.js"
 
 export default {
@@ -18,9 +19,11 @@ export default {
     return {
       alertsEvents : []
       ,
-      alertsTasks: [{taskId: 1, descr: "test1"},{taskId: 2, descr: "test2"},{taskId: 3, descr: "test3"}]
+      alertsTasks: []
       ,
       futureEvents: []
+      ,
+      myGarden: []
     };
 
   },
@@ -42,8 +45,16 @@ export default {
       //this.alertsTasks = this.alertsTasks.filter(e=> e.taskId != taskId); //update client list of alerts
     },
     getTaskAlerts(){
-      TaskService.getTaskRemindersByUser(this.$store.state.user.userId).then(response=>
-        this.alertsTasks = response.data
+      TaskService.getTaskRemindersByUser(this.$store.state.user.userId).then(response=>{
+        this.alertsTasks = response.data;
+        PlantService.listGardenPlants(this.$store.state.user.userId).then(response=>{
+            this.myGarden = response.data;
+        
+    }
+      ).catch(error=>
+        console.log(error.message)
+      )
+    }
       ).catch(error=>
         console.log(error.message)
       )
@@ -68,6 +79,21 @@ export default {
 
       return alerts;
     },
+    getMyGarden(){
+      PlantService.listGardenPlants(this.$store.state.user.userId).then(response=>{
+        this.myGarden = response.data;
+        this.alertsTasks.forEach(alert=> {
+      alert.commonName = this.myGarden.find(p=> p.plantId == alert.plantId).commonName
+      }
+    )
+    }
+      ).catch(error=>
+        console.log(error.message)
+      )
+    },
+    name(id){
+      return this.myGarden.find(p=> p.plantId == id).commonName
+    }
   },
   computed: {
     classes() {
@@ -79,7 +105,9 @@ export default {
     eventService.futureEvents().then(response=>{
     this.futureEvents = response.data;
     this.getEventAlerts();
-    this.getTaskAlerts();
+    this.getTaskAlerts()
+   
+    
     }
     );
   }

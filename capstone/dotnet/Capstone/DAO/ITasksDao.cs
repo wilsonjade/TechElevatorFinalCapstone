@@ -7,15 +7,19 @@
     
     public interface ITasksDao 
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>Full List of Events</returns>
+      
         public List<Tasks> GetTasks();
+
+        public Tasks GetTasksById(int taskId);
 
         public List<Tasks> GetMyTaskReminders(int userId);
         public bool DeleteTask(int taskId);
 
         public int UpdateTaskAck(TasksAck ack);
+
+        public Tasks AddTask(Tasks taskToAdd);
+        public Tasks UpdateTask(Tasks taskToUpdate);
+
+        public List<Tasks> GetTasksByPlantId(int plantId);
     }
 }
