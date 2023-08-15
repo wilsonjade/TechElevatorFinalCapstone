@@ -132,10 +132,6 @@ section.container {
   text-align: center;
 }
 
-img {
-  width: 300px;
-  border-radius: 100%;
-}
 
 .off-white {
   background: #f6f7e8;

@@ -106,11 +106,12 @@
       </p>
     </form>
 
-     <section>
+     <section class="chart-container">
  <img class="chart" src="../assets/plantingzones.jpg" />
     </section>
     
   </div>
+  
 </template>
 
 <script>
@@ -171,16 +172,22 @@ export default {
 <style scoped>
 .form-input-group {
   margin-bottom: 1rem;
+  
 }
 label {
   margin-right: 0.5rem;
 }
 
-.chart {
-  max-width: 500%;
-  max-height: 550%;
-  
+.chart-container{
+  float: right;
+  margin-top: 20px;
+  align-items: right;
+  clear: both;
 }
-
+.chart{
+  height: 350px;
+  width: 400px;
+  border-radius: 5%;
+} 
 
 </style>

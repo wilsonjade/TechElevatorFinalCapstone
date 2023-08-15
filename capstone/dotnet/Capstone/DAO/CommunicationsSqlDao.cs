@@ -73,10 +73,7 @@ namespace Capstone.DAO
 
 
         [HttpGet("{type}")]
-<<<<<<< HEAD
 
-=======
->>>>>>> 3e304039a6fc4d88b39668eb63b7141ce0be76ae
         public List<Communication> GetCommunicationsByType(string type)
         {
             List<Communication> communicationsList = new List<Communication>();
@@ -223,10 +220,7 @@ namespace Capstone.DAO
             communication.Type = Convert.ToString(reader["type"]);
             communication.StartTime = Convert.ToDateTime(reader["start_time"]);
             communication.EndTime = Convert.ToDateTime(reader["end_time"]);
-<<<<<<< HEAD
 
-=======
->>>>>>> 3e304039a6fc4d88b39668eb63b7141ce0be76ae
 
             return communication;
         }
