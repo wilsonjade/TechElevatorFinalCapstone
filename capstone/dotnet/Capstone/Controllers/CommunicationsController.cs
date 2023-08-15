@@ -55,6 +55,13 @@ namespace Capstone.Controllers
             return Ok(communicationsDao.GetCommunicationsByType(communicationType));
         }
 
+        [HttpGet("polloption/{pollId}")]
+        //[Authorize(Roles = "admin, user")]
+        public ActionResult<List<PollOptions>> GetPollOptionsByPollId(int id)
+        {
+            return Ok(communicationsDao.GetPollOptionsByPollId(id));
+        }
+
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
@@ -72,8 +79,6 @@ namespace Capstone.Controllers
                 return NotFound();
             }
         }
-
-
 
 
         [HttpDelete("{id}")]
@@ -97,6 +102,13 @@ namespace Capstone.Controllers
         {
             Communication added = communicationsDao.AddCommunication(newCommunication);
             return Created($"/communications/{added.CommunicationId}", added);
+        }
+
+        [HttpPost("polls")]
+        public ActionResult<PollOptions> AddPollOption(PollOptions newPollOption)
+        {
+            PollOptions added = communicationsDao.AddPollOption(newPollOption);
+            return Created($"/communications/polls/{added.PollId}", added);
         }
 
         //TODO - NEED METHOD TO POST USER'S POLL RESPONSE

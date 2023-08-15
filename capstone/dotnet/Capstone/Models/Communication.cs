@@ -21,39 +21,39 @@ namespace Capstone.Models
             StartTime = startTime;
             EndTime = endTime;
         }
+    }
 
-        public class PollOptions
+    public class PollOptions
+    {
+        public int OptionId { get; set; }
+        public int PollId { get; set; }
+        public string Text { get; set; }
+
+        public PollOptions() { }
+        public PollOptions(int optionId, int pollId, string text)
         {
-            public int OptionId { get; set; }
-            public int PollId { get; set; }
-            public string Text { get; set; }
-
-            public PollOptions() { }
-            public PollOptions (int optionId, int pollId, string text)
-            {
-                OptionId = optionId;
-                PollId = pollId;
-                Text = text;
-            }
+            OptionId = optionId;
+            PollId = pollId;
+            Text = text;
         }
+    }
 
-        public class PollResponse
+    public class PollResponse
+    {
+        public int ResponseId { get; set; }
+        public int UserId { get; set; }
+        public int PollId { get; set; }
+        public int OptionId { get; set; }
+        public DateTime SubmissionDate { get; set; }
+
+        public PollResponse() { }
+        public PollResponse(int responseId, int userId, int pollId, int optionId, DateTime submissionDate)
         {
-            public int ResponseId { get; set; }
-            public int UserId { get; set; }
-            public int PollId { get; set; }
-            public int OptionId { get; set; }
-            public DateTime SubmissionDate { get; set; }
-
-            public PollResponse() { }
-            public PollResponse (int responseId, int userId, int pollId, int optionId, DateTime submissionDate)
-            {
-                ResponseId = responseId;
-                UserId = userId;
-                PollId = pollId;
-                OptionId = optionId;
-                SubmissionDate = submissionDate;
-            }
+            ResponseId = responseId;
+            UserId = userId;
+            PollId = pollId;
+            OptionId = optionId;
+            SubmissionDate = submissionDate;
         }
     }
 }
