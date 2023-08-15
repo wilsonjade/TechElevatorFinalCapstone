@@ -106,8 +106,10 @@
       </p>
     </form>
 
-    <img class="chart" src="../assets/plantingzones.jpg" />
-
+     <section>
+ <img class="chart" src="../assets/plantingzones.jpg" />
+    </section>
+    
   </div>
 </template>
 
@@ -175,9 +177,10 @@ label {
 }
 
 .chart {
-  align-content: right;
-  max-width: 100%;
-  max-height: 100%;
-
+  max-width: 500%;
+  max-height: 550%;
+  
 }
+
+
 </style>
