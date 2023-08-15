@@ -16,14 +16,10 @@ namespace Capstone.DAO
         private readonly string SqlGetAllCommunications = "SELECT communication_id, user_id, type, title, " +
             "start_time, end_time FROM communications;";
 
-<<<<<<< HEAD
+
         private readonly string SqlGetCommunicationsByType = @"SELECT * FROM communications JOIN poll_response ON poll_response.poll_id = communication_id " +
             "WHERE type = 'poll' AND poll_id = @poll_id;";
-=======
-        private readonly string SqlGetCommunicationsByType = "SELECT communication_id, user_id, type, title, " +
-            "start_time, end_time FROM communications " +
-            "WHERE type = @type;";
->>>>>>> a84d9fb52ff6d55a17e45195ba22699bb352d0a0
+
 
         private readonly string SqlGetFutureCommunications = "SELECT communication_id, user_id, type, title, " +
             "start_time, end_time FROM communications " +
@@ -157,14 +153,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToAdd.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToAdd.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToAdd.EndTime);
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-                   
->>>>>>> a909d2e4ecc1a6238f7d28229d3b4bc53ec0f6c8
->>>>>>> a84d9fb52ff6d55a17e45195ba22699bb352d0a0
 
                     communicationToAdd.CommunicationId = (int)cmd.ExecuteNonQuery();
                 }
@@ -185,14 +174,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToUpdate.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToUpdate.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToUpdate.EndTime);
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-                
->>>>>>> a909d2e4ecc1a6238f7d28229d3b4bc53ec0f6c8
->>>>>>> a84d9fb52ff6d55a17e45195ba22699bb352d0a0
 
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
@@ -238,15 +220,7 @@ namespace Capstone.DAO
             communication.Type = Convert.ToString(reader["type"]);
             communication.StartTime = Convert.ToDateTime(reader["start_time"]);
             communication.EndTime = Convert.ToDateTime(reader["end_time"]);
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-         
->>>>>>> a84d9fb52ff6d55a17e45195ba22699bb352d0a0
-
->>>>>>> a909d2e4ecc1a6238f7d28229d3b4bc53ec0f6c8
             return communication;
         }
 
