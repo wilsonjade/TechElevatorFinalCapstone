@@ -192,6 +192,14 @@ const router = new Router({
       }
     },
     {
+      path: "/communications/:type",
+      name: "communicationsByType",
+      component: CommunicationsList,
+      meta:{
+        requiresAuth: true
+      }
+    },
+    {
       path: "/community",
       name: "communityView",
       component: CommunityView,
