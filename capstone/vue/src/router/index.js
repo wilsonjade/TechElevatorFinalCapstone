@@ -10,6 +10,7 @@ import ListPlants from '../components/ListPlants.vue'
 import PlantDetail from '../components/PlantDetail.vue'
 import myStuffView from '../views/myStuffView.vue'
 import virtualGardenView from '../views/virtualGardenView.vue'
+import virtualGardenListView from '../views/virtualGardenListView.vue'
 import searchView from '../views/searchView.vue'
 import eventsView from '../views/eventsView.vue'
 import EventAdmin from '../components/EventAdmin.vue'
@@ -98,6 +99,14 @@ const router = new Router({
       path: "/virtualGarden/:user",
       name: "virtualGardenView",
       component: virtualGardenView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/virtualGardenlist",
+      name: "virtualGardenListView",
+      component: virtualGardenListView,
       meta: {
         requiresAuth: true
       }

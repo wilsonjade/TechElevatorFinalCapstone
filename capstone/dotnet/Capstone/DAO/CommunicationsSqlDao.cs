@@ -78,7 +78,8 @@ namespace Capstone.DAO
         }
 
 
-        
+
+        [HttpGet("{type}")]
         public List<Communication> GetCommunicationsByType(string type)
         {
             List<Communication> communicationsList = new List<Communication>();
@@ -264,6 +265,7 @@ namespace Capstone.DAO
             communication.Type = Convert.ToString(reader["type"]);
             communication.StartTime = Convert.ToDateTime(reader["start_time"]);
             communication.EndTime = Convert.ToDateTime(reader["end_time"]);
+
 
             return communication;
         }

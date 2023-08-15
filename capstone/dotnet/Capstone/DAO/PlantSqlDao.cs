@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Numerics;
 
 namespace Capstone.DAO
 {
@@ -19,11 +20,38 @@ namespace Capstone.DAO
         private readonly string sqlAddPlantToVG = @"INSERT INTO virtual_garden(plant_id, user_id) VALUES(@plant_id, @user_id)";
 
         private readonly string sqlDeletePlantFromGarden = @"DELETE FROM virtual_garden WHERE @plant_id = plant_id AND @user_id = user_id";
+        private readonly string sqlGetAllGardens = @"SELECT DISTINCT user_id FROM virtual_garden;";
         public PlantSqlDao(string dbConnectionString)
         {
             connectionString = dbConnectionString;
         }
 
+        public List<int> GetAllGardens()
+        {
+            List<int> result = new List<int>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlGetAllGardens, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int thisInt = Convert.ToInt32((reader["user_id"]));
+                        result.Add(thisInt);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException("SQL exception occurred", ex);
+            }
+
+            return result;
+        }
 
         public Plant GetPlantById(int plantId)
         {
