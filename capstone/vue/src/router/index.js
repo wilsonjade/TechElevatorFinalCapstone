@@ -95,7 +95,7 @@ const router = new Router({
       }
     },
     {
-      path: "/virtualGarden",
+      path: "/virtualGarden/:user",
       name: "virtualGardenView",
       component: virtualGardenView,
       meta: {

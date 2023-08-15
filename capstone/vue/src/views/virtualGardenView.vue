@@ -3,7 +3,7 @@
      
   <section class="garden-container">
       
-      <plant-garden-card v-for="plant in myPlants" v-bind:key="plant.plantId" v-bind:thisPlant="plant"     />
+      <plant-garden-card v-for="plant in myPlants" v-bind:key="plant.plantId" v-bind:thisPlant="plant" v-bind:isMine="isMyGarden"    />
     
   </section>
   </div>
@@ -21,9 +21,15 @@ export default {
         myPlants : []
       }
     },
+    computed: {
+      isMyGarden(){
+        const isMine = this.$route.params.user == this.$store.state.user.userId;
+        return isMine;
+      }
+    },
     created(){
       //populate myPlants
-      PlantService.listGardenPlants(this.$store.state.user.userId).then(response=>
+      PlantService.listGardenPlants(this.$route.params.user).then(response=>
       this.myPlants = response.data
       )
     }

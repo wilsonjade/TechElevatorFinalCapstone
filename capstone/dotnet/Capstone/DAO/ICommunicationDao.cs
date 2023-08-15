@@ -1,9 +1,10 @@
 ﻿using Capstone.Models;
+using Microsoft.AspNetCore.Http.Connections;
 using System.Collections.Generic;
 
 namespace Capstone.DAO
 {
-    public interface ICommunicationDao
+    public interface ICommunicationDao 
     {
         public List<Communication> GetCommunications();
         public List<Communication> GetCommunicationsByType(string type);

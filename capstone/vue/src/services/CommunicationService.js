@@ -4,8 +4,8 @@ export default {
     listCommunications() {
         return axios.get("/communications");
     },
-    listPolls() {
-        //todo
+    listCommunicationsByType(communicationType) {
+        return axios.get(`/communications/${communicationType}`)
     },
     getCommunicationById(communicationId) {
         return axios.get(`/communications/${communicationId}`)
