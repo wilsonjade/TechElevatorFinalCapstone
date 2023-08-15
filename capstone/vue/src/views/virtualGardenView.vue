@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1 id="gardenheadline">this is the virtualGardenView</h1>
+     
   <section class="garden-container">
       
       <plant-garden-card v-for="plant in myPlants" v-bind:key="plant.plantId" v-bind:thisPlant="plant"     />
@@ -42,5 +42,6 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
   align-content: flex-start;
+  
 }
 </style>
