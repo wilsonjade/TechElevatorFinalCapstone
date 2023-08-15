@@ -28,7 +28,7 @@ namespace Capstone.DAO
 
         private readonly string SqlAddCommunication = "INSERT INTO communications (user_id, title, type, " +
             "start_time, end_time) VALUES (@user_id, " +
-            "@title, @type, @description, @start_time, @end_time);";
+            "@title, @type, @start_time, @end_time);";
 
         private readonly string SqlUpdateCommunication = "UPDATE communications " +
             "SET user_id=@user_id, title=@title, type=@type, start_time=@start_time, " +
@@ -68,7 +68,7 @@ namespace Capstone.DAO
             return communicationsList;
         }
        
-        [HttpGet("{type}")]
+
         public List<Communication> GetCommunicationsByType(string type)
         {
             List<Communication> communicationsList = new List<Communication>();
@@ -150,11 +150,6 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToAdd.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToAdd.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToAdd.EndTime);
-<<<<<<< HEAD
-=======
-                   
->>>>>>> a909d2e4ecc1a6238f7d28229d3b4bc53ec0f6c8
-
                     communicationToAdd.CommunicationId = (int)cmd.ExecuteNonQuery();
                 }
             }
@@ -174,11 +169,6 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@type", communicationToUpdate.Type);
                     cmd.Parameters.AddWithValue("@start_time", communicationToUpdate.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToUpdate.EndTime);
-<<<<<<< HEAD
-=======
-                
->>>>>>> a909d2e4ecc1a6238f7d28229d3b4bc53ec0f6c8
-
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
                     {
@@ -223,11 +213,6 @@ namespace Capstone.DAO
             communication.Type = Convert.ToString(reader["type"]);
             communication.StartTime = Convert.ToDateTime(reader["start_time"]);
             communication.EndTime = Convert.ToDateTime(reader["end_time"]);
-<<<<<<< HEAD
-=======
-         
-
->>>>>>> a909d2e4ecc1a6238f7d28229d3b4bc53ec0f6c8
             return communication;
         }
     }

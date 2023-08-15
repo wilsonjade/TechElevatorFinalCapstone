@@ -55,7 +55,7 @@ export default {
                 communicationId: 0,
                 userId: this.$store.state.user.userId,
                 title: '',
-                type: 'poll',
+                type: '',
                 description: '',
                 startTime: '',
                 endTime: '',
@@ -67,10 +67,10 @@ export default {
     methods: {
         addCommunication() {
           console.log("reached communicationsAdmin --> addCommunication()")
-            CommunicationService.createCommunication(parseInt(this.$route.params.sellerId), this.newRating)
+            CommunicationService.createCommunication(this.newCommunication)
             .then( () => {
                 this.$store.commit("LOAD_COMMUNICATIONS");
-                this.$router.push({name: "home"});
+                this.$router.push({name: "communicationsList"});
             })
         .catch((error) => {
           if (error.response) {
