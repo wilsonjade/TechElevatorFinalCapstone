@@ -33,6 +33,7 @@ export default new Vuex.Store({
     futureEvents: [],
     communications: [],
     futureCommunications: [],
+    
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
