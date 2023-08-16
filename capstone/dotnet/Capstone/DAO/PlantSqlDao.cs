@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Numerics;
+using System.Security.AccessControl;
 
 namespace Capstone.DAO
 {
@@ -15,7 +16,9 @@ namespace Capstone.DAO
 
         private readonly string sqlGetPlantById = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, sun, water, fertilizer, img_url FROM plants WHERE plant_id = @plantId;";
 
-        private readonly string sqlGetPlantsByCommonName = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, sun, water, fertilizer, img_url FROM plants WHERE common_name LIKE @commonName;";
+        private readonly string sqlGetPlantsBySearchCriteria = @"SELECT plant_id, kingdom, family, genus, species, common_name, [order], subfamily, description, sun, water, fertilizer, img_url FROM plants " + 
+            "WHERE common_name LIKE @commonName OR family LIKE @family OR species LIKE @species OR genus LIKE @genus;";
+
 
         private readonly string sqlGetPlantsByUserId = @"SELECT user_id, vg.plant_id, plants.common_name, plants.description, plants.family, plants.genus, plants.img_url, plants.kingdom, plants.plant_id, plants.species, plants.[order], plants.subfamily, plants.sun, plants.water, plants.fertilizer FROM virtual_garden AS vg INNER JOIN plants ON plants.plant_id = vg.plant_id WHERE user_id = @user_id";
 
@@ -88,7 +91,7 @@ namespace Capstone.DAO
             return plant;
         }
 
-        public List<Plant> GetPlantsByCommonName (string commonName)
+        public List<Plant> GetPlantsBySearchCriteria (Plant searchPlant)
         {
             Plant plant = new Plant();
             List<Plant> plants = new List<Plant>();
@@ -97,13 +100,53 @@ namespace Capstone.DAO
             {
                 conn.Open();
 
-                using(SqlCommand cmd = new SqlCommand(sqlGetPlantsByCommonName, conn))
+                using(SqlCommand cmd = new SqlCommand(sqlGetPlantsBySearchCriteria, conn))
                 {
-                    cmd.Parameters.AddWithValue("@commonName", "%"+commonName+"%");
+                    if (searchPlant.CommonName == "")
+                    { cmd.Parameters.AddWithValue("@commonName", "");
+                    }
+
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@commonName", "%" + searchPlant.CommonName + "%");
+
+                    }
+                    if (searchPlant.Family == "")
+                    {
+                        cmd.Parameters.AddWithValue("@family", "");
+                    }
+
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@family", "%" + searchPlant.Family + "%");
+
+                    }
+                    if (searchPlant.Species == "")
+                    {
+                        cmd.Parameters.AddWithValue("@species", "");
+                    }
+
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@species", "%" + searchPlant.Species + "%");
+
+                    }
+                    if (searchPlant.Genus == "")
+                    {
+                        cmd.Parameters.AddWithValue("@genus", "");
+                    }
+
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@genus", "%" + searchPlant.Genus + "%");
+
+                    }
+
+
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if(reader.Read())
+                        while(reader.Read())
                         {
                             plant = MapRowToPlant(reader);
                             plants.Add(plant);
@@ -115,6 +158,92 @@ namespace Capstone.DAO
             }
             return plants;
         }
+
+
+        //public List<Plant> GetPlantsByFamily(string family)
+        //{
+        //    Plant plant = new Plant();
+        //    List<Plant> plants = new List<Plant>();
+
+        //    using (SqlConnection conn = new SqlConnection(connectionString))
+        //    {
+        //        conn.Open();
+
+        //        using (SqlCommand cmd = new SqlCommand(sqlGetPlantsByFamily, conn))
+        //        {
+        //            cmd.Parameters.AddWithValue("@family", "%"+ family +"%");
+
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    plant = MapRowToPlant(reader);
+        //                    plants.Add(plant);
+
+        //                }
+        //            }
+
+        //        }
+        //    }
+        //    return plants;
+        //}
+
+        //public List<Plant> GetPlantsBySpecies(string species)
+        //{
+        //    Plant plant = new Plant();
+        //    List<Plant> plants = new List<Plant>();
+
+        //    using (SqlConnection conn = new SqlConnection(connectionString))
+        //    {
+        //        conn.Open();
+
+        //        using (SqlCommand cmd = new SqlCommand(sqlGetPlantsBySpecies, conn))
+        //        {
+        //            cmd.Parameters.AddWithValue("@species", "%" + species + "%");
+
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    plant = MapRowToPlant(reader);
+        //                    plants.Add(plant);
+
+        //                }
+        //            }
+
+        //        }
+        //    }
+        //    return plants;
+        //}
+
+        //public List<Plant> GetPlantsByGenus(string genus)
+        //{
+        //    Plant plant = new Plant();
+        //    List<Plant> plants = new List<Plant>();
+
+        //    using (SqlConnection conn = new SqlConnection(connectionString))
+        //    {
+        //        conn.Open();
+
+        //        using (SqlCommand cmd = new SqlCommand(sqlGetPlantsByGenus, conn))
+        //        {
+        //            cmd.Parameters.AddWithValue("@genus", "%" + genus + "%");
+
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    plant = MapRowToPlant(reader);
+        //                    plants.Add(plant);
+
+        //                }
+        //            }
+
+        //        }
+        //    }
+        //    return plants;
+        //}
+
 
         public List<Plant> GetPlants()
         {

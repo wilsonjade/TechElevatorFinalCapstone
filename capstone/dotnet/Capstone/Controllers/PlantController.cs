@@ -39,13 +39,14 @@ namespace Capstone.Controllers
             return Ok(plantDao.GetPlantById(plantId));
         }
 
-        [HttpGet("name/{commonName}")]
+        [HttpPost("search")]
 
-        public ActionResult<List<Plant>>GetPlantByCommonName(string commonName)
+        public ActionResult<List<Plant>>GetPlantBySearchCriteria(Plant searchPlant)
         {
-            return Ok(plantDao.GetPlantsByCommonName(commonName));
+            return Ok(plantDao.GetPlantsBySearchCriteria(searchPlant));
         }
 
+        
 
 
 

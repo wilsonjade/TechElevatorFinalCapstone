@@ -17,6 +17,10 @@ namespace Capstone.DAO
 
         bool DeletePlantFromGarden(int plantId, int userId);
 
-        List<Plant> GetPlantsByCommonName(string commonName);
+        List<Plant> GetPlantsBySearchCriteria(Plant searchPlant);
+
+    
+
+
     }
 }

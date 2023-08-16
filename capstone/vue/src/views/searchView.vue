@@ -1,10 +1,21 @@
 <template>
   <section>
-      <h1> Search Plants By Common Name!</h1>
+      <h3>Welcome to the Search Page</h3>
+      <h1>While here, you can search plants by common name, family, species, and genus.</h1>
     
   <form v-on:submit.prevent="searchPlantByCommonName()">
-    <div class="searchbar">
-    <input v-model="commonName" type="text" placeholder="Search plants by name..">
+    <div class="searchbar"> 
+      <label>Common Name:</label>
+    <input v-model="search.commonName" type="text" placeholder="Search plants by name..">
+
+   <label>Family:</label>
+    <input v-model="search.family" type="text" placeholder="Search plants by family..">
+
+<label>Species</label>
+    <input v-model="search.species" type="text" placeholder="Search plants by species..">
+
+    <label>Genus:</label>
+    <input v-model="search.genus" type="text" placeholder="Search plants by genus..">
    <input type="submit" value="Search" >
    
    </div> 
@@ -28,12 +39,16 @@ export default {
   name: "search",
   components: {  },
   data() {
-    return {commonName: "",
+    return {search: {commonName: "",
+    family: "",
+    species: "",
+    genus:""
+    },
     plants: []};
   },
   methods: {
     searchPlantByCommonName(){
-      plantService.getPlantByCommonName(this.commonName)
+      plantService.getPlantByCommonName(this.search)
       .then((response)=>{
         console.log(response)
         this.plants = response.data})

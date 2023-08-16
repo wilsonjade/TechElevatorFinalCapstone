@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export default {
     listPlants() {
         return axios.get("/plant");
@@ -10,8 +11,8 @@ export default {
     getPlantById(plantId) {
         return axios.get(`/plant/${plantId}`)
     },
-    getPlantByCommonName(commonName){
-        return axios.get(`/plant/name/${commonName}`)
+    getPlantByCommonName(search){
+        return axios.post(`/plant/search`, search)
     },
     addToGarden(plantUser){
         return axios.post(`/plant/garden`,plantUser)
