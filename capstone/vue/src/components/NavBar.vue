@@ -231,12 +231,16 @@ li.nav-item:hover {
   align-items: center;
   height: 5rem;
   text-decoration: none;
+  color: #475542;
+  font-weight: bold;
 }
 
 .link-text {
   display: none;
   margin-left: 1rem;
+  
 }
+
 
 .nav-link svg {
   min-width: 2rem;

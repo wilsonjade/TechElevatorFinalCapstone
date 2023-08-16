@@ -72,7 +72,7 @@ const router = new Router({
       }
     },
     {
-      path: "/plant",
+      path: "/plants",
       name: "plants",
       component: ListPlants,
       meta: {
@@ -138,7 +138,7 @@ const router = new Router({
       }
     },
     {
-      path: "/seller",
+      path: "/sellers",
       name: "sellersView",
       component: SellersView,
       meta:{
@@ -146,7 +146,7 @@ const router = new Router({
       }
     },
     {
-      path: "/seller/plant/:plantId",
+      path: "/sellers/plant/:plantId",
       name: "sellersByPlant",
       component: SellerList,
       meta:{
@@ -154,19 +154,11 @@ const router = new Router({
       }
     },
     {
-      path: "/selleradmin",
+      path: "/addseller",
       name: "SellerAdmin",
       component: SellerAdmin,
       meta:{
         requiresAuth: true
-      }
-    },    
-    {
-      path: "/ratings",
-      name: "ratingsList",
-      component: RatingsList,
-      meta:{
-        requiresAuth: false
       }
     },  
     {
@@ -178,7 +170,7 @@ const router = new Router({
       }
     },
     {
-      path: "/ratingsadmin/:sellerId",
+      path: "/addrating/:sellerId",
       name: "ratingsAdmin",
       component: RatingsAdmin,
       meta:{

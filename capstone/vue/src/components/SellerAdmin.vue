@@ -1,11 +1,6 @@
 <template>
-  <section>
-    <h1>SellerAdmin.vue</h1>
+  <section class="card" >
     <form v-on:submit.prevent="submitForm()">
-      <div>
-      <label for="id">Id:</label>
-      <input v-model="formData.sellerId" type="number" id="name" disabled />
-      </div>
       <div>
       <label for="name">Name:</label>
       <input v-model="formData.sellerName" type="text" id="name"  required />

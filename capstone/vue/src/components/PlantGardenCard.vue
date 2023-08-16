@@ -1,5 +1,5 @@
 <template>
-  <div id="plantcardcontainer" class="plantcardcontainer" v-on:hover="showTips()">
+  <div id="plantcardcontainer" class="plantcardcontainer card" v-on:hover="showTips()">
       <h1 class="cardtitle"> {{thisPlant.commonName}}</h1>
       <img id="cardimg" class="cardimg" v-bind:src="thisPlant.imgUrl" />
       <div class="species"> {{thisPlant.species}}</div>
@@ -65,7 +65,6 @@ export default {
   margin-right: 20px;
   margin: 20px;
   padding: 15px;
-  background-color: #4c9173a8;
   /*background-image: url("../assets/vgbg.png"); */
   border-style: solid;
   border-radius: 30px;

@@ -63,25 +63,34 @@ body {
 }
 
 a {
-  color: #22311d;
+  color: #f6f7e8;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 12px;
 }
 
 .card {
-  background-color: #4c9173a8;
-  color: #f6f7e8;
-  border-radius: 8px;
-  padding: 4px 6px;
-  margin: 12px;
-  border: 2px solid #266147;
+  background-color: #85b488b7;
+  color: #22311d;
+  border-radius: 12px;
+  padding: 4px 12px 8px 12px;
+  margin: .5rem .5rem 1.2rem .5rem;
+  border: 2px solid #22311d;
   max-width: 400px;
+  box-shadow: 8px 8px 6px 1px #22311d;
 }
 
 button {
-  background-color: #4c9173;
+  background-color: #77a370;
   color: #f6f7e8;
-  border-radius: 8px;
-  padding: 4px 6px;
+  border-radius: 16px;
+  padding: 6px 12px;
+  margin: .5rem;
   border: 2px solid #266147;
+  font-weight: bold;
 }
 
 button:hover {
@@ -126,7 +135,7 @@ section.container {
   bottom: 0;
   left: 0;
   height: 35px;
-  background-color: darkolivegreen;
+  background-color: #446047;
   color: #f6f7e8;
   width: 100%;
   text-align: center;
@@ -137,27 +146,5 @@ section.container {
   background: #f6f7e8;
 }
 
-.light-green {
-  background: #7dd87d;
-}
 
-.medium-green {
-  background: #4c9173;
-}
-
-.dark-green {
-  background: #266147;
-}
-
-.dark-purple {
-  background: #4d4355;
-}
-
-.medium-purple {
-  background: #5b446a;
-}
-
-.light-purple {
-  background: #da98cc;
-}
 </style>

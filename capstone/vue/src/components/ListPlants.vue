@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h1>Plants</h1>
     <section class="container">
       <plant-detail v-for="plant in plants" v-bind:key="plant.plantId" v-bind:plant="plant" />
     </section>

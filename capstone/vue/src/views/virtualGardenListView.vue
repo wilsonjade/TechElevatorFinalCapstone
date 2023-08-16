@@ -1,12 +1,12 @@
 <template>
   <div id="gardenlistcontainer">
-      <div class="gardenlistcard" v-on:click="visitGarden" v-for="garden in gardens" v-bind:key="garden.userId">
+      <div class="gardenlistcard card" v-on:click="visitGarden" v-for="garden in gardens" v-bind:key="garden.userId">
           
         <div>  {{garden.firstName}}'s Garden</div>
           Level {{garden.expertiseLevel}} Gardener
           Located in Zone : {{garden.region}}
          {{garden.firstName}} has {{garden.plantCount}} plants in their garden
-      <router-link v-bind:to="{name: 'virtualGardenView', params: {user: garden.userId}}"> Visit Garden </router-link>
+      <button><router-link v-bind:to="{name: 'virtualGardenView', params: {user: garden.userId}}"> Visit Garden </router-link></button>
       </div>
 
   </div>

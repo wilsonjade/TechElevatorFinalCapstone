@@ -1,5 +1,5 @@
 <template>
-  <section class="eventDetail">
+  <section class="eventDetail card">
     
      <p v-if="item.isVirtual">This Event is Virtual</p>
      <span>{{item.startTime}}</span><span>{{item.endTime}}</span>
@@ -76,9 +76,5 @@ export default {
 </script>
 
 <style>
-.eventDetail{
-  background-color: darkolivegreen;
-  border-width: 2px;
-  border-style: solid;
-}
+
 </style>

@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h1>RatingsList.vue</h1>
     <rating-detail
       v-for="rating in ratings"
       v-bind:key="rating.ratingId"

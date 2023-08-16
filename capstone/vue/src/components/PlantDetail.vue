@@ -1,5 +1,5 @@
 <template>
-  <section class="plantCard">
+  <section class="plantCard card">
     <h1 class="headline">Common name: {{ plant.commonName }}</h1>
     <p>Id: {{ plant.plantId }}</p>
     <p>Kingdom: {{ plant.kingdom }}</p>
@@ -17,7 +17,7 @@
     </section>
     <section>
       <button v-on:click="addToGarden()" > Add to My Virtual Garden </button>
-      <router-link v-bind:to="{name: 'sellersByPlant'}">Find Retailers</router-link>
+      <button><router-link v-bind:to="{name: 'sellersByPlant'}">Find Retailers</router-link></button>
     </section>
   </section>
 
