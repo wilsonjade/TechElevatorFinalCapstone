@@ -105,10 +105,16 @@ export default {
   computed: {},
   methods: {
     addCommunication() {
+      let addedId = 0;
       CommunicationService.createCommunication(this.newCommunication)
-        .then(() => {
+        .then((response) => {
+          addedId = response.data["communicationId"];
           this.$store.commit("LOAD_COMMUNICATIONS");
           this.$router.push({ name: "communicationsList" });
+
+          if (this.newCommunication.type == "poll") {
+            this.addPollOptions(addedId);
+          }
         })
         .catch((error) => {
           if (error.response) {
@@ -130,17 +136,11 @@ export default {
             console.log("Error updating communications: error making request");
           }
         });
-
-      if (this.newCommunication.type == "poll") {
-        this.addPollOptions();
-      }
     },
-    addPollOptions() {
+    addPollOptions(addedId) {
       if (this.newPollOption1 != "") {
-        CommunicationService.createPollOption(
-          this.newCommunication.communicationId,
-          this.newPollOption1
-        )
+        this.newPollOption1.pollId = addedId;
+        CommunicationService.createPollOption(this.newPollOption1)
           .then(() => {
             this.$store.commit("LOAD_POLL_OPTIONS");
             this.$router.push({ name: "communicationsList" });
@@ -169,10 +169,8 @@ export default {
           });
       }
       if (this.newPollOption2 != "") {
-        CommunicationService.createPollOption(
-          this.newCommunication.communicationId,
-          this.newPollOption2
-        )
+        this.newPollOption2.pollId = addedId;
+        CommunicationService.createPollOption(this.newPollOption2)
           .then(() => {
             this.$store.commit("LOAD_POLL_OPTIONS");
             this.$router.push({ name: "communicationsList" });
@@ -201,10 +199,8 @@ export default {
           });
       }
       if (this.newPollOption3 != "") {
-        CommunicationService.createPollOption(
-          this.newCommunication.communicationId,
-          this.newPollOption3
-        )
+        this.newPollOption3.pollId = addedId;
+        CommunicationService.createPollOption(this.newPollOption3)
           .then(() => {
             this.$store.commit("LOAD_POLL_OPTIONS");
             this.$router.push({ name: "communicationsList" });
@@ -233,10 +229,8 @@ export default {
           });
       }
       if (this.newPollOption4 != "") {
-        CommunicationService.createPollOption(
-          this.newCommunication.communicationId,
-          this.newPollOption4
-        )
+        this.newPollOption4.pollId = addedId;
+        CommunicationService.createPollOption(this.newPollOption4)
           .then(() => {
             this.$store.commit("LOAD_POLL_OPTIONS");
             this.$router.push({ name: "communicationsList" });

@@ -29,7 +29,7 @@ export default {
         return axios.get(`/communications/type/poll/${pollId}`)
     },
     createPollOption(newPollOption) {
-        return axios.post(`/communications/polls`, newPollOption)
+        return axios.post(`/communications/type/polloptions`, newPollOption)
     },
     
 }

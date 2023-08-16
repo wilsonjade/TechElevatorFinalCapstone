@@ -30,7 +30,8 @@ namespace Capstone.DAO
             "WHERE communication_id = @communication_id;";
 
         private readonly string SqlAddCommunication = "INSERT INTO communications (user_id, title, type, " +
-            "start_time, end_time) VALUES (@user_id, " +
+            "start_time, end_time) OUTPUT INSERTED.communication_id " +
+            "VALUES (@user_id, " +
             "@title, @type, @start_time, @end_time);";
 
         private readonly string SqlGetPollOptions = "SELECT * FROM poll_options";
@@ -164,7 +165,9 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@start_time", communicationToAdd.StartTime);
                     cmd.Parameters.AddWithValue("@end_time", communicationToAdd.EndTime);
 
-                    communicationToAdd.CommunicationId = (int)cmd.ExecuteNonQuery();
+                    int newId = (int)cmd.ExecuteScalar();
+
+                    communicationToAdd.CommunicationId = newId;
                 }
             }
             return communicationToAdd;
@@ -277,7 +280,7 @@ namespace Capstone.DAO
                 {
                     cmd.Parameters.AddWithValue("@text", newPollOption.Text);
                     cmd.Parameters.AddWithValue("@poll_id", newPollOption.PollId);
-                    //newPollOption.OptionId = (int)cmd.ExecuteNonQuery();
+                    newPollOption.OptionId = (int)cmd.ExecuteNonQuery();
                 }
             }
             return newPollOption;
