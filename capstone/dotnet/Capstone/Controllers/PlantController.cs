@@ -39,6 +39,16 @@ namespace Capstone.Controllers
             return Ok(plantDao.GetPlantById(plantId));
         }
 
+        [HttpGet("name/{commonName}")]
+
+        public ActionResult<Plant>GetPlantByCommonName(string commonName)
+        {
+            return Ok(plantDao.GetPlantByCommonName(commonName));
+        }
+
+
+
+
         [HttpGet("garden/{userId}")]
         public ActionResult<List<Plant>> GetMyPlants(int userId)
         {
