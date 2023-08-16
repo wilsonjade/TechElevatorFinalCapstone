@@ -86,6 +86,14 @@ img {
   box-shadow: 8px 8px 6px 1px #22311d;
 }
 
+.card-header {
+  background-color: #446047;
+  color: #f6f7e8;
+  text-align: center;
+  border-radius: 12px;
+  margin-top: 4px;
+}
+
 button {
   background-color: #77a370;
   color: #f6f7e8;
@@ -120,13 +128,13 @@ section.container {
   position: fixed;
   margin-left: 5rem;
   padding: 1rem;
-  width: 100%;
+  width: 92%;
   top: 0;
   left: 0;
   height: 35px;
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: flex-end;
   background-color: #f0b45b75;
 }
 
