@@ -32,7 +32,7 @@
     
 
     <section class="communication-details" v-if="item.type == 'challenge'">
-      <button>Challenge Completed</button>
+      <button v-on:click="deleteCommunication" >Challenge Completed</button>
     </section>
 
     <section class="communication-details" v-if="item.type == 'competition'">
@@ -88,7 +88,6 @@ export default {
   data() {
     return {
       isAdmin: false,
-      pollId: this.item.communicationId,
       choice: -1,
       currentPoll: {
         title: this.item.title,

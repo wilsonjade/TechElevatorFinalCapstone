@@ -68,4 +68,9 @@ export default {
 label {
   margin-right: 0.5rem;
 }
+
+.card {
+  max-width: 400px;
+  margin-top: 1.5rem;
+}
 </style>

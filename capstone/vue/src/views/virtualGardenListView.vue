@@ -3,9 +3,9 @@
       <div class="gardenlistcard card" v-on:click="visitGarden" v-for="garden in gardens" v-bind:key="garden.userId">
           
         <div>  {{garden.firstName}}'s Garden</div>
-          Level {{garden.expertiseLevel}} Gardener
-          Located in Zone : {{garden.region}}
-         {{garden.firstName}} has {{garden.plantCount}} plants in their garden
+        <section>  Level {{garden.expertiseLevel}} Gardener</section>
+         <section>   Located in Zone : {{garden.region}}</section>
+        <section>   {{garden.firstName}} has {{garden.plantCount}} plants in their garden</section>
       <button><router-link v-bind:to="{name: 'virtualGardenView', params: {user: garden.userId}}"> Visit Garden </router-link></button>
       </div>
 
@@ -36,11 +36,9 @@ export default {
         
         PlantService.getAllGardens().then( response =>{
             this.gardens = response.data
+            this.gardens = this.gardens.filter(g=> g.userId != this.$store.state.user.userId) //filter out user's own garden
         }
         )
-        //call user list
-        //add user name/region/etc
-        //add plant count
     }
 }
 </script>
@@ -52,14 +50,8 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
   align-content: flex-start;
-}
+}*/
 .gardenlistcard{
-    display: flex;
-    border-radius: 20px;
-    border-style: solid;
-    border-color: black;
-    width: 30%;
-    margin: 25px;
-    padding: 10px;
-} */
+   width: fit-content;
+} 
 </style>

@@ -60,6 +60,7 @@ export default {
 <style>
 .plantcardcontainer {
   width: 20%;
+  height: 25%;
   font-size: larger;
   margin-left: 20px;
   margin-right: 20px;
@@ -74,7 +75,15 @@ export default {
 }
 .plantcardcontainer:hover {
   width: 40%;
-  height: 100%;
+  height:fit-content;
+}
+#gardenlistlink{
+  width: 10%;
+  height:fit-content;
+}
+#gardenlistlink:hover {
+  width: 10%;
+  height:fit-content;
 }
 .plantcardcontainer > .tipcontainer {
   display: none;

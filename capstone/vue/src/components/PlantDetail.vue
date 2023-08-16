@@ -1,5 +1,5 @@
 <template>
-  <section class="plantCard card">
+  <section class="plantCard card flex-container">
     <h1 class="headline">Common name: {{ plant.commonName }}</h1>
     <div class="card" >
     <p>Id: {{ plant.plantId }}</p>
@@ -14,13 +14,13 @@
 
     </div>
     <section>
-      <p><router-link :to="{ name: 'taskAdmin' }">Edit and add task.</router-link></p>
+      <p><router-link v-if="isAdmin"  :to="{ name: 'taskAdmin' }">Edit and add task.</router-link></p>
     </section>
     <section>
-      <p><router-link :to="{ name: 'taskAdminDelete' }">Delete task.</router-link></p>
+      <p><router-link v-if="isAdmin" :to="{ name: 'taskAdminDelete' }">Delete task.</router-link></p>
     </section>
-    <section>
-      <img v-bind:src="plant.imgUrl" alt="a generic plant image"/>
+    <section class="flex-container">
+      <img id="plant-image" v-bind:src="plant.imgUrl" alt="a generic plant image"/>
     </section>
     <section>
       <button v-on:click="addToGarden()" > Add to My Virtual Garden </button>
@@ -55,7 +55,7 @@ export default {
       }
       ).catch(error=> {
         console.log(error.message)
-        this.$router.push({name: "virtualGardenView"})
+        this.$router.push({name: "virtualGardenView" ,params:{user:this.$store.state.user.userId }})
       
       })
       
@@ -70,13 +70,19 @@ export default {
 
   created(){
     this.getThisPlant();
+    
+      this.isAdmin = this.$store.state.user.role == "admin";
+    
 
   }
 };
 </script>
 
-<style>
+<style scoped>
 .plantCard{
-  margin: auto;
+  margin: 1rem auto;
+  flex-direction: column;
 }
+
+
 </style>
