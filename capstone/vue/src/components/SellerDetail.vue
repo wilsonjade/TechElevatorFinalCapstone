@@ -9,9 +9,9 @@
     <p>{{ item.zip }}</p>
     <p>{{ item.website }}</p>
 
-      <router-link v-bind:to="{name: 'ratingsBySeller', params: {sellerId: item.sellerId}}">See Ratings</router-link>
+      <button><router-link v-bind:to="{name: 'ratingsBySeller', params: {sellerId: item.sellerId}}">See Ratings</router-link></button>
       
-      <router-link v-bind:to="{name: 'ratingsAdmin', params: {sellerId: item.sellerId }}">Rate this Seller</router-link>
+      <button><router-link v-bind:to="{name: 'ratingsAdmin', params: {sellerId: item.sellerId }}">Rate this Seller</router-link></button>
 
 
     <button

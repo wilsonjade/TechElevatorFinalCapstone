@@ -23,6 +23,7 @@ import CommunicationsList from '../components/CommunicationsList.vue'
 import CommunicationsAdmin from '../components/CommunicationsAdmin.vue'
 import CommunityView from '../views/CommunityView.vue'
 import TaskAdmin from '../components/TaskAdmin.vue'
+import TaskAdminDelete from '../components/TaskAdminDelete.vue'
 
 Vue.use(Router)
 
@@ -72,7 +73,7 @@ const router = new Router({
       }
     },
     {
-      path: "/plant",
+      path: "/plants",
       name: "plants",
       component: ListPlants,
       meta: {
@@ -138,7 +139,7 @@ const router = new Router({
       }
     },
     {
-      path: "/seller",
+      path: "/sellers",
       name: "sellersView",
       component: SellersView,
       meta:{
@@ -146,7 +147,7 @@ const router = new Router({
       }
     },
     {
-      path: "/seller/plant/:plantId",
+      path: "/sellers/plant/:plantId",
       name: "sellersByPlant",
       component: SellerList,
       meta:{
@@ -154,19 +155,11 @@ const router = new Router({
       }
     },
     {
-      path: "/selleradmin",
+      path: "/addseller",
       name: "SellerAdmin",
       component: SellerAdmin,
       meta:{
         requiresAuth: true
-      }
-    },    
-    {
-      path: "/ratings",
-      name: "ratingsList",
-      component: RatingsList,
-      meta:{
-        requiresAuth: false
       }
     },  
     {
@@ -178,7 +171,7 @@ const router = new Router({
       }
     },
     {
-      path: "/ratingsadmin/:sellerId",
+      path: "/addrating/:sellerId",
       name: "ratingsAdmin",
       component: RatingsAdmin,
       meta:{
@@ -221,6 +214,14 @@ const router = new Router({
       path: "/plant/tasks",
       name: "taskAdmin",
       component: TaskAdmin,
+      meta:{
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/plant/tasks/delete",
+      name: "taskDelete",
+      component: TaskAdminDelete,
       meta:{
         requiresAuth: true
       }

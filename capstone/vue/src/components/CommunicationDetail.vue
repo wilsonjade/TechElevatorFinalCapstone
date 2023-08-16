@@ -7,23 +7,23 @@
 
     <section class="poll-details" v-show="item.type == 'poll'">
       <div>
-        <input type="radio" name="poll-item" id="poll-option1" />
-        <label for="poll-option1">{{ item.pollOption1 }}</label>
+        <input type="radio" name="poll-item" v-model="choice" value="0" id="poll-option1" />
+        <label for="poll-option1">{{ currentPollOptions[0].text }}</label>
       </div>
 
       <div>
-        <input type="radio" name="poll-item" id="poll-option2" />
-        <label for="poll-option2">{{ item.pollOption2 }}</label>
+        <input type="radio" name="poll-item" v-model="choice" value="1" id="poll-option2" />
+        <label for="poll-option2">{{ currentPollOptions[1].text }}</label>
       </div>
 
       <div>
-        <input type="radio" name="poll-item" id="poll-option3" />
-        <label for="poll-option3">{{ item.pollOption3 }}</label>
+        <input type="radio" name="poll-item" v-model="choice" value="2" id="poll-option3" />
+        <label for="poll-option3">{{ currentPollOptions[2].text }}</label>
       </div>
 
       <div>
-        <input type="radio" name="poll-item" id="poll-option4" />
-        <label for="poll-option4">{{ item.pollOption4 }}</label>
+        <input type="radio" name="poll-item" v-model="choice" value="3" id="poll-option4" />
+        <label for="poll-option4">{{ currentPollOptions[3].text }}</label>
       </div>
     <button>Submit your answer!</button>
     </section>
@@ -85,20 +85,25 @@ export default {
   data() {
     return {
       isAdmin: false,
-      pollOptions: [],
+      pollId: this.item.communicationId,
+      choice: -1,
     };
+  },
+  computed: {
+    currentPollOptions() {
+      return this.$store.state.pollOptions.filter( pollOption => {
+         return pollOption.pollId == this.item.communicationId
+      } )
+    }
   },
   created() {
     this.isAdmin = this.$store.state.user.role == "admin";
+    this.$store.commit("LOAD_POLL_OPTIONS");
   },
 };
 </script>
 
 <style scoped>
-h1 {
-  text-align: center;
-}
-
 .poll {
   display: flex;
   flex-direction: column;
@@ -106,5 +111,9 @@ h1 {
 
 div {
   padding: 4px;
+}
+
+.card {
+  max-width: 450px;
 }
 </style>

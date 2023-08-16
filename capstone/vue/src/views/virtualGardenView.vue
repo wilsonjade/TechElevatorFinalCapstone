@@ -6,6 +6,7 @@
       <plant-garden-card v-for="plant in myPlants" v-bind:key="plant.plantId" v-bind:thisPlant="plant" v-bind:isMine="isMyGarden"    />
     
   </section>
+    <router-link v-bind:to="{name: 'virtualGardenListView'}"> Explore Community Gardens </router-link>
   </div>
 </template>
 

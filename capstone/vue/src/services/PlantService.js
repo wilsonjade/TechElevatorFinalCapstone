@@ -17,4 +17,8 @@ export default {
         return axios.delete("/plant/garden/",{data: plantUser})
 
     }
+    ,
+    getAllGardens(){
+        return axios.get("/plant/gardens/")
+    }
 }

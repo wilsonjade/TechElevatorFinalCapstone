@@ -1,6 +1,7 @@
 <template>
-  <section class="plantCard">
+  <section class="plantCard card">
     <h1 class="headline">Common name: {{ plant.commonName }}</h1>
+    <div class="card" >
     <p>Id: {{ plant.plantId }}</p>
     <p>Kingdom: {{ plant.kingdom }}</p>
     <p>Order: {{ plant.order }}</p>
@@ -9,15 +10,21 @@
     <p>Genus: {{ plant.genus }}</p>
     <p>Species: {{ plant.species }}</p>
     <p>Description: {{ plant.description }}</p>
+
+
+    </div>
     <section>
       <p><router-link :to="{ name: 'taskAdmin' }">Edit and add task.</router-link></p>
+      </section>
+       <section>
+      <p><router-link :to="{ name: 'taskDelete' }">Delete task.</router-link></p>
       </section>
     <section>
       <img v-bind:src="plant.imgUrl" alt="a generic plant image"/>
     </section>
     <section>
       <button v-on:click="addToGarden()" > Add to My Virtual Garden </button>
-      <router-link v-bind:to="{name: 'sellersByPlant'}">Find Retailers</router-link>
+      <button><router-link v-bind:to="{name: 'sellersByPlant'}">Find Retailers</router-link></button>
     </section>
   </section>
 

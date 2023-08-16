@@ -8,14 +8,14 @@
     </svg>
     <h1>The Leaf Exchange</h1>
 
-    <div class="login-out">
+    <div class="login-out"><button>
       <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
         >Logout</router-link
       >
       <router-link v-bind:to="{ name: 'login' }" v-else>Login</router-link>
-    </div>
+    </button></div>
   </header>
 </template>
 

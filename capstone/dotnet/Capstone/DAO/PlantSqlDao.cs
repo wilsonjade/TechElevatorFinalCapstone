@@ -20,15 +20,18 @@ namespace Capstone.DAO
         private readonly string sqlAddPlantToVG = @"INSERT INTO virtual_garden(plant_id, user_id) VALUES(@plant_id, @user_id)";
 
         private readonly string sqlDeletePlantFromGarden = @"DELETE FROM virtual_garden WHERE @plant_id = plant_id AND @user_id = user_id";
-        private readonly string sqlGetAllGardens = @"SELECT DISTINCT user_id FROM virtual_garden;";
+        private readonly string sqlGetAllGardens = @"SELECT COUNT(virtual_garden.plant_id) AS plant_count, virtual_garden.user_id, users.expertise_level, users.first_name, users.region 
+                                                    FROM virtual_garden
+                                                    JOIN users ON users.user_id = virtual_garden.user_id
+                                                    GROUP BY virtual_garden.user_id, users.expertise_level, users.first_name, users.region ;";
         public PlantSqlDao(string dbConnectionString)
         {
             connectionString = dbConnectionString;
         }
 
-        public List<int> GetAllGardens()
+        public List<Garden> GetAllGardens()
         {
-            List<int> result = new List<int>();
+            List<Garden> result = new List<Garden>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -40,8 +43,14 @@ namespace Capstone.DAO
 
                     while (reader.Read())
                     {
-                        int thisInt = Convert.ToInt32((reader["user_id"]));
-                        result.Add(thisInt);
+                        Garden current = new Garden();
+                        current.UserId = Convert.ToInt32(reader["user_id"]);
+                        current.Region = Convert.ToInt32(reader["region"]);
+                        current.FirstName = Convert.ToString(reader["first_name"]);
+                        current.ExpertiseLevel = Convert.ToInt32(reader["expertise_level"]);
+                        current.PlantCount = Convert.ToInt32(reader["plant_count"]);
+                       
+                        result.Add(current);
                     }
                 }
             }

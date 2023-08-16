@@ -41,7 +41,7 @@ namespace Capstone.Controllers
 
 
         [HttpGet("future")] //GetFutureCommunications()
-        [Authorize(Roles = "admin, user")]
+        //[Authorize(Roles = "admin, user")]
         public ActionResult<List<Communication>> GetFutureCommunications()
         {
             return Ok(communicationsDao.GetFutureCommunications());
@@ -55,11 +55,21 @@ namespace Capstone.Controllers
             return Ok(communicationsDao.GetCommunicationsByType(communicationType));
         }
 
+<<<<<<< HEAD
         [HttpGet("{pollId}")]
         //[Authorize(Roles = "admin, user")]
         public ActionResult<List<PollOptions>> GetPollOptionsByPollId(int pollId)
         {
             return Ok(communicationsDao.GetPollOptionsByPollId(pollId));
+=======
+
+        [HttpPost()]
+        //[Authorize(Roles = "admin")]
+        public ActionResult<Communication> AddCommunication(Communication newCommunication)
+        {
+            Communication added = communicationsDao.AddCommunication(newCommunication);
+            return Created($"/communications/{added.CommunicationId}", added);
+>>>>>>> e83589db394ac43891bc9e11020065629957db82
         }
 
 
@@ -94,17 +104,22 @@ namespace Capstone.Controllers
         }
 
 
-
-
-        [HttpPost()]
-        //[Authorize(Roles = "admin")]
-        public ActionResult<Communication> AddCommunication(Communication newCommunication)
+        [HttpGet("type/poll/{pollId}")]
+        //[Authorize(Roles = "admin, user")]
+        public ActionResult<List<PollOptions>> GetPollOptionsByPollId(int pollId)
         {
-            Communication added = communicationsDao.AddCommunication(newCommunication);
-            return Created($"/communications/{added.CommunicationId}", added);
+            return Ok(communicationsDao.GetPollOptionsByPollId(pollId));
         }
 
-        [HttpPost("polls")]
+
+        [HttpGet("type/polloptions")]
+        public ActionResult<List<PollOptions>> GetPollOptions()
+        {
+            return Ok(communicationsDao.GetPollOptions());
+
+        }
+
+        [HttpPost("type/polloptions")]
         public ActionResult<PollOptions> AddPollOption(PollOptions newPollOption)
         {
             PollOptions added = communicationsDao.AddPollOption(newPollOption);

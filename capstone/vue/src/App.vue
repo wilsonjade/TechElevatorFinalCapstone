@@ -32,8 +32,6 @@ export default {
     this.$store.commit("LOAD_COMMUNICATIONS");
     this.$store.commit("LOAD_FUTURE_COMMUNICATIONS");
     this.$store.commit("LOAD_TASKS");
-
-    
   },
 };
 </script>
@@ -55,7 +53,6 @@ body {
   -o-background-size: cover;
   background-size: cover;
 
-  display: grid;
   margin: 0;
   padding: 0;
 
@@ -63,25 +60,40 @@ body {
 }
 
 a {
-  color: #22311d;
+  color: #f6f7e8;
+  text-decoration: none;
 }
 
+img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+
 .card {
-  background-color: #4c9173a8;
-  color: #f6f7e8;
-  border-radius: 8px;
-  padding: 4px 6px;
-  margin: 12px;
-  border: 2px solid #266147;
-  max-width: 400px;
+  background-color: #85b488b7;
+  color: #22311d;
+  border-radius: 12px;
+  padding: 4px 12px 8px 12px;
+  margin: .5rem .5rem 1.2rem .5rem;
+  border: 2px solid #22311d;
+  box-shadow: 8px 8px 6px 1px #22311d;
 }
 
 button {
-  background-color: #4c9173;
+  background-color: #77a370;
   color: #f6f7e8;
-  border-radius: 8px;
-  padding: 4px 6px;
-  border: 2px solid #266147;
+  border-radius: 16px;
+  padding: 6px 12px;
+  margin: .5rem;
+  border: 2px solid #22311d;
+  font-weight: bold;
 }
 
 button:hover {
@@ -121,43 +133,14 @@ section.container {
 #footer {
   position: fixed;
   margin-left: 5rem;
-  padding: 1rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
   width: 100%;
   bottom: 0;
   left: 0;
-  height: 35px;
-  background-color: darkolivegreen;
+  height: 1.3rem;
+  background-color: #446047;
   color: #f6f7e8;
   width: 100%;
-  text-align: center;
-}
-
-
-.off-white {
-  background: #f6f7e8;
-}
-
-.light-green {
-  background: #7dd87d;
-}
-
-.medium-green {
-  background: #4c9173;
-}
-
-.dark-green {
-  background: #266147;
-}
-
-.dark-purple {
-  background: #4d4355;
-}
-
-.medium-purple {
-  background: #5b446a;
-}
-
-.light-purple {
-  background: #da98cc;
+  text-align: right;
 }
 </style>

@@ -16,14 +16,20 @@ export default {
     createCommunication(newCommunication){        
         return axios.post("/communications/", newCommunication);
     },
-    createPollOption(newPollOption) {
-        return axios.post(`/communications/polls`, newPollOption)
-    },
     updateCommunication(communicationId, updatedCommunication){
         return axios.put(`/communications/${communicationId}`,updatedCommunication)
     },
     getFutureCommunications(){
         return axios.get(`/communications/future`)
-    }
+    },
+    getPollOptions() {
+        return axios.get("/communications/type/polloptions")
+    },
+    getPollOptionsByPollId(pollId) {
+        return axios.get(`/communications/type/poll/${pollId}`)
+    },
+    createPollOption(newPollOption) {
+        return axios.post(`/communications/polls`, newPollOption)
+    },
     
 }

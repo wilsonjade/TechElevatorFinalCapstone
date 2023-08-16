@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="communications-list">
     <button v-show="isAdmin" v-on:click="$router.push({name: 'communicationsAdmin'})" >Add New Communication</button>
 
     <communication-detail
@@ -7,16 +7,15 @@
       v-bind:key="communication.communicationId"
       v-bind:item="communication"
     />
-    <communication-detail v-for="poll in polls" v-bind:key="poll.pollId" />
   </section>
 </template>
 
 <script>
 import CommunicationDetail from "./CommunicationDetail.vue";
+
 export default {
   name: "listCommunications",
   components: { CommunicationDetail },
-
   data() {
     return {
       isAdmin: false,
@@ -28,9 +27,6 @@ export default {
     },
     futureCommunications() {
       return this.$store.state.futureCommunications;
-    },
-    polls() {
-      return this.$store.state.polls;
     },
   },
   created() {

@@ -1,17 +1,8 @@
 <template>
-  <form v-on:submit.prevent="submitForm()">
-      <div>
-      <label for="id">Id:</label>
-      <input v-model="formData.eventId" type="number" id="name" disabled />
-    </div>
-     
-      <div>
+  <form class="card" v-on:submit.prevent="submitForm()">
+    <div>
       <label for="name">Name:</label>
       <input v-model="formData.name"  type="text" id="name"  required />
-    </div>
-    <div>
-      <label for="userId">User ID:</label>
-      <input v-model="formData.userid" v-bind:placeholder="userid"  type="number" id="userId" disabled />
     </div>
     <div>
       <label for="address1">Address:</label>
