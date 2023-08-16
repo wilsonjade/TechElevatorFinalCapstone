@@ -1,40 +1,34 @@
 <template>
-  <section class="task-admin-delete">
-    <h1>Delete Task</h1>
-    
-     <form v-on:submit.prevent="submitForm()">
-      <div>
+  
+  <form v-on:submit="submitForm()">
+    <div>
       <label for="taskId">Task Id:</label>
-      <input v-model.number="formData.taskId" type="number" id="name"  />
+      <input v-model.number="taskId" type="number" id="taskId" />
     </div>
-
-    
-     <button type="submit">Submit</button>
+    <button type="submit">Submit</button>
   </form>
-    
-    
-  </section>
 </template>
 
 <script>
-import taskService from '../services/TaskService.js'
+import taskService from "../services/TaskService.js";
 
 export default {
   components: {},
-  name: "taskDelete",
+  name: "taskAdminDelete",
   props: ["item"],
   data() {
     return {
       isAdmin: false,
       seller: {},
+      taskId: 0,
     };
   },
   methods: {
-    deleteTask() {
+    submitForm() {
       let wasSuccess = false;
       let errorMsg;
       taskService
-        .deleteTask(this.item.taskId)
+        .deleteTask(this.taskId)
         .then((response) => {
           wasSuccess = response.status == 200;
           alert(
@@ -63,7 +57,7 @@ export default {
           }
         });
     },
-    
+
     created() {
       this.isAdmin = this.$store.state.user.role == "admin";
     },

@@ -220,7 +220,7 @@ const router = new Router({
     },
     {
       path: "/plant/tasks/delete",
-      name: "taskDelete",
+      name: "taskAdminDelete",
       component: TaskAdminDelete,
       meta:{
         requiresAuth: true

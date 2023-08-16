@@ -13,6 +13,7 @@ namespace Capstone.DAO
 
         private readonly string SqlGetTasksById = @"SELECT [task_id],[plant_id],[task_description],[task_category],[frequency_days] FROM [final_capstone].[dbo].[tasks] WHERE task_id = @taskId;";
         private readonly string SqlDeleteTask = @"DELETE tasks WHERE task_id = @task_id;";
+        private readonly string SqlDeleteAckTask = @"DELETE user_ack_task WHERE task_id = @task_id;";
         /* v1.0  private readonly string sqlGetMyTaskReminders = @"SELECT tasks.task_id, tasks.plant_id, tasks.task_category, tasks.task_description, tasks.frequency_days FROM tasks
                                                           JOIN virtual_garden ON virtual_garden.plant_id = tasks.plant_id
                                                           JOIN plants ON plants.plant_id = tasks.plant_id
@@ -146,14 +147,28 @@ WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) >
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand(SqlDeleteTask, conn))
+                using (SqlCommand cmd = new SqlCommand(SqlDeleteAckTask, conn))
                 {
+                    
                     cmd.Parameters.AddWithValue("@task_id", taskId);
 
                     int count = cmd.ExecuteNonQuery();
                     if (count == 1)
                     {
-                        return true;
+                        using (SqlCommand cmd2 = new SqlCommand(SqlDeleteTask, conn))
+                        {
+                            cmd2.Parameters.AddWithValue("@task_id", taskId);
+
+                            int count2 = cmd2.ExecuteNonQuery();
+                            if (count2 == 1)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
                     }
                     else
                     {
