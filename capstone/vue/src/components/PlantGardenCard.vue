@@ -85,6 +85,7 @@ export default {
 
 .plantcardcontainer:hover > .tipcontainer {
   display: flex;
+
   flex-wrap: wrap;
   flex-direction: row;
   justify-items: center;
