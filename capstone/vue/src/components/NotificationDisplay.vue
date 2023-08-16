@@ -1,6 +1,6 @@
 <template>
   <div v-bind:class="classes">
-    <span class="containertitle"> Notifications </span>
+    <div class="containertitle"> Notifications </div>
     <div v-on:click="ackAlertEvent(alertEvent)" v-bind:id="alertEvent" v-for="alertEvent in alertsEvents" v-bind:key="alertEvent" class="alert">
        <img src="../assets/checkicon.png" /> {{ alertEvent }} 
     </div>
@@ -45,7 +45,7 @@ export default {
       
       const now = new Date();
       let ackObj = {"taskId": taskId, "userId": this.$store.state.user.userId, "lastAck": now }
-      TaskService.ackTaskReminder(ackObj).then(
+      TaskService.ackTaskReminder(ackObj).then(()=>
         this.getTaskAlerts() //refresh alerts
     )},1700)
       //this.alertsTasks = this.alertsTasks.filter(e=> e.taskId != taskId); //update client list of alerts
@@ -166,6 +166,8 @@ div>img{
 .containertitle{
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 17pt;
+  min-width: 40%;
+  text-align: center;
   margin-left: auto; margin-right: auto;
   animation-name: openalerts;
   animation-duration: 4s;
