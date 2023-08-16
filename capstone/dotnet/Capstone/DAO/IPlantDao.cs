@@ -17,6 +17,6 @@ namespace Capstone.DAO
 
         bool DeletePlantFromGarden(int plantId, int userId);
 
-        Plant GetPlantByCommonName(string commonName);
+        List<Plant> GetPlantsByCommonName(string commonName);
     }
 }
