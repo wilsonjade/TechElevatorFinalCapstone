@@ -55,11 +55,13 @@ namespace Capstone.Controllers
             return Ok(communicationsDao.GetCommunicationsByType(communicationType));
         }
 
-        [HttpGet("type/poll/{pollId}")]
-        //[Authorize(Roles = "admin, user")]
-        public ActionResult<List<PollOptions>> GetPollOptionsByPollId(int pollId)
+
+        [HttpPost()]
+        //[Authorize(Roles = "admin")]
+        public ActionResult<Communication> AddCommunication(Communication newCommunication)
         {
-            return Ok(communicationsDao.GetPollOptionsByPollId(pollId));
+            Communication added = communicationsDao.AddCommunication(newCommunication);
+            return Created($"/communications/{added.CommunicationId}", added);
         }
 
 
@@ -94,6 +96,14 @@ namespace Capstone.Controllers
         }
 
 
+        [HttpGet("type/poll/{pollId}")]
+        //[Authorize(Roles = "admin, user")]
+        public ActionResult<List<PollOptions>> GetPollOptionsByPollId(int pollId)
+        {
+            return Ok(communicationsDao.GetPollOptionsByPollId(pollId));
+        }
+
+
         [HttpGet("type/polloptions")]
         public ActionResult<List<PollOptions>> GetPollOptions()
         {
@@ -101,15 +111,7 @@ namespace Capstone.Controllers
 
         }
 
-        [HttpPost()]
-        //[Authorize(Roles = "admin")]
-        public ActionResult<Communication> AddCommunication(Communication newCommunication)
-        {
-            Communication added = communicationsDao.AddCommunication(newCommunication);
-            return Created($"/communications/{added.CommunicationId}", added);
-        }
-
-        [HttpPost("polls")]
+        [HttpPost("type/polloptions")]
         public ActionResult<PollOptions> AddPollOption(PollOptions newPollOption)
         {
             PollOptions added = communicationsDao.AddPollOption(newPollOption);

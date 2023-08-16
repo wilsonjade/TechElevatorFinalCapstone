@@ -32,8 +32,6 @@ export default {
     this.$store.commit("LOAD_COMMUNICATIONS");
     this.$store.commit("LOAD_FUTURE_COMMUNICATIONS");
     this.$store.commit("LOAD_TASKS");
-
-    
   },
 };
 </script>
@@ -55,7 +53,6 @@ body {
   -o-background-size: cover;
   background-size: cover;
 
-  display: grid;
   margin: 0;
   padding: 0;
 
@@ -72,6 +69,13 @@ img {
   border-radius: 12px;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+
 .card {
   background-color: #85b488b7;
   color: #22311d;
@@ -79,7 +83,6 @@ img {
   padding: 4px 12px 8px 12px;
   margin: .5rem .5rem 1.2rem .5rem;
   border: 2px solid #22311d;
-  max-width: 400px;
   box-shadow: 8px 8px 6px 1px #22311d;
 }
 
@@ -89,7 +92,7 @@ button {
   border-radius: 16px;
   padding: 6px 12px;
   margin: .5rem;
-  border: 2px solid #266147;
+  border: 2px solid #22311d;
   font-weight: bold;
 }
 

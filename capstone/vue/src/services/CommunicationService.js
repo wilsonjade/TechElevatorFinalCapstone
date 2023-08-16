@@ -22,14 +22,14 @@ export default {
     getFutureCommunications(){
         return axios.get(`/communications/future`)
     },
-    createPollOption(newPollOption) {
-        return axios.post(`/communications/type/poll`, newPollOption)
-    },
     getPollOptions() {
         return axios.get("/communications/type/polloptions")
     },
     getPollOptionsByPollId(pollId) {
         return axios.get(`/communications/type/poll/${pollId}`)
-    }
+    },
+    createPollOption(newPollOption) {
+        return axios.post(`/communications/polls`, newPollOption)
+    },
     
 }

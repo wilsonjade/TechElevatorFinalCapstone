@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="communications-list">
     <button v-show="isAdmin" v-on:click="$router.push({name: 'communicationsAdmin'})" >Add New Communication</button>
 
     <communication-detail

@@ -1,6 +1,5 @@
 <template>
-  <section>
-      <h1>Welcome to the Community Home Page</h1>
+  <section class="grid-container" id="community-view">
     <!-- include events,forums, communications, buy/sell/trade components here -->
     <events-view />
     <communications-list />
@@ -16,10 +15,19 @@ export default {
 </script>
 
 <style scoped>
-body {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: 
-    "events communications"    
-    ;
+
+#community-view {
+  grid-template-areas: 
+    "events-view events-view communications-list";
+}
+
+#events-view {
+  grid-area: events-view;
+  margin-right: 25px;
+}
+
+#communications-list {
+  grid-area: communications-list;
+  margin-right: 25px;
 }
 </style>

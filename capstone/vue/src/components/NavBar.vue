@@ -195,6 +195,7 @@ export default {
   width: 5rem;
   height: 100vh;
   position: fixed;
+  top: 0;
   background-color: #a9d3a9;
   transition: width 200ms ease;
   z-index: 10;

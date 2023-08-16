@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="events-view">
       <button v-if="isAdmin" v-on:click="newEvent()"> Add New Event</button>
       <event-card v-for="event in events" v-bind:key="event.id" v-bind:item="event"/> 
         

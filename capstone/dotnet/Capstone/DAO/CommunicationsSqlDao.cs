@@ -34,7 +34,7 @@ namespace Capstone.DAO
             "@title, @type, @start_time, @end_time);";
 
         private readonly string SqlGetPollOptions = "SELECT * FROM poll_options";
-        private readonly string SqlAddPollOption = "INSERT INTO poll_options (text) VALUES (@text);";
+        private readonly string SqlAddPollOption = "INSERT INTO poll_options (poll_id, text) VALUES (@poll_id, @text);";
 
         private readonly string SqlGetPollOptionsByPollId = "SELECT * FROM poll_options " +
             "JOIN communications ON poll_options.poll_id = communication_id " +
@@ -275,7 +275,8 @@ namespace Capstone.DAO
                 using (SqlCommand cmd = new SqlCommand(SqlAddPollOption, conn))
                 {
                     cmd.Parameters.AddWithValue("@text", newPollOption.Text);
-                    newPollOption.OptionId = (int)cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("@poll_id", newPollOption.PollId);
+                    //newPollOption.OptionId = (int)cmd.ExecuteNonQuery();
                 }
             }
             return newPollOption;
