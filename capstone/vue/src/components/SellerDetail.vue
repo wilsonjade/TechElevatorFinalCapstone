@@ -1,6 +1,6 @@
 <template>
   <section class="seller-detail card">
-    <h1>{{ item.sellerName }}</h1>
+    <h2>{{ item.sellerName }}</h2>
     <p>{{ item.sellerType }}</p>
     <p>{{ item.address1 }}</p>
     <p>{{ item.address2 }}</p>

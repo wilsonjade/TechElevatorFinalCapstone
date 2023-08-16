@@ -194,7 +194,7 @@ const router = new Router({
         requiresAuth: true
       }
     },
-    {
+    { //not currently being used
       path: "/communications/:type",
       name: "communicationsByType",
       component: CommunicationsList,
@@ -243,3 +243,5 @@ router.beforeEach((to, from, next) => {
 });
 
 export default router;
+
+

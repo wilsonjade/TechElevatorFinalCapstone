@@ -2,6 +2,7 @@
   <section class="card" >
     <form v-on:submit.prevent="submitForm()">
       <div>
+        <h3>Add New Seller</h3>
       <label for="name">Name:</label>
       <input v-model="formData.sellerName" type="text" id="name"  required />
     </div>
@@ -99,5 +100,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.card {
+  max-width: 400px;
+}
 </style>
