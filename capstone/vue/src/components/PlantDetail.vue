@@ -14,10 +14,10 @@
 
     </div>
     <section>
-      <p><router-link :to="{ name: 'taskAdmin' }">Edit and add task.</router-link></p>
+      <p><router-link v-if="isAdmin"  :to="{ name: 'taskAdmin' }">Edit and add task.</router-link></p>
     </section>
     <section>
-      <p><router-link :to="{ name: 'taskAdminDelete' }">Delete task.</router-link></p>
+      <p><router-link v-if="isAdmin" :to="{ name: 'taskAdminDelete' }">Delete task.</router-link></p>
     </section>
     <section class="flex-container">
       <img id="plant-image" v-bind:src="plant.imgUrl" alt="a generic plant image"/>
@@ -70,6 +70,9 @@ export default {
 
   created(){
     this.getThisPlant();
+    
+      this.isAdmin = this.$store.state.user.role == "admin";
+    
 
   }
 };
