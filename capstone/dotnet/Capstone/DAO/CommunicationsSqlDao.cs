@@ -82,6 +82,7 @@ namespace Capstone.DAO
 
 
         [HttpGet("{type}")]
+
         public List<Communication> GetCommunicationsByType(string type)
         {
             List<Communication> communicationsList = new List<Communication>();

@@ -41,13 +41,13 @@ export default {
     },
     ackAlertTask(taskId){
       document.getElementById(taskId).classList.add("closealert");
-     setTimeout(()=>{
+      setTimeout(()=>{
       
       const now = new Date();
       let ackObj = {"taskId": taskId, "userId": this.$store.state.user.userId, "lastAck": now }
       TaskService.ackTaskReminder(ackObj).then(
         this.getTaskAlerts() //refresh alerts
-    )},700)
+    )},1700)
       //this.alertsTasks = this.alertsTasks.filter(e=> e.taskId != taskId); //update client list of alerts
     },
     getTaskAlerts(){
@@ -172,7 +172,8 @@ div>img{
 }
 .closealert{
   animation-name: closealert;
-  animation-duration: 2s;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes opencontainer {
@@ -196,7 +197,8 @@ div>img{
   100% {height: auto;}
 }
 @keyframes closealert {
-  from {opacity: 1}
-  to {opacity: 0}
+  0% {opacity: 1}
+  50% {opacity: 0 ;}
+  100% {display: none}
 }
 </style>
