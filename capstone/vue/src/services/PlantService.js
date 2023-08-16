@@ -10,6 +10,9 @@ export default {
     getPlantById(plantId) {
         return axios.get(`/plant/${plantId}`)
     },
+    getPlantByCommonName(commonName){
+        return axios.get(`/plant/name/${commonName}`)
+    },
     addToGarden(plantUser){
         return axios.post(`/plant/garden`,plantUser)
     },

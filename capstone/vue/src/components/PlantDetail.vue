@@ -55,7 +55,7 @@ export default {
       }
       ).catch(error=> {
         console.log(error.message)
-        this.$router.push({name: "virtualGardenView"})
+        this.$router.push({name: "virtualGardenView" ,params:{user:this.$store.state.user.userId }})
       
       })
       
