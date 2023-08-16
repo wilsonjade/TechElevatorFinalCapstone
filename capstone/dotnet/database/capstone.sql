@@ -199,7 +199,7 @@ INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 3, 'R
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 4, 'Rating 4', 5, 'This is a review also also also')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 5', 5, 'This is a review also also also also')
 
-
+--communication id1
 INSERT INTO communications (user_id, type, title,  start_time, end_time) 
 	VALUES (2, 'poll', 'Which is your favorite hanging plant?', '2023-08-12 10:00:00', '2023-08-20 11:00:00');
 INSERT INTO poll_options (poll_id, text) VALUES (1, 'Pothos');
@@ -211,50 +211,57 @@ INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (2, 1, 4, GETDATE());
 
+--communication id2
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'competition', 'Enter your tallest plant height in order to win!', '2023-08-22 09:30:00', '2023-08-29 09:30:00');
+
+--communication id3
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'challenge', 'Water your plants on time for one week to win a badge!', '2023-08-22 09:30:00', '2023-08-29 09:30:00');
 
+--communication id4
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'poll', 'How many plants do you have in your home?', '2023-08-15 10:00:00', '2023-08-22 11:00:00');
-INSERT INTO poll_options (poll_id, text) VALUES (2, '0-8');
-INSERT INTO poll_options (poll_id, text) VALUES (2, '8-15');
-INSERT INTO poll_options (poll_id, text) VALUES (2, '15-25');
-INSERT INTO poll_options (poll_id, text) VALUES (2, '25+');
+INSERT INTO poll_options (poll_id, text) VALUES (4, '0-8');
+INSERT INTO poll_options (poll_id, text) VALUES (4, '8-15');
+INSERT INTO poll_options (poll_id, text) VALUES (4, '15-25');
+INSERT INTO poll_options (poll_id, text) VALUES (4, '25+');
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (1, 2, 5, GETDATE());
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (2, 2, 7, GETDATE());
 		   
+--communication id5
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'poll', 'What was your first houseplant?', '2023-08-20 09:30:00', '2023-08-27 09:30:00');
-INSERT INTO poll_options (poll_id, text) VALUES (3, 'Cactus');
-INSERT INTO poll_options (poll_id, text) VALUES (3, 'Pothos');
-INSERT INTO poll_options (poll_id, text) VALUES (3, 'Monstera');
-INSERT INTO poll_options (poll_id, text) VALUES (3, 'Succulent');
+INSERT INTO poll_options (poll_id, text) VALUES (5, 'Cactus');
+INSERT INTO poll_options (poll_id, text) VALUES (5, 'Pothos');
+INSERT INTO poll_options (poll_id, text) VALUES (5, 'Monstera');
+INSERT INTO poll_options (poll_id, text) VALUES (5, 'Succulent');
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (1, 3, 10, GETDATE());
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (2, 3, 12, GETDATE());
 
+--communication id6
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'poll', 'Do you prefer indoor plants or outdoor gardening?', '2023-08-16 09:30:00', '2023-08-23 09:30:00');
-INSERT INTO poll_options (poll_id, text) VALUES (4, 'Indoor');
-INSERT INTO poll_options (poll_id, text) VALUES (4, 'Outdoor');
-INSERT INTO poll_options (poll_id, text) VALUES (4, 'Standard programmer answer: it depends.');
-INSERT INTO poll_options (poll_id, text) VALUES (4, 'Little of both!');
+INSERT INTO poll_options (poll_id, text) VALUES (6, 'Indoor');
+INSERT INTO poll_options (poll_id, text) VALUES (6, 'Outdoor');
+INSERT INTO poll_options (poll_id, text) VALUES (6, 'Standard programmer answer: it depends.');
+INSERT INTO poll_options (poll_id, text) VALUES (6, 'Little of both!');
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (1, 4, 14, GETDATE());
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (2, 4, 15, GETDATE());
 
+--communication id7
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'poll', 'What is the best houseplant for beginners?', '2023-08-22 09:30:00', '2023-08-29 09:30:00');
-INSERT INTO poll_options (poll_id, text) VALUES (5, 'Succulent');
-INSERT INTO poll_options (poll_id, text) VALUES (5, 'Palm');
-INSERT INTO poll_options (poll_id, text) VALUES (5, 'Snake Plant');
-INSERT INTO poll_options (poll_id, text) VALUES (5, 'Pothos');
+INSERT INTO poll_options (poll_id, text) VALUES (7, 'Succulent');
+INSERT INTO poll_options (poll_id, text) VALUES (7, 'Palm');
+INSERT INTO poll_options (poll_id, text) VALUES (7, 'Snake Plant');
+INSERT INTO poll_options (poll_id, text) VALUES (7, 'Pothos');
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (1, 5, 18, GETDATE());
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
