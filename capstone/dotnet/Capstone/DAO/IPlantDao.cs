@@ -16,5 +16,7 @@ namespace Capstone.DAO
         bool AddPlantToVG(int plantId, int userId);
 
         bool DeletePlantFromGarden(int plantId, int userId);
+
+        Plant GetPlantByCommonName(string commonName);
     }
 }

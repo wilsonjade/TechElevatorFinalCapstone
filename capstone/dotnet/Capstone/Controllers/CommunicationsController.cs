@@ -56,12 +56,15 @@ namespace Capstone.Controllers
         }
 
 
+       
+
         [HttpPost()]
         //[Authorize(Roles = "admin")]
         public ActionResult<Communication> AddCommunication(Communication newCommunication)
         {
             Communication added = communicationsDao.AddCommunication(newCommunication);
             return Created($"/communications/{added.CommunicationId}", added);
+
         }
 
 
