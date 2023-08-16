@@ -55,11 +55,11 @@ namespace Capstone.Controllers
             return Ok(communicationsDao.GetCommunicationsByType(communicationType));
         }
 
-        [HttpGet("polloption/{pollId}")]
+        [HttpGet("{pollId}")]
         //[Authorize(Roles = "admin, user")]
-        public ActionResult<List<PollOptions>> GetPollOptionsByPollId(int id)
+        public ActionResult<List<PollOptions>> GetPollOptionsByPollId(int pollId)
         {
-            return Ok(communicationsDao.GetPollOptionsByPollId(id));
+            return Ok(communicationsDao.GetPollOptionsByPollId(pollId));
         }
 
 
