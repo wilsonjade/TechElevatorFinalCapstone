@@ -153,7 +153,7 @@ WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) >
                     cmd.Parameters.AddWithValue("@task_id", taskId);
 
                     int count = cmd.ExecuteNonQuery();
-                    if (count == 1)
+                    
                     {
                         using (SqlCommand cmd2 = new SqlCommand(SqlDeleteTask, conn))
                         {
@@ -170,10 +170,10 @@ WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) >
                             }
                         }
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    
+                    
+                        
+                    
                 }
             }
         }
