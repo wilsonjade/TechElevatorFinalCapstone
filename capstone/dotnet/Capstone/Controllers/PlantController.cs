@@ -41,9 +41,9 @@ namespace Capstone.Controllers
 
         [HttpGet("name/{commonName}")]
 
-        public ActionResult<Plant>GetPlantByCommonName(string commonName)
+        public ActionResult<List<Plant>>GetPlantByCommonName(string commonName)
         {
-            return Ok(plantDao.GetPlantByCommonName(commonName));
+            return Ok(plantDao.GetPlantsByCommonName(commonName));
         }
 
 

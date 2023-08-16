@@ -1,20 +1,67 @@
 <template>
   <section>
-      <h1> Search Plants view</h1>
-    <router-link v-bind:to="{ name: 'plantDetail', params:{plantId:1} }">Plant detail id1</router-link>&nbsp;|&nbsp;
+      <h1> Search Plants By Common Name!</h1>
+    
+  <form v-on:submit.prevent="searchPlantByCommonName()">
+    <div class="searchbar">
+    <input v-model="commonName" type="text" placeholder="Search plants by name..">
+   <input type="submit" value="Search" >
+   
+   </div> 
+   </form>
 
+     <h3 v-for="plant in plants" v-bind:key="plant.id">{{plant.commonName}}</h3>
+     <button v-for="plant in plants" v-bind:key="plant.id"><router-link v-bind:to="{name:'plantDetail', params:{plantId:plant.plantId}}" >Details</router-link></button>
+     
+   
+   
   </section>
+
 </template>
 
 <script>
 
+//return a simple description(name etc) and a link to that specific plant detail page 
+import plantService from "../services/PlantService.js"
 
 export default {
+  name: "search",
   components: {  },
+  data() {
+    return {commonName: "",
+    plants: []};
+  },
+  methods: {
+    searchPlantByCommonName(){
+      plantService.getPlantByCommonName(this.commonName)
+      .then((response)=>{
+        console.log(response)
+        this.plants = response.data})
+    },
+  }
 
 }
 </script>
 
+
+
+
+
+
 <style>
+.searchbar input[type=text] {
+  padding: 10px;
+  border-width: medium;
+  border-color: olivedrab;
+  margin-top: 10px;
+  margin-right: 30px;
+  font-size: 20px;
+}
+
+/* Change the color of links on hover */
+/* .searchbar a:hover {
+  background-color: #ddd;
+  color: black;
+} */
 
 </style>
