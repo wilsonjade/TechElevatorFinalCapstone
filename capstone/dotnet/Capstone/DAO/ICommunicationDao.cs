@@ -13,6 +13,7 @@ namespace Capstone.DAO
         public Communication AddCommunication(Communication communicationToAdd);
         public Communication UpdateCommunication(Communication communicationToUpdate);
         public bool DeleteCommunication(int communicationId);
+        public List<PollOptions> GetPollOptions();
         public PollOptions AddPollOption(PollOptions newPollOption);
         public List<PollOptions> GetPollOptionsByPollId(int id);
     }

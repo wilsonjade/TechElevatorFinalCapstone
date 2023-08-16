@@ -8,22 +8,22 @@
     <section class="poll-details" v-show="item.type == 'poll'">
       <div>
         <input type="radio" name="poll-item" id="poll-option1" />
-        <label for="poll-option1">{{ pollOptions[0].text }}</label>
+        <label for="poll-option1">{{ currentPollOptions[0].text }}</label>
       </div>
 
       <div>
         <input type="radio" name="poll-item" id="poll-option2" />
-        <label for="poll-option2">{{ pollOptions[1].text }}</label>
+        <label for="poll-option2">{{ currentPollOptions[1].text }}</label>
       </div>
 
       <div>
         <input type="radio" name="poll-item" id="poll-option3" />
-        <label for="poll-option3">{{ pollOptions[2].text }}</label>
+        <label for="poll-option3">{{ currentPollOptions[2].text }}</label>
       </div>
 
       <div>
         <input type="radio" name="poll-item" id="poll-option4" />
-        <label for="poll-option4">{{ pollOptions[3].text }}</label>
+        <label for="poll-option4">{{ currentPollOptions[3].text }}</label>
       </div>
     <button>Submit your answer!</button>
     </section>
@@ -89,8 +89,10 @@ export default {
     };
   },
   computed: {
-    pollOptions() {
-      return this.$store.state.pollOptions;
+    currentPollOptions() {
+      return this.$store.state.pollOptions.filter( pollOption => {
+         return pollOption.pollId == this.item.communicationId
+      } )
     }
   },
   created() {

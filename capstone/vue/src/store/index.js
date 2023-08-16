@@ -193,9 +193,9 @@ export default new Vuex.Store({
         }
       });
     },
-    LOAD_POLL_OPTIONS(state, pollId) {
-      console.log("Reached LOAD_POLL_OPTIONS, pollId: " + pollId)
-      communicationService.getPollOptionsByPollId(pollId)
+    LOAD_POLL_OPTIONS(state) {
+      console.log("Reached LOAD_POLL_OPTIONS")
+      communicationService.getPollOptions()
       .then( (response) => {
         state.pollOptions = response.data;
       } )

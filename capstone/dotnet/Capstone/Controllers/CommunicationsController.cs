@@ -94,7 +94,12 @@ namespace Capstone.Controllers
         }
 
 
+        [HttpGet("type/polloptions")]
+        public ActionResult<List<PollOptions>> GetPollOptions()
+        {
+            return Ok(communicationsDao.GetPollOptions());
 
+        }
 
         [HttpPost()]
         //[Authorize(Roles = "admin")]
