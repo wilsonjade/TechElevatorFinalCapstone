@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style>
-.gardenlistcontainer{
+/* .gardenlistcontainer{
     display: flex;
   flex-direction: row;
   justify-content: center;
@@ -61,5 +61,5 @@ export default {
     width: 30%;
     margin: 25px;
     padding: 10px;
-}
+} */
 </style>

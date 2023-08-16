@@ -69,12 +69,23 @@ img {
   border-radius: 12px;
 }
 
+.view {
+  padding-top: 15px;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+
+}
 
 .card {
   background-color: #85b488b7;
