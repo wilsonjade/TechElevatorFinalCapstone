@@ -1,5 +1,5 @@
 <template>
-  <section class="plantCard card">
+  <section class="plantCard card flex-container">
     <h1 class="headline">Common name: {{ plant.commonName }}</h1>
     <div class="card" >
     <p>Id: {{ plant.plantId }}</p>
@@ -19,8 +19,8 @@
     <section>
       <p><router-link :to="{ name: 'taskAdminDelete' }">Delete task.</router-link></p>
     </section>
-    <section>
-      <img v-bind:src="plant.imgUrl" alt="a generic plant image"/>
+    <section class="flex-container">
+      <img id="plant-image" v-bind:src="plant.imgUrl" alt="a generic plant image"/>
     </section>
     <section>
       <button v-on:click="addToGarden()" > Add to My Virtual Garden </button>
@@ -75,8 +75,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .plantCard{
-  margin: auto;
+  margin: 1rem auto;
+  flex-direction: column;
 }
+
+
 </style>
