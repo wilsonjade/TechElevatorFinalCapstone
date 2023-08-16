@@ -7,34 +7,34 @@
 
     <section class="poll-details" v-show="item.type == 'poll'">
       <div>
-        <input type="radio" name="poll-item" v-model="choice" value="0" id="poll-option1" />
+        <input type="radio" name="poll-item" v-model="choice" value="0" />
         <label for="poll-option1">{{ currentPollOptions[0].text }}</label>
       </div>
 
       <div>
-        <input type="radio" name="poll-item" v-model="choice" value="1" id="poll-option2" />
+        <input type="radio" name="poll-item" v-model="choice" value="1" />
         <label for="poll-option2">{{ currentPollOptions[1].text }}</label>
       </div>
 
       <div>
-        <input type="radio" name="poll-item" v-model="choice" value="2" id="poll-option3" />
+        <input type="radio" name="poll-item" v-model="choice" value="2" />
         <label for="poll-option3">{{ currentPollOptions[2].text }}</label>
       </div>
 
       <div>
-        <input type="radio" name="poll-item" v-model="choice" value="3" id="poll-option4" />
+        <input type="radio" name="poll-item" v-model="choice" value="3" />
         <label for="poll-option4">{{ currentPollOptions[3].text }}</label>
       </div>
     <button>Submit your answer!</button>
     </section>
 
-    <section class="challenge-details" v-show="item.type == 'challenge'">
+    <!-- <section class="challenge-details" v-show="item.type == 'challenge'">
       <button>Challenge Completed</button>
     </section>
 
     <section class="competition-details" v-show="item.type == 'competition'">
       <button>Join the Competition!</button>
-    </section>
+    </section> -->
 
 
     <button v-on:click="deleteCommunication" v-show="isAdmin">Delete this {{ item.type }}</button>
@@ -87,6 +87,9 @@ export default {
       isAdmin: false,
       pollId: this.item.communicationId,
       choice: -1,
+      currentPoll: {
+        title: this.item.title,
+      },
     };
   },
   computed: {
