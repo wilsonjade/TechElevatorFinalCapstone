@@ -57,7 +57,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 .plantcardcontainer {
   width: 20%;
   font-size: larger;
@@ -148,8 +148,5 @@ export default {
 .plantcardcontainer:hover > #cardimg {
   width: 80%;
   height: 150px;
-}
-#remove {
-  /* how to push this to the bottom?? */
 }
 </style>

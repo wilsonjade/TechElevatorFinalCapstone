@@ -159,7 +159,7 @@ div>img{
   padding: 5px;
   box-shadow: 2px 2px slategrey;
   border-radius: 10px;
-  background-color: hwb(110 49% 4%);
+  background-color: #85b488b7;
   animation-name: openalerts;
   animation-duration: 6s;
 }

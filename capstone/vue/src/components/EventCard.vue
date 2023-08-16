@@ -1,8 +1,9 @@
 <template>
   <div class="event card">
     <section >
-      <h1>{{ item.name }}</h1>
-      <h2>{{ item.shortDescription }}</h2>
+      <p class="card-header">Event</p>
+      <h2>{{ item.name }}</h2>
+      <h3>{{ item.shortDescription }}</h3>
      
     </section>
     <section>
