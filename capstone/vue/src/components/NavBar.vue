@@ -58,7 +58,10 @@
       <li class="nav-item">
         <router-link
           class="nav-link"
-          v-bind:to="{ name: 'virtualGardenView', params: { user: $store.state.user.userId } }"
+          v-bind:to="{
+            name: 'virtualGardenView',
+            params: { user: $store.state.user.userId },
+          }"
         >
           <svg
             class="nav-icon"
@@ -91,7 +94,10 @@
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" v-bind:to="{ name: 'communicationsList' }">
+        <router-link
+          class="nav-link"
+          v-bind:to="{ name: 'communicationsList' }"
+        >
           <svg
             class="nav-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +191,6 @@ export default {
 </script>
 
 <style>
-
 #nav {
   width: 5rem;
   height: 100vh;
@@ -193,14 +198,6 @@ export default {
   background-color: #a9d3a9;
   transition: width 200ms ease;
   z-index: 10;
-}
-
-#nav:hover {
-  width: 12rem;
-}
-
-#nav:hover .link-text {
-  display: block;
 }
 
 ul.navbar-nav {
@@ -238,9 +235,7 @@ li.nav-item:hover {
 .link-text {
   display: none;
   margin-left: 1rem;
-  
 }
-
 
 .nav-link svg {
   min-width: 2rem;
@@ -256,4 +251,86 @@ svg.nav-icon {
   color: #f6f7e8;
 }
 
+/******************************
+********************************
+###### - MEDIA QUERIES - ######
+********************************
+***************************** */
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 700px) {
+  #nav {
+    width: 5rem;
+    height: 100vh;
+    position: fixed;
+    background-color: #a9d3a9;
+    transition: width 200ms ease;
+    z-index: 10;
+  }
+  #nav:hover {
+    width: 12rem;
+  }
+
+  #nav:hover .link-text {
+    display: block;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* CSS */
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  /* CSS */
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  /* CSS */
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  #nav {
+  width: 100%;
+  height: 5rem;
+  position: fixed;
+  bottom: 0;
+  background-color: #a9d3a9;
+  z-index: 10;
+}
+
+ul.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+li.nav-item {
+  align-items: center;
+}
+
+}
 </style>

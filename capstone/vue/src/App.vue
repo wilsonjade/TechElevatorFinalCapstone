@@ -130,21 +130,14 @@ section.container {
 #footer {
   position: fixed;
   margin-left: 5rem;
-  padding: 1rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
   width: 100%;
   bottom: 0;
   left: 0;
-  height: 35px;
+  height: 1.3rem;
   background-color: #446047;
   color: #f6f7e8;
   width: 100%;
-  text-align: center;
+  text-align: right;
 }
-
-
-.off-white {
-  background: #f6f7e8;
-}
-
-
 </style>

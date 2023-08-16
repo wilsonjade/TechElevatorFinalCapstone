@@ -1,6 +1,7 @@
 <template>
   <section class="plantCard card">
     <h1 class="headline">Common name: {{ plant.commonName }}</h1>
+    <div class="card" >
     <p>Id: {{ plant.plantId }}</p>
     <p>Kingdom: {{ plant.kingdom }}</p>
     <p>Order: {{ plant.order }}</p>
@@ -9,6 +10,9 @@
     <p>Genus: {{ plant.genus }}</p>
     <p>Species: {{ plant.species }}</p>
     <p>Description: {{ plant.description }}</p>
+
+
+    </div>
     <section>
       <p><router-link :to="{ name: 'taskAdmin' }">Edit and add task.</router-link></p>
       </section>
