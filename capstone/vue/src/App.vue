@@ -106,7 +106,6 @@ button {
 
 button:hover {
   font-weight: bold;
-  color: #da98cc;
 }
 
 section.container {
@@ -126,16 +125,25 @@ section.container {
 
 #header {
   position: fixed;
-  margin-left: 5rem;
-  padding: 1rem;
-  width: 92%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 10rem;
+  width: 100%;
   top: 0;
   left: 0;
   height: 35px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   background-color: #f0b45b75;
+  font-size: 2rem;
+  font-family: fantasy;
+  color: #567a49;
+
+}
+
+#header:onscroll {
+  display: hide;
 }
 
 #footer {
