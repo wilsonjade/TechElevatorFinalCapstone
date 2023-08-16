@@ -119,7 +119,7 @@ CREATE TABLE [ratings] (
 
 	CREATE TABLE poll_options (
 	option_id int IDENTITY(1,1) NOT NULL,
-	poll_id int,
+	poll_id int NOT NULL,
 	text varchar(max),
 	CONSTRAINT [PK_option_id] PRIMARY KEY (option_id),
 	CONSTRAINT [FK_poll_id_options] FOREIGN KEY (poll_id) REFERENCES [communications](communication_id),
@@ -212,6 +212,11 @@ INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (2, 1, 4, GETDATE());
 
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
+	VALUES (2, 'competition', 'Enter your tallest plant height in order to win!', '2023-08-22 09:30:00', '2023-08-29 09:30:00');
+INSERT INTO communications (user_id, type, title, start_time, end_time) 
+	VALUES (2, 'challenge', 'Water your plants on time for one week to win a badge!', '2023-08-22 09:30:00', '2023-08-29 09:30:00');
+
+INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'poll', 'How many plants do you have in your home?', '2023-08-15 10:00:00', '2023-08-22 11:00:00');
 INSERT INTO poll_options (poll_id, text) VALUES (2, '0-8');
 INSERT INTO poll_options (poll_id, text) VALUES (2, '8-15');
@@ -254,6 +259,7 @@ INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (1, 5, 18, GETDATE());
 INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
 	VALUES (2, 5, 20, GETDATE());
+
 
 --populate tasks table
 INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (1, 'water', 1)

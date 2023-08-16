@@ -1,11 +1,12 @@
 <template>
   <form
     v-on:submit.prevent="submitPollResponse()"
-    class="communication-detail card poll"
+    class="communication-detail card"
   >
+    <header class="card-header">{{item.type}}</header>
     <h3>{{ item.title }}</h3>
 
-    <section class="poll-details" v-show="item.type == 'poll'">
+    <section class="poll-details" v-if="item.type == 'poll'">
       <div>
         <input type="radio" name="poll-item" v-model="choice" value="0" />
         <label for="poll-option1">{{ currentPollOptions[0].text }}</label>
@@ -28,13 +29,15 @@
     <button>Submit your answer!</button>
     </section>
 
-    <!-- <section class="challenge-details" v-show="item.type == 'challenge'">
+    
+
+    <section class="communication-details" v-if="item.type == 'challenge'">
       <button>Challenge Completed</button>
     </section>
 
-    <section class="competition-details" v-show="item.type == 'competition'">
+    <section class="communication-details" v-if="item.type == 'competition'">
       <button>Join the Competition!</button>
-    </section> -->
+    </section>
 
 
     <button v-on:click="deleteCommunication" v-show="isAdmin">Delete this {{ item.type }}</button>
@@ -107,16 +110,19 @@ export default {
 </script>
 
 <style scoped>
-.poll {
-  display: flex;
-  flex-direction: column;
-}
-
 div {
   padding: 4px;
 }
 
 .card {
   max-width: 450px;
+  display: flex;
+  flex-direction: column;
 }
+
+
+h3 {
+  margin: 8px;
+}
+
 </style>
