@@ -60,7 +60,7 @@ export default {
 <style>
 .plantcardcontainer {
   width: 20%;
-  height: 25%;
+  height: fit-content;
   font-size: larger;
   margin-left: 20px;
   margin-right: 20px;
@@ -109,6 +109,11 @@ export default {
 .plantcardcontainer > .cardtitle {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border-bottom: black;
+  border-bottom-style:inset;
+  border-bottom-width: 1px;
   text-align: center;
 }
 .species {

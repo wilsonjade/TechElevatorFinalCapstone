@@ -23,7 +23,17 @@
 
      <h3 v-for="plant in plants" v-bind:key="plant.id">{{plant.commonName}}</h3>
      <button v-for="plant in plants" v-bind:key="plant.id"><router-link v-bind:to="{name:'plantDetail', params:{plantId:plant.plantId}}" >Details</router-link></button>
-     
+    
+     <table>
+       <thead>
+         <th>Common Name</th><th>Family</th><th>Genus</th><th>Species</th><th>Description</th> <th>View Details</th>
+         </thead>
+         <tbody>
+           <tr v-for="plant in plants" v-bind:key="plant.id">
+             <td>{{plant.commonName}}</td><td>{{plant.family}}</td><td>{{plant.genus}}</td><td>{{plant.species}}</td><td>{{plant.description}}</td><td><button ><router-link v-bind:to="{name:'plantDetail', params:{plantId:plant.plantId}}" >Details</router-link></button></td>
+           </tr>
+         </tbody>
+      </table>
    
    
   </section>
@@ -51,7 +61,9 @@ export default {
       plantService.getPlantByCommonName(this.search)
       .then((response)=>{
         console.log(response)
-        this.plants = response.data})
+        this.plants = response.data
+        // this.plants.forEach(e=> e.description = e.description.substr(0,15)) shorten description?
+        })
     },
   }
 
