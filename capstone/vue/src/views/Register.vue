@@ -1,117 +1,125 @@
 <template>
-  <div id="register" class="text-center card">
-    <form @submit.prevent="register">
-      <h1>Create Account</h1>
-      <div role="alert" v-if="registrationErrors">
-        {{ registrationErrorMsg }}
-      </div>
-      <div class="form-input-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          v-model="user.username"
-          required
-          autofocus
-        />
-      </div>
-      <div class="form-input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model="user.password" required />
-      </div>
-      <div class="form-input-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          v-model="user.confirmPassword"
-          required
-        />
-      </div>
+  <section class="grid-container card">
+    <div id="register" class="text-center">
+      <form @submit.prevent="register" class="grid-left">
+        <h1>Create Account</h1>
+        <div role="alert" v-if="registrationErrors">
+          {{ registrationErrorMsg }}
+        </div>
+        <div class="form-input-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            v-model="user.username"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-input-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            v-model="user.password"
+            required
+          />
+        </div>
+        <div class="form-input-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            v-model="user.confirmPassword"
+            required
+          />
+        </div>
 
-      <div class="form-input-group">
-        <label for="expertiseLevel">Level of Expertise</label>
-        <select
-          name="expertiseLevel"
-          input
-          type="number"
-          id="expertiseLevel"
-          v-model.number="user.expertiseLevel"
-          required
-          autofocus
-        >
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
+        <div class="form-input-group">
+          <label for="expertiseLevel">Level of Expertise</label>
+          <select
+            name="expertiseLevel"
+            input
+            type="number"
+            id="expertiseLevel"
+            v-model.number="user.expertiseLevel"
+            required
+            autofocus
+          >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </div>
 
-        </select>
-      </div>
+        <div class="form-input-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            v-model="user.firstName"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-input-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            v-model="user.lastName"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-input-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            v-model="user.email"
+            required
+            autofocus
+          />
+        </div>
 
-      <div class="form-input-group">
-        <label for="firstName">First Name</label>
-        <input
-          type="text"
-          id="firstName"
-          v-model="user.firstName"
-          required
-          autofocus
-        />
-      </div>
-      <div class="form-input-group">
-        <label for="lastName">Last Name</label>
-        <input
-          type="text"
-          id="lastName"
-          v-model="user.lastName"
-          required
-          autofocus
-        />
-      </div>
-      <div class="form-input-group">
-        <label for="email">Email</label>
-        <input type="text" id="email" v-model="user.email" required autofocus />
-      </div>
+        <div class="form-input-group">
+          <label for="region">Region</label>
+          <select
+            name="region"
+            input
+            type="number"
+            id="region"
+            v-model.number="user.region"
+            required
+            autofocus
+          >
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </div>
 
-
-
-      <div class="form-input-group">
-        <label for="region">Region</label>
-        <select
-          name = "region"
-          input type="number"
-          id="region"
-          v-model.number="user.region"
-          required
-          autofocus
-        >
-
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
-
-        </select>
-      </div>
-
-      <button type="submit">Create Account</button>
-      <p>
-        <button><router-link :to="{ name: 'login' }"
-          >Already have an account? Log in.</router-link
-        ></button>
-      </p>
-    </form>
-
-     <section class="chart-container">
- <img class="chart" src="../assets/plantingzones.jpg" />
+        <button type="submit">Create Account</button>
+        <p>
+          <button>
+            <router-link :to="{ name: 'login' }"
+              >Already have an account? Log in.</router-link
+            >
+          </button>
+        </p>
+      </form>
+    </div>
+    <section class="chart-container grid-right">
+      <img class="chart" src="../assets/plantingzones.jpg" />
     </section>
-    
-  </div>
-  
+  </section>
 </template>
 
 <script>
@@ -170,24 +178,39 @@ export default {
 </script>
 
 <style scoped>
+
+.card {
+  max-width: 900px;
+}
+.grid-container {
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "grid-left grid-right";
+}
+
+.grid-left {
+  grid-area: grid-left;
+}
+
+.grid-right {
+  grid-area: grid-right;
+}
+
 .form-input-group {
   margin-bottom: 1rem;
-  
 }
 label {
   margin-right: 0.5rem;
 }
 
-.chart-container{
+.chart-container {
   float: right;
   margin-top: 20px;
   align-items: right;
   clear: both;
 }
-.chart{
+.chart {
   height: 350px;
-  width: 400px;
+  width: auto;
   border-radius: 5%;
-} 
-
+}
 </style>
