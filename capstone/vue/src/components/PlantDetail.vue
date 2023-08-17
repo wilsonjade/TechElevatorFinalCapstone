@@ -31,6 +31,13 @@
         >
       </button>
     </section>
+     <section>
+      <p><router-link v-if="isAdmin"  :to="{ name: 'taskAdmin' }">Edit and add task.</router-link></p>
+    </section>
+    <section>
+      <p><router-link v-if="isAdmin" :to="{ name: 'taskAdminDelete' }">Delete task.</router-link></p>
+    </section>
+
   </section>
 </template>
 
@@ -39,7 +46,7 @@ import plantService from "../services/PlantService.js";
 
 export default {
   name: "plant",
-
+  isAdmin: false,
   methods: {
     getThisPlant() {
       plantService.getPlantById(this.$route.params.plantId).then((response) => {
