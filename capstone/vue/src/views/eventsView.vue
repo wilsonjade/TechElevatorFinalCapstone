@@ -22,7 +22,17 @@ export default {
   },
   methods:{
    getListEvents() {
-      EventService.listEvents().then(response => this.events = response.data)
+      EventService.listEvents().then(response =>{ 
+      this.events = response.data;
+      this.events.forEach(e=>{
+      let dt = new Date(e.startTime);
+          e['startTimeObj'] = dt;
+          dt = new Date(e.endTime);
+          e['endTimeObj'] = dt;
+          
+          }
+      )}
+      )
 
     },
     newEvent(){
