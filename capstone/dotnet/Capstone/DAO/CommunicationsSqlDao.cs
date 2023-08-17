@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using static Capstone.Models.Communication;
 
 namespace Capstone.DAO
@@ -47,6 +48,8 @@ namespace Capstone.DAO
             "WHERE communication_id = @communication_id;";
 
         private readonly string SqlDeleteCommunication = "DELETE FROM communications WHERE communication_id = @communication_id;";
+
+        private readonly string SqlDeletePollOption = "DELETE FROM poll_options WHERE poll_id = @communication_id;";
 
 
 
@@ -207,19 +210,33 @@ namespace Capstone.DAO
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand(SqlDeleteCommunication, conn))
+                using (SqlCommand cmd = new SqlCommand(SqlDeletePollOption, conn))
                 {
+
                     cmd.Parameters.AddWithValue("@communication_id", communicationId);
 
                     int count = cmd.ExecuteNonQuery();
-                    if (count == 1)
+
                     {
-                        return true;
+                        using (SqlCommand cmd2 = new SqlCommand(SqlDeleteCommunication, conn))
+                        {
+                            cmd2.Parameters.AddWithValue("@communication_id", communicationId);
+
+                            int count2 = cmd2.ExecuteNonQuery();
+                            if (count2 == 1)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
+
+
+
+
                 }
             }
         }

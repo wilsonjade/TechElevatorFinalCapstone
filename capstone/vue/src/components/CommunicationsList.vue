@@ -7,6 +7,10 @@
       v-bind:key="communication.communicationId"
       v-bind:item="communication"
     />
+
+    <div class="card">
+      <p>There are no more community activities to show at this time.</p>
+    </div>
   </section>
 </template>
 
