@@ -201,8 +201,9 @@ INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 1, 'R
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 2, 'Rating 2', 5, 'This is a review also')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 3, 'Rating 3', 5, 'This is a review also also')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 4, 'Rating 4', 5, 'This is a review also also also')
-INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 5', 5, 'This is a review also also also also')
-
+INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 5', 5, 'Good location, I love to stop here every weekend and see what''s new!')
+INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (3, 1, 'Friendly', 5, 'Nice people and great selection! Will buy here again')
+INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (3, 3, 'Cacti too spiky', 2, 'I purchased several cacti here for my grandma and they were too thorny!')
 
 INSERT INTO communications (user_id, type, title,  start_time, end_time) 
 	VALUES (2, 'poll', 'Which is your favorite hanging plant?', '2023-08-12 10:00:00', '2023-08-20 11:00:00');
