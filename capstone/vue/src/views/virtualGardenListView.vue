@@ -1,8 +1,8 @@
 <template>
-  <div id="gardenlistcontainer">
+  <div id="gardenlistcontainer" class="flex-container">
       <div class="gardenlistcard card" v-on:click="visitGarden" v-for="garden in gardens" v-bind:key="garden.userId">
           
-        <div>  {{garden.firstName}}'s Garden</div>
+        <div class="card-header">  {{garden.firstName}}'s Garden</div>
         <section>  Level {{garden.expertiseLevel}} Gardener</section>
          <section>   Located in Zone : {{garden.region}}</section>
         <section>   {{garden.firstName}} has {{garden.plantCount}} plants in their garden</section>
@@ -54,4 +54,12 @@ export default {
 .gardenlistcard{
    width: fit-content;
 } 
+
+.flex-container {
+    flex-wrap: wrap;
+}
+
+.card {
+    align-self: start;
+}
 </style>

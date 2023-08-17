@@ -62,7 +62,6 @@ export default {
 
 .grid-container {
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
 }
 
 
