@@ -20,25 +20,6 @@
       <li class="nav-item">
         <router-link
           class="nav-link"
-          v-bind:to="{ name: 'myStuffView', params: { user: 'id' } }"
-        >
-          <svg
-            class="nav-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            height="1em"
-            viewBox="0 0 448 512"
-          >
-            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-            <path
-              d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
-            />
-          </svg>
-          <span class="link-text">My Stuff</span>
-        </router-link>
-      </li>
-      <li class="nav-item">
-        <router-link
-          class="nav-link"
           v-bind:to="{
             name: 'virtualGardenView',
             params: { user: $store.state.user.userId },
@@ -164,16 +145,16 @@ export default {
   background-color: #a9d3a9;
   transition: width 200ms ease;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 ul.navbar-nav {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
 }
 
 li.nav-item {
@@ -237,6 +218,9 @@ svg.nav-icon {
     transition: width 200ms ease;
     z-index: 10;
   }
+
+
+
   #nav:hover {
     width: 12rem;
   }

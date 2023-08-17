@@ -51,10 +51,6 @@
       </div>
     </form>
 
-    <h3 v-for="plant in plants" v-bind:key="plant.id">
-      {{ plant.commonName }}
-    </h3>
-
     <table class="table" v-if="!plants.length == 0">
       <thead>
         <th class="t-head">Common Name</th>
@@ -65,7 +61,9 @@
         <th>View Details</th>
       </thead>
       <tbody>
+        
         <tr v-for="plant in plants" v-bind:key="plant.id">
+          
           <td>{{ plant.commonName }}</td>
           <td>{{ plant.family }}</td>
           <td>{{ plant.genus }}</td>
@@ -89,7 +87,6 @@
 </template>
 
 <script>
-//return a simple description(name etc) and a link to that specific plant detail page
 import plantService from "../services/PlantService.js";
 
 export default {
@@ -106,7 +103,6 @@ export default {
       plantService.getPlantByCommonName(this.search).then((response) => {
         console.log(response);
         this.plants = response.data;
-        // this.plants.forEach(e=> e.description = e.description.substr(0,15)) shorten description?
       });
     },
   },
@@ -127,12 +123,6 @@ export default {
   margin-right: 30px;
   font-size: 20px;
 }
-
-/* Change the color of links on hover */
-/* .searchbar a:hover {
-  background-color: #ddd;
-  color: black;
-} */
 
 .flex-container {
   flex-direction: column;
@@ -164,5 +154,17 @@ export default {
   padding: 6px 12px;
   margin: 0.5rem;
   border: 2px solid #22311d;
+}
+
+table, th, td
+{
+ border-style: solid;
+ border-color: rgb(1, 85, 36);
+ border-width: .5px;
+ border-radius: 16px;
+ border-collapse: collapse;
+ padding-left: 8px;
+ padding-right: 8px;
+
 }
 </style>
