@@ -148,10 +148,11 @@ CREATE TABLE [user_ack_task](
 INSERT INTO users (username, password_hash, salt, user_role, expertise_level, first_name, last_name, email, region) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user', 1, 'Jade', 'Wilson', 'jade@gmail.com', 2);
 INSERT INTO users (username, password_hash, salt, user_role, expertise_level, first_name, last_name, email, region) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin', 2, 'Emily', 'Bates', 'emily@gmail.com', 3);
 INSERT INTO users (username, password_hash, salt, user_role, expertise_level, first_name, last_name, email, region) VALUES ('mitch','uVCwKlk+qTovYsiaZQtaQjFqMvI=', 'j5du0U5vQa0=','user', 2, 'Mitch', 'Essig', 'mitch.essig@gmail.com', 6);
+INSERT INTO users (username, password_hash, salt, user_role, expertise_level, first_name, last_name, email, region) VALUES ('karen','uVCwKlk+qTovYsiaZQtaQjFqMvI=', 'j5du0U5vQa0=','karen', 3, 'Karen', 'Green', 'kgg@gmail.com', 4);
 
 --populate test data
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, sun, water, fertilizer, img_url) VALUES ('Plantae','Poales', 'Poaceae','Pooideae','Poa','Poa Pratensis', 'Kentucky bluegrass', 'Poa pratensis, commonly known as Kentucky bluegrass (or blue grass), smooth meadow-grass, or common meadow-grass, is a perennial species of grass native to practically all of Europe, North Asia and the mountains of Algeria and Morocco. Although the species is spread over all of the cool, humid parts of the United States, it is not native to North America.','full-sun','daily','biannually','https://debucksodfarm.com/wp-content/uploads/2020/04/kentucky-bluegrass-sod.jpg');
-INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, sun, water, fertilizer, img_url) VALUES('Plantae', 'Pinales', 'Pinaceae','', 'Pinus', 'P. sylvestris', 'Scoth Pine', 'Pinus sylvestris is an evergreen coniferous tree growing up to 35 metres (115 feet) in height[3] and 1 m (3 ft 3 in) in trunk diameter when mature,[4] exceptionally over 45 m (148 ft) tall and 1.7 m (5+1⁄2 ft) in trunk diameter on very productive sites.', 'shade','weekly','biannually','https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Skuleskogen_pine.jpg/330px-Skuleskogen_pine.jpg');
+INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, sun, water, fertilizer, img_url) VALUES('Plantae', 'Pinales', 'Pinaceae','', 'Pinus', 'P. sylvestris', 'Scotch Pine', 'Pinus sylvestris is an evergreen coniferous tree growing up to 35 metres (115 feet) in height[3] and 1 m (3 ft 3 in) in trunk diameter when mature,[4] exceptionally over 45 m (148 ft) tall and 1.7 m (5+1⁄2 ft) in trunk diameter on very productive sites.', 'shade','weekly','biannually','https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Skuleskogen_pine.jpg/330px-Skuleskogen_pine.jpg');
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, sun, water, fertilizer, img_url) VALUES('Plantae', 'Zingiberales', 'Strelitziaceae', '', 'Strelitzia', 'S. reginia', 'Bird of Paradise', ' The leaves are evergreen and arranged in two ranks, making a fan-shaped crown. The flowers stand above the foliage at the tips of long stalks. The hard, beak-like sheath from which the flower emerges is termed the spathe.', 'partial-sun','daily','annually', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Bird_of_Paradise_flower.JPG/330px-Bird_of_Paradise_flower.JPG');
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, sun, water, fertilizer, img_url) VALUES('Plantae', 'Caryophyllales', 'Cactaceae', 'Cactoideae', 'Rhipsalidopsis', 'R. gaertneri', 'Spring Cactus', 'R. gaertneri grows on trees (epiphytic) or less often rocks (lithophytic) in sub-tropical rain forest. Together with the hybrid with R. rosea, Rhipsalidopsis × graeseri, it is known, in English speaking countries in the Northern Hemisphere, as Easter cactus or Whitsun cactus and is a widely cultivated ornamental plant.', 'full-sun','daily','biannually', 'https://upload.wikimedia.org/wikipedia/commons/c/c0/Hatiora_gaertneri.jpg');
 --test data for search plant
@@ -196,14 +197,17 @@ INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,5);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (3,1);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (3,11);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (3,13);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (4,5);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (4,8);
 
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 1, 'Rating 1', 5, 'This is a review')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 2, 'Rating 2', 5, 'This is a review also')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 3, 'Rating 3', 5, 'This is a review also also')
-INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 4, 'Rating 4', 5, 'This is a review also also also')
+INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (5, 4, 'Rating 4', 4, 'This is one of my top 15 favorite places to get plants')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 1, 'Rating 5', 5, 'Good location, I love to stop here every weekend and see what''s new!')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (3, 1, 'Friendly', 5, 'Nice people and great selection! Will buy here again')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (3, 3, 'Cacti too spiky', 2, 'I purchased several cacti here for my grandma and they were too thorny!')
+INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (3, 4, 'Fresh turf', 5, 'Freshest turf in Ohio, with quick delivery.')
 
 INSERT INTO communications (user_id, type, title,  start_time, end_time) 
 	VALUES (2, 'poll', 'Which is your favorite hanging plant?', '2023-08-12 10:00:00', '2023-08-20 11:00:00');
