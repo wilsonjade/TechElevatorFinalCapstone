@@ -164,7 +164,7 @@ section.container {
   width: 100%;
   bottom: 0;
   left: 0;
-  height: 1.3rem;
+  height: 1rem;
   background-color: #446047;
   color: #f6f7e8;
   width: 100%;

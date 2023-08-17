@@ -1,12 +1,11 @@
 <template>
   <section class="seller-detail card">
+    <p class="card-header">Retailer</p>
     <h2>{{ item.sellerName }}</h2>
     <p>{{ item.sellerType }}</p>
     <p>{{ item.address1 }}</p>
     <p>{{ item.address2 }}</p>
-    <p>{{ item.city }}</p>
-    <p>{{ item.state }}</p>
-    <p>{{ item.zip }}</p>
+    <p>{{ item.city }}, {{item.state}} {{ item.zip }}</p>
     <p>{{ item.website }}</p>
 
       <button><router-link v-bind:to="{name: 'ratingsBySeller', params: {sellerId: item.sellerId}}">See Ratings</router-link></button>
