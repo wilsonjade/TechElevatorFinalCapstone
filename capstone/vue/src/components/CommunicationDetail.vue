@@ -26,7 +26,7 @@
         <input type="radio" name="poll-item" v-model="choice" value="3" />
         <label for="poll-option4">{{ currentPollOptions[3].text }}</label>
       </div>
-    <button>Submit your answer!</button>
+    <button v-on:click="deleteCommunication" >Submit your answer!</button>
     </section>
 
     
@@ -36,7 +36,7 @@
     </section>
 
     <section class="communication-details" v-if="item.type == 'competition'">
-      <button>Join the Competition!</button>
+      <button v-on:click="deleteCommunication" >Join the Competition!</button>
     </section>
 
 
@@ -52,17 +52,10 @@ export default {
   methods: {
     submitPollResponse() {},    
     deleteCommunication() {
-      let wasSuccess = false;
       let errorMsg;
       communicationService
         .deleteCommunication(this.item.communicationId)
-        .then((response) => {
-          wasSuccess = response.status == 200;
-          alert(
-            wasSuccess
-              ? "Communication Deleted"
-              : "Communication deletion unsuccessful, please try again"
-          );
+        .then(() => {
           this.$router.go(0); //refresh view
         })
         .catch((error) => {

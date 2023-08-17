@@ -77,5 +77,7 @@ export default {
 </script>
 
 <style scoped>
-
+.card {
+  background-color: #f6f7e89a;
+}
 </style>

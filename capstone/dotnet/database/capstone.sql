@@ -125,18 +125,6 @@ CREATE TABLE [ratings] (
 	CONSTRAINT [FK_poll_id_options] FOREIGN KEY (poll_id) REFERENCES [communications](communication_id),
 	)
 
-	CREATE TABLE poll_response (
-	response_id int IDENTITY(1,1) NOT NULL,
-	user_id int,
-	poll_id int,
-	option_id int,
-	submission_date datetime,
-	CONSTRAINT [PK_response_id] PRIMARY KEY (response_id),
-	CONSTRAINT [FK_user_id_poll_response] FOREIGN KEY (user_id) REFERENCES [users](user_id),
-	CONSTRAINT [FK_poll_id_response] FOREIGN KEY (poll_id) REFERENCES [communications](communication_id),
-	CONSTRAINT [FK_option_id] FOREIGN KEY (option_id) REFERENCES [poll_options](option_id),
-	)
-
 
 CREATE TABLE [tasks] (
 	task_id int IDENTITY(1,1) NOT NULL,
@@ -217,10 +205,6 @@ INSERT INTO poll_options (poll_id, text) VALUES (1, 'Pothos');
 INSERT INTO poll_options (poll_id, text) VALUES (1, 'String of Peals');
 INSERT INTO poll_options (poll_id, text) VALUES (1, 'Spider Plant');
 INSERT INTO poll_options (poll_id, text) VALUES (1, 'Philodendron');
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (1, 1, 2, GETDATE());
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (2, 1, 4, GETDATE());
 
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'competition', 'Enter your tallest plant height in order to win!', '2023-08-22 09:30:00', '2023-08-29 09:30:00');
@@ -233,10 +217,6 @@ INSERT INTO poll_options (poll_id, text) VALUES (2, '0-8');
 INSERT INTO poll_options (poll_id, text) VALUES (2, '8-15');
 INSERT INTO poll_options (poll_id, text) VALUES (2, '15-25');
 INSERT INTO poll_options (poll_id, text) VALUES (2, '25+');
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (1, 2, 5, GETDATE());
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (2, 2, 7, GETDATE());
 		   
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'poll', 'What was your first houseplant?', '2023-08-20 09:30:00', '2023-08-27 09:30:00');
@@ -244,10 +224,6 @@ INSERT INTO poll_options (poll_id, text) VALUES (3, 'Cactus');
 INSERT INTO poll_options (poll_id, text) VALUES (3, 'Pothos');
 INSERT INTO poll_options (poll_id, text) VALUES (3, 'Monstera');
 INSERT INTO poll_options (poll_id, text) VALUES (3, 'Succulent');
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (1, 3, 10, GETDATE());
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (2, 3, 12, GETDATE());
 
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'poll', 'Do you prefer indoor plants or outdoor gardening?', '2023-08-16 09:30:00', '2023-08-23 09:30:00');
@@ -255,10 +231,6 @@ INSERT INTO poll_options (poll_id, text) VALUES (4, 'Indoor');
 INSERT INTO poll_options (poll_id, text) VALUES (4, 'Outdoor');
 INSERT INTO poll_options (poll_id, text) VALUES (4, 'Standard programmer answer: it depends.');
 INSERT INTO poll_options (poll_id, text) VALUES (4, 'Little of both!');
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (1, 4, 14, GETDATE());
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (2, 4, 15, GETDATE());
 
 INSERT INTO communications (user_id, type, title, start_time, end_time) 
 	VALUES (2, 'poll', 'What is the best houseplant for beginners?', '2023-08-22 09:30:00', '2023-08-29 09:30:00');
@@ -266,10 +238,6 @@ INSERT INTO poll_options (poll_id, text) VALUES (5, 'Succulent');
 INSERT INTO poll_options (poll_id, text) VALUES (5, 'Palm');
 INSERT INTO poll_options (poll_id, text) VALUES (5, 'Snake Plant');
 INSERT INTO poll_options (poll_id, text) VALUES (5, 'Pothos');
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (1, 5, 18, GETDATE());
-INSERT INTO poll_response (user_id, poll_id, option_id, submission_date)
-	VALUES (2, 5, 20, GETDATE());
 
 
 --populate tasks table
