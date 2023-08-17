@@ -136,8 +136,8 @@ div>img{
   z-index: 5;
   position: absolute;
   top: 20%;
-  left: 15%;
-  max-width: 45%;
+  right: 7%;
+  max-width: 40%;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -159,7 +159,7 @@ div>img{
   padding: 5px;
   box-shadow: 2px 2px slategrey;
   border-radius: 10px;
-  background-color: #85b488b7;
+  background-color: #85b488ec;
   animation-name: openalerts;
   animation-duration: 6s;
 }
