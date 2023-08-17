@@ -1,6 +1,6 @@
 <template>
-  <section id="seller-list">
-    <router-link v-bind:to="{ name: 'SellerAdmin' }"
+  <section id="seller-list" class="grid-container" >
+    <router-link v-if="isAdmin" v-bind:to="{ name: 'SellerAdmin' }"
       >Add New Seller</router-link
     >
 
@@ -55,5 +55,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#seller-list {
+  margin: auto;
+}
+
+.grid-container {
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+
 </style>
