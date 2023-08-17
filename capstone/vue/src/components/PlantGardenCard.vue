@@ -1,16 +1,33 @@
 <template>
-  <div id="plantcardcontainer" class="plantcardcontainer card" v-on:hover="showTips()">
-      <h1 class="cardtitle"> {{thisPlant.commonName}}</h1>
-      <img id="cardimg" class="cardimg" v-bind:src="thisPlant.imgUrl" />
-      <div class="species"> {{thisPlant.species}}</div>
-      <div class="descr"> {{thisPlant.description}} </div>
-      <div class="tipcontainer">
-          <span> Care and Feeding </span>
-          <div class="tip sun" ><img class="icon" src="../assets/sunicon.png" /> Sun: {{thisPlant.sun}}</div>
-           <div class="tip water" ><img class="icon" src="../assets/watericon.png" />Water: {{thisPlant.water}}</div>
-            <div class="tip fertilizer" >Fertilizer: {{thisPlant.fertilizer}}</div>
-     </div>
-      <button v-if="isMine" v-on:click="remove()" id="remove">Remove from My Garden</button>
+  <div
+    id="plantcardcontainer"
+    class="plantcardcontainer card"
+    v-on:hover="showTips()"
+  >
+    <h1 class="cardtitle">{{ thisPlant.commonName }}</h1>
+    <img id="cardimg" class="cardimg" v-bind:src="thisPlant.imgUrl" />
+    <div class="species">{{ thisPlant.species }}</div>
+    <div class="descr">{{ thisPlant.description }}</div>
+    <div class="tipcontainer">
+      <span> Care and Feeding </span>
+      <div class="tip sun">
+        <img class="icon" src="../assets/sunicon.png" /> Sun:
+        {{ thisPlant.sun }}
+      </div>
+      <div class="tip water">
+        <img class="icon" src="../assets/watericon.png" />Water:
+        {{ thisPlant.water }}
+      </div>
+      <div class="tip fertilizer">Fertilizer: {{ thisPlant.fertilizer }}</div>
+    </div>
+    <div class="buttons">
+    <button v-if="isMine" v-on:click="remove()" id="remove">
+      Remove from My Garden
+    </button>
+    <button>
+      <router-link v-bind:to="{name: 'plantDetail', params: { plantId: thisPlant.plantId }}">Details</router-link>
+    </button>
+    </div>
   </div>
 </template>
 
@@ -22,7 +39,7 @@ export default {
       tips: [],
     };
   },
-  props: ["thisPlant","isMine"],
+  props: ["thisPlant", "isMine"],
   methods: {
     remove() {
       PlantService.removeFromGarden({
@@ -34,28 +51,22 @@ export default {
         }
       });
     },
-    
-    
-    
+
     methods: {
-        remove(){
-            PlantService.removeFromGarden({plantId: this.thisPlant.plantId, userId: this.$store.state.user.userId}).then(
-                response=> {
-                    if(response.status == 200){
-                        this.$router.go(0); //refresh page
-                    }
-                }
-            )
-        },
-        showTips(){
-
-        },
+      remove() {
+        PlantService.removeFromGarden({
+          plantId: this.thisPlant.plantId,
+          userId: this.$store.state.user.userId,
+        }).then((response) => {
+          if (response.status == 200) {
+            this.$router.go(0); //refresh page
+          }
+        });
+      },
+      showTips() {},
     },
-}
-}
-
-
-
+  },
+};
 </script>
 
 <style>
@@ -76,15 +87,15 @@ export default {
 }
 .plantcardcontainer:hover {
   width: 40%;
-  height:fit-content;
+  height: fit-content;
 }
-#gardenlistlink{
+#gardenlistlink {
   width: 10%;
-  height:fit-content;
+  height: fit-content;
 }
 #gardenlistlink:hover {
   width: 10%;
-  height:fit-content;
+  height: fit-content;
 }
 .plantcardcontainer > .tipcontainer {
   display: none;
@@ -113,7 +124,7 @@ export default {
   margin-top: 3px;
   margin-bottom: 3px;
   border-bottom: black;
-  border-bottom-style:inset;
+  border-bottom-style: inset;
   border-bottom-width: 1px;
   text-align: center;
 }
@@ -164,4 +175,6 @@ export default {
   width: 80%;
   height: 150px;
 }
+
+
 </style>
