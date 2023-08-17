@@ -137,7 +137,7 @@ div>img{
   position: absolute;
   top: 20%;
   right: 7%;
-  max-width: 40%;
+  max-width: 35%;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
