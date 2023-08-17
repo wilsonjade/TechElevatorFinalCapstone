@@ -62,6 +62,7 @@ export default {
 
 .grid-container {
   grid-template-columns: 1fr 1fr;
+<<<<<<< HEAD
   grid-template-areas:
   "add-button add-button" 
   "card card" ;
@@ -82,6 +83,8 @@ export default {
   margin: 0.5rem;
   border: 2px solid #22311d;
   font-weight: bold;
+=======
+>>>>>>> 7e52757a9c465753960778a0c7d7c65d7a88e0d4
 }
 
 
