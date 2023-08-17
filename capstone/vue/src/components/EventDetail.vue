@@ -2,7 +2,8 @@
   <section class="eventDetail card">
     
      <p v-if="item.isVirtual">This Event is Virtual</p>
-     <span>{{item.startTime}}</span><span>{{item.endTime}}</span>
+     <p>Start time: {{item.startTime}}</p>
+     <p>End time: {{item.endTime}}</p>
       <p>{{item.longDescription}}</p>
    
   <button v-if="isAdmin" v-on:click="$router.push({name: 'eventAdmin', params:{id: item.eventId}})" >Edit Event</button> 
