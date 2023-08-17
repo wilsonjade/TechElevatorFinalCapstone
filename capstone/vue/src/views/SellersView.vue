@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="sellers-view">
     <seller-list />
 
   </section>
@@ -35,6 +35,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#sellers-view {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+}
 
 </style>

@@ -114,7 +114,6 @@ div {
 }
 
 .card {
-  max-width: 450px;
   display: flex;
   flex-direction: column;
 }

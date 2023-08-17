@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="seller-list">
     <router-link v-bind:to="{ name: 'SellerAdmin' }"
       >Add New Seller</router-link
     >

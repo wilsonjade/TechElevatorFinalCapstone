@@ -1,6 +1,5 @@
 <template>
   <footer id="footer">
-    <p>FooterComponent.vue</p>
   </footer>
 </template>
 
