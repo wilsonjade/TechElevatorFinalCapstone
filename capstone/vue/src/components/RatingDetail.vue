@@ -5,10 +5,11 @@
     <p>Retailer: {{ item.sellerName }}</p>
     <p>Review: {{ item.review }}</p>
     <p>User: {{ item.firstName }}</p>
-
-    <button v-if="isAdmin" v-on:click="deleteThisRating()">
-      Delete Rating
-    </button>
+    
+      <button v-if="isAdmin"  v-on:click="deleteThisRating()">
+        Delete Rating
+      </button>
+    
   </section>
 </template>
 
@@ -61,7 +62,7 @@ export default {
     },
   },
   created() {    
-    this.isAdmin = this.$store.state.user.role;
+     this.isAdmin = this.$store.state.user.role == "admin";
   },
 };
 </script>

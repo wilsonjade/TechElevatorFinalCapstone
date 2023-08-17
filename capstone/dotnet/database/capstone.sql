@@ -147,7 +147,7 @@ CREATE TABLE [user_ack_task](
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role, expertise_level, first_name, last_name, email, region) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user', 1, 'Jade', 'Wilson', 'jade@gmail.com', 2);
 INSERT INTO users (username, password_hash, salt, user_role, expertise_level, first_name, last_name, email, region) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin', 2, 'Emily', 'Bates', 'emily@gmail.com', 3);
-
+INSERT INTO users (username, password_hash, salt, user_role, expertise_level, first_name, last_name, email, region) VALUES ('mitch','uVCwKlk+qTovYsiaZQtaQjFqMvI=', 'j5du0U5vQa0=','user', 2, 'Mitch', 'Essig', 'mitch.essig@gmail.com', 6);
 
 --populate test data
 INSERT INTO plants (kingdom, [order], family, subfamily, genus, species, common_name, description, sun, water, fertilizer, img_url) VALUES ('Plantae','Poales', 'Poaceae','Pooideae','Poa','Poa Pratensis', 'Kentucky bluegrass', 'Poa pratensis, commonly known as Kentucky bluegrass (or blue grass), smooth meadow-grass, or common meadow-grass, is a perennial species of grass native to practically all of Europe, North Asia and the mountains of Algeria and Morocco. Although the species is spread over all of the cool, humid parts of the United States, it is not native to North America.','full-sun','daily','biannually','https://www.picturethisai.com/image-handle/website_cmsname/image/1080/154159742233608208.jpeg');
@@ -193,7 +193,9 @@ INSERT INTO virtual_garden (user_id, plant_id) VALUES (1,2);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,3);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,4);
 INSERT INTO virtual_garden (user_id, plant_id) VALUES (2,5);
-
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (3,1);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (3,11);
+INSERT INTO virtual_garden (user_id, plant_id) VALUES (3,13);
 
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (1, 1, 'Rating 1', 5, 'This is a review')
 INSERT INTO ratings (user_id, seller_id, title, rating, review) VALUES (2, 2, 'Rating 2', 5, 'This is a review also')
