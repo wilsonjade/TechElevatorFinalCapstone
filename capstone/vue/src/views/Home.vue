@@ -21,7 +21,7 @@
         <img
           id="plant-image"
           v-bind:src="plant.imgUrl"
-          alt="a generic plant image"
+          alt="plant image"
         />
       </section>
     </div>
