@@ -129,6 +129,9 @@ export default new Vuex.Store({
       eventService.futureEvents()
       .then( (response) => {
         state.futureEvents = response.data;
+        state.futureEvents.forEach(e=> {
+          let dt = new Date(e.startTime);
+          e['startTimeObj'] = dt})
       } )
       .catch((error) => {
         if (error.response) { 
@@ -147,6 +150,7 @@ export default new Vuex.Store({
           console.log("Error loading events: make request")
         }
       });
+      
     },
     LOAD_COMMUNICATIONS(state) {
       communicationService.listCommunications()

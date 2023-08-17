@@ -22,7 +22,7 @@ export default {
       tips: [],
     };
   },
-  props: ["thisPlant"],
+  props: ["thisPlant","isMine"],
   methods: {
     remove() {
       PlantService.removeFromGarden({
@@ -34,8 +34,9 @@ export default {
         }
       });
     },
-    props: ["thisPlant","isMine"]
-    ,
+    
+    
+    
     methods: {
         remove(){
             PlantService.removeFromGarden({plantId: this.thisPlant.plantId, userId: this.$store.state.user.userId}).then(
