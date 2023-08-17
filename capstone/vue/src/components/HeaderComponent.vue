@@ -1,7 +1,7 @@
 <template>
   <header id="header">
 
-    <h1>Garden Guardians</h1>
+    <h1>Garden Guardian</h1>
     <svg class="header-icon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
       <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
       <path
