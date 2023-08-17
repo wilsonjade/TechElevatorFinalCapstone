@@ -82,6 +82,7 @@ export default {
 .plantCard{
   margin: 1rem auto;
   flex-direction: column;
+  
 }
 
 

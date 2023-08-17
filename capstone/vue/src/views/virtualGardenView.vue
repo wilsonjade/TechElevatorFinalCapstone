@@ -57,7 +57,8 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&family=Zen+Loop:ital@1&family=Zen+Tokyo+Zoo&display=swap");
 
 #gardencontainer{
-  height:100%;
+  height:85%;
+  
 }
 #gardentitle {
   font-family: "Zen Loop";
