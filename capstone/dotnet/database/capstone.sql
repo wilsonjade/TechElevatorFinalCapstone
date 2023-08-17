@@ -257,6 +257,16 @@ INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (2, 'water', 
 INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (2, 'fertilizer', 365)
 INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (13, 'water', 2)
 INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (13, 'a pruning', 90)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (3, 'water', 2)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (4, 'water', 2)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (5, 'water', 2)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (6, 'water', 2)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (7, 'water', 2)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (8, 'water', 2)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (9, 'water', 2)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (10, 'water', 2)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (11, 'water', 2)
+INSERT INTO tasks (plant_id, task_category, frequency_days) VALUES (12, 'water', 2)
 
 --populate user_ack_task table
 
