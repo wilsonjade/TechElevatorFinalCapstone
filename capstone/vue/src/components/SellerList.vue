@@ -74,10 +74,30 @@ export default {
 
 .grid-container {
   grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+  "add-button add-button" 
+  "card card" ;
+  gap: 1rem;
 }
 
 svg {
   fill: #f6f7e8;
+}
+
+
+.add-button{  
+  grid-area: add-button;
+  width: 20vw;
+  margin-top: 20px;
+  background-color: #77a370;
+  color: #f6f7e8;
+  border-radius: 16px;
+  padding: 6px 12px;
+  margin: 1.5rem auto 0 auto;
+  border: 2px solid #22311d;
+  font-weight: bold;
+
+
 }
 
 .add-button {

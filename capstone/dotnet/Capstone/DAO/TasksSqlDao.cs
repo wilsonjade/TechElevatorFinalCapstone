@@ -24,7 +24,7 @@ namespace Capstone.DAO
 FROM tasks
 LEFT OUTER JOIN virtual_garden ON virtual_garden.plant_id = tasks.plant_id
 LEFT OUTER JOIN user_ack_task ON tasks.task_id = user_ack_task.task_id
-WHERE virtual_garden.user_id = 1 AND ( DAY(GETDATE() - user_ack_task.last_ack) > tasks.frequency_days OR user_ack_task.last_ack IS NULL) ;";  //v2.0
+WHERE virtual_garden.user_id = @user_id AND ( DAY(GETDATE() - user_ack_task.last_ack) > tasks.frequency_days OR user_ack_task.last_ack IS NULL) ;";  //v2.0
 
         private readonly string SqlAddTask = @"INSERT INTO tasks (plant_id, task_description, task_category, frequency_days)
         VALUES (@plantId, @taskDescription, @taskCategory, @frequencyDays);";
