@@ -83,7 +83,6 @@ export default {
   border-radius: 30px;
   transition: width, height;
   transition-duration: 1s;
-  transition-delay: 1s;
 }
 .plantcardcontainer:hover {
   width: 40%;
