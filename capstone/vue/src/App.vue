@@ -126,7 +126,7 @@ section.container {
 
 #main {
   margin-left: 5rem;
-  margin-bottom: 5rem;
+  margin-bottom: 10rem;
   margin-top: 5rem;
   padding: 1rem;
   margin-top: 50px;

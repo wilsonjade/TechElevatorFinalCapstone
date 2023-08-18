@@ -155,7 +155,7 @@ const router = new Router({
       }
     },
     {
-      path: "/addseller",
+      path: "/addseller/:id",
       name: "SellerAdmin",
       component: SellerAdmin,
       meta:{

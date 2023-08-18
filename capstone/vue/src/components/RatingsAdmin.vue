@@ -1,6 +1,6 @@
 <template>
   <form v-on:submit.prevent="addRating" class="card">
-    <h1>New review form</h1>
+    <h1>New rating</h1>
       <div>
       <label for="title">Title: </label>
       <input type="text" name="title" id="rating-title" v-model="newRating.title">
@@ -43,7 +43,7 @@ export default {
             RatingService.createRating(parseInt(this.$route.params.sellerId), this.newRating)
             .then( () => {
                 this.$store.commit("LOAD_RATINGS");
-                this.$router.push({name: "ratingsBySeller"});
+                this.$router.push({ name: 'ratingsBySeller', params: { sellerId: this.newRating.sellerId } });
             })
         .catch((error) => {
           if (error.response) {
@@ -70,5 +70,14 @@ export default {
 <style scoped>
 .card {
   max-width: 450px;
+}
+
+input, textarea {
+  padding: 10px;
+  border: 2px solid #22311d;
+  border-radius: 10px;
+  margin-bottom: 10px;  
+  max-width: min-content;
+  background-color: #f6f7e89a;
 }
 </style>

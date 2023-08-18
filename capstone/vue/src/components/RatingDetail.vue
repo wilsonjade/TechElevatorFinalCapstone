@@ -1,7 +1,8 @@
 <template>
   <section class="rating-detail card">
+    <p class="card-header">User Rating for {{item.sellerName}}</p>
     <p>Title: {{ item.title }}</p>
-    <p>Rating: {{ item.rating }}</p>
+    <p>Rating: {{ item.rating }}/5</p>
     <p>Retailer: {{ item.sellerName }}</p>
     <p>Review: {{ item.review }}</p>
     <p>User: {{ item.firstName }}</p>
@@ -67,5 +68,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.card {
+  max-width: 60%;
+  margin: 1rem auto;
+}
 </style>

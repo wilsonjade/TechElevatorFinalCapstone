@@ -102,7 +102,7 @@ export default {
       EventService.updateEvent(this.formData.eventId,this.formData).then(
           response=> {if(response.status == 200){alert("Update successful")}
           
-          this.$router.push({name: "eventsView"}); //refresh view
+          this.$router.push({name: "communityView"}); //refresh view
           }
       ).catch(error=> alert(error.message));}
 

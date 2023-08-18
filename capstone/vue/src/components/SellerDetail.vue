@@ -12,11 +12,11 @@
       
       <button><router-link v-bind:to="{name: 'ratingsAdmin', params: {sellerId: item.sellerId }}">Rate this Seller</router-link></button>
 
-
+    <!-- WHY DOESN'T SELLER DETAIL KNOW USER IS ADMIN?? SELLER LIST KNOWS :( -->
     <button
       v-if="isAdmin"
       v-on:click="
-        $router.push({ name: 'sellerAdmin', params: { id: item.sellerId } })
+        $router.push({ name: 'sellerAdmin', params: { sellerId: item.sellerId } })
       "
     >
       Edit Seller
@@ -77,6 +77,9 @@ export default {
     created() {
       this.isAdmin = this.$store.state.user.role == "admin";
     },
+  },
+  created(){
+    this.isAdmin = this.$store.state.user.role == 'admin';
   },
 };
 </script>
